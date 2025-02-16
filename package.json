@@ -16,10 +16,12 @@
   },
   "dependencies": {
     "@auth0/auth0-vue": "^2.4.0",
+    "@mdi/font": "^7.4.47",
     "@vueuse/core": "^10.9.0",
     "pinia": "^2.0.36",
     "vue": "^3.4.27",
-    "vue-router": "^4.2.0"
+    "vue-router": "^4.2.0",
+    "vuetify": "^3.7.12"
   },
   "devDependencies": {
     "@playwright/test": "^1.44.0",

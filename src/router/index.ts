@@ -3,9 +3,18 @@ import { authGuard } from './guards'
 
 const routes = [
   {
+    path: '/',
+    redirect: '/login'
+  },
+  {
+    path: '/login',
+    component: () => import('../views/LoginView.vue')
+  },
+  {
     path: '/dashboard',
     component: () => import('../views/DashboardView.vue'),
-    meta: { requiresAuth: true },
+    //meta: { requiresAuth: true },
+    meta: { requiresAuth: false },
     beforeEnter: authGuard
   }
 ]
