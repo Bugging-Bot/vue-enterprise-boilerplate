@@ -1,11 +1,9 @@
 <template>
   <v-app>
-    <!-- Top App Bar -->
     <v-app-bar>
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
       <v-app-bar-title>Uxerflow Inc.</v-app-bar-title>
 
-      <!-- Search Bar -->
       <v-text-field
         density="compact"
         variant="solo"
@@ -27,9 +25,21 @@
           <v-list-item>Upgrade Plan</v-list-item>
         </v-list>
       </v-menu>
+
+      <v-menu>
+        <template v-slot:activator="{ props }">
+          <v-btn icon v-bind="props">
+            <v-icon>mdi-dots-vertical</v-icon>
+          </v-btn>
+        </template>
+        <v-list>
+          <v-list-item title="Settings"></v-list-item>
+          <v-list-item title="Help"></v-list-item>
+          <v-list-item title="Feedback"></v-list-item>
+        </v-list>
+      </v-menu>
     </v-app-bar>
 
-    <!-- Navigation Drawer -->
     <v-navigation-drawer v-model="drawer">
       <v-list>
         <v-list-item title="Dashboard" prepend-icon="mdi-view-dashboard"></v-list-item>
@@ -49,15 +59,13 @@
 
       <template v-slot:append>
         <v-card class="ma-2">
-          <v-card-text> Upgrade & unlock all features </v-card-text>
+          <v-card-text>Upgrade & unlock all features</v-card-text>
         </v-card>
       </template>
     </v-navigation-drawer>
 
-    <!-- Main Content -->
     <v-main>
       <v-container fluid>
-        <!-- Overview/Sales Order Section -->
         <v-card>
           <v-row>
             <v-col>
@@ -72,20 +80,18 @@
             </v-col>
           </v-row>
 
-          <!-- Statistics Cards -->
           <v-row v-if="activeTab === 'overview'">
             <v-col cols="3" v-for="stat in statistics" :key="stat.title">
               <v-card>
                 <v-card-title>{{ stat.title }}</v-card-title>
                 <v-card-text>
                   {{ stat.value }}
-                  <span :class="stat.trend > 0 ? 'success' : 'error'"> {{ stat.trend }}% </span>
+                  <span :class="stat.trend > 0 ? 'success' : 'error'">{{ stat.trend }}%</span>
                 </v-card-text>
               </v-card>
             </v-col>
           </v-row>
 
-          <!-- Charts Row -->
           <v-row>
             <v-col cols="6">
               <v-card title="Average Ticket">
@@ -100,7 +106,6 @@
           </v-row>
         </v-card>
 
-        <!-- Deals and Pipeline -->
         <v-row>
           <v-col cols="8">
             <v-card>
@@ -125,9 +130,10 @@
 </template>
 
 <script setup lang="ts">
+import type { D } from 'vitest/dist/reporters-w_64AS5f.js'
 import { ref } from 'vue'
 
-const drawer = ref(true)
+const drawer = ref(false)
 const activeTab = ref('overview')
 
 const statistics = [
@@ -137,6 +143,18 @@ const statistics = [
   { title: 'Monthly Target', value: '68%', trend: 15 }
 ]
 
-const deals = []
-const dealHeaders = []
+interface Deal {
+  id: number
+  name: string
+  amount: number
+  status: string
+}
+
+interface DealHeader {
+  text: string
+  value: string
+}
+
+const deals = [] as Deal[]
+const dealHeaders = [] as DealHeader[]
 </script>

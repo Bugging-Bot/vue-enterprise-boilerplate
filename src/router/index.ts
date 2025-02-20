@@ -11,8 +11,8 @@ const routes = [
     component: () => import('../views/LoginView.vue')
   },
   {
-    path: '/dashboard',
-    component: () => import('../views/DashboardView.vue'),
+    path: '/home',
+    component: () => import('../views/HomeView.vue'),
     //meta: { requiresAuth: true },
     meta: { requiresAuth: false },
     beforeEnter: authGuard

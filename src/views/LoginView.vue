@@ -68,7 +68,7 @@ const handleLogin = async () => {
   await new Promise((resolve) => setTimeout(resolve, 500))
   loading.value = false
   // Direct navigation to dashboard
-  router.push('/dashboard')
+  router.push('/home')
 }
 const handleForgotPassword = () => {
   // Implement forgot password logic
