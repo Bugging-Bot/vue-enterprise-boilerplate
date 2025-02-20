@@ -3,6 +3,12 @@
     <v-row align="center" justify="center">
       <v-col cols="12" sm="8" md="6" lg="4">
         <v-card class="elevation-12 pa-8">
+          <div class="d-flex justify-end mb-2">
+            <v-btn
+              :icon="themePreference === 'dark' ? 'mdi-weather-night' : 'mdi-weather-sunny'"
+              @click="toggleTheme"
+            />
+          </div>
           <v-card-title class="text-h5 mb-4"> Login </v-card-title>
 
           <v-form @submit.prevent="handleLogin">
@@ -43,14 +49,19 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import useTheme from '@/composables/useTheme'
 
 const router = useRouter()
+const { themePreference, setTheme } = useTheme()
 const email = ref('')
 const password = ref('')
 const rememberMe = ref(false)
 const showPassword = ref(false)
 const loading = ref(false)
 
+const toggleTheme = () => {
+  setTheme(themePreference.value === 'dark' ? 'light' : 'dark')
+}
 const handleLogin = async () => {
   loading.value = true
   // Simulate brief loading state
