@@ -1,6 +1,7 @@
 <template>
   <v-app>
-    <AppBar />
+    <AppBar @toggle-drawer="isDrawerOpen = !isDrawerOpen" />
+    <!-- <NavigationDrawer v-model="isDrawerOpen" /> -->
     <NavigationDrawer v-model="isDrawerOpen" />
 
     <v-main>
@@ -58,6 +59,7 @@ import NavigationDrawer from '@/components/layout/NavigationDrawer.vue'
 import StatisticsCard from '@/components/dashboard/StatisticsCard.vue'
 import DealsTable from '@/components/dashboard/DealsTable.vue'
 import AppFooter from '@/components/layout/AppFooter.vue'
+
 const activeTab = ref('overview')
 const isDrawerOpen = ref(false) // Declare isDrawerOpen
 const statistics = [
