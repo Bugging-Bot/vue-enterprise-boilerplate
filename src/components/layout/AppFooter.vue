@@ -9,9 +9,7 @@
 
       <v-divider></v-divider>
 
-      <div class="px-4 py-2 text-center w-100">
-        {{ currentYear }} — <strong>Powered by DataKrit</strong>
-      </div>
+      <div class="px-4 py-2 text-center w-100">{{ currentYear }} — <strong>Powered</strong></div>
     </v-footer>
   </v-card>
 </template>
