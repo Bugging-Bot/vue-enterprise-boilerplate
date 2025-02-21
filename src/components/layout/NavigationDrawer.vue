@@ -29,7 +29,7 @@
 
 <script setup lang="ts">
 defineProps<{
-  modelValue: boolean
+  modelValue: boolean // Accept modelValue to manage the drawer's open/close state
 }>()
-defineEmits(['update:modelValue'])
+defineEmits(['update:modelValue']) // Emit event when state changes
 </script>
