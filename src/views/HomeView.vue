@@ -1,53 +1,56 @@
 <template>
-  <v-app>
-    <AppBar @toggle-drawer="isDrawerOpen = !isDrawerOpen" />
-    <NavigationDrawer v-model="isDrawerOpen" />
+  <!-- <v-app> -->
+  <AppBar @toggle-drawer="isDrawerOpen = !isDrawerOpen" />
+  <NavigationDrawer v-model="isDrawerOpen" />
 
-    <v-main>
-      <v-container fluid>
-        <v-sheet class="overflow-y-auto">
-          <v-sheet class="overflow-x-auto">
-            <v-card>
-              <v-row>
-                <v-col>
-                  <v-tabs v-model="activeTab">
-                    <v-tab value="overview">Overview</v-tab>
-                    <v-tab value="sales">Sales Order</v-tab>
-                  </v-tabs>
-                </v-col>
-                <v-col class="text-right">
-                  <v-btn>Filter</v-btn>
-                  <v-btn>Export</v-btn>
-                </v-col>
-              </v-row>
+  <v-main>
+    <v-container fluid>
+      <!-- Single sheet for handling overflow -->
+      <v-sheet>
+        <v-card>
+          <!-- Top bar with tabs and buttons -->
+          <v-row>
+            <v-col>
+              <v-tabs v-model="activeTab">
+                <v-tab value="overview">Overview</v-tab>
+                <v-tab value="sales">Sales Order</v-tab>
+              </v-tabs>
+            </v-col>
+            <v-col class="text-right">
+              <v-btn>Filter</v-btn>
+              <v-btn>Export</v-btn>
+            </v-col>
+          </v-row>
 
-              <v-row v-if="activeTab === 'overview'">
-                <v-col cols="3" v-for="stat in statistics" :key="stat.title">
-                  <StatisticsCard v-bind="stat" />
-                </v-col>
-              </v-row>
+          <!--- This is second row--->
+          <v-row v-if="activeTab === 'overview'">
+            <v-col cols="1" v-for="stat in statistics" :key="stat.title">
+              <StatisticsCard v-bind="stat" />
+            </v-col>
+          </v-row>
+          <!-- This is the sales order tab -->
+          <v-row>
+            <v-col cols="1" v-for="chart in charts" :key="chart.title">
+              <v-card :title="chart.title">
+                <div>Chart Here</div>
+              </v-card>
+            </v-col>
+          </v-row>
 
-              <v-row>
-                <v-col cols="6" v-for="chart in charts" :key="chart.title">
-                  <v-card :title="chart.title">
-                    <div>Chart Here</div>
-                  </v-card>
-                </v-col>
-              </v-row>
-            </v-card>
-
-            <v-row>
-              <v-col cols="12">
-                <DealsTable />
-              </v-col>
-            </v-row>
-          </v-sheet>
-        </v-sheet>
-      </v-container>
-    </v-main>
-
-    <AppFooter />
-  </v-app>
+          <!-- This is the sales order table -->
+          <!-- Renders a row with a single column that contains the `DealsTable` component. This component is likely responsible for displaying a table of sales deals or transactions. -->
+          <v-row>
+            <v-col cols="12">
+              <DealsTable />
+            </v-col>
+          </v-row>
+        </v-card>
+      </v-sheet>
+    </v-container>
+  </v-main>
+  <!-- this for footer-->
+  <AppFooter />
+  <!-- </v-app> -->
 </template>
 
 <script setup lang="ts">
@@ -68,5 +71,12 @@ const statistics = [
   { title: 'Monthly Target', value: '68%', trend: 15 }
 ]
 
-const charts = [{ title: 'Average Ticket' }, { title: 'Revenue' }]
+const charts = [
+  { title: 'Average Ticket' },
+  { title: 'Revenue' },
+  { title: 'Sales' },
+  { title: 'Customers' },
+  { title: 'Orders' },
+  { title: 'Profit' }
+]
 </script>
