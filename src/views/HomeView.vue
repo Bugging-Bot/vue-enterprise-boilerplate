@@ -131,7 +131,7 @@
     </v-main>
     <v-footer class="d-flex flex-column">
       <v-row justify="center" no-gutters>
-        <v-btn
+        <!--<v-btn
           v-for="link in ['Home', 'About', 'Services', 'Blog', 'Contact Us']"
           :key="link"
           variant="text"
@@ -139,7 +139,7 @@
           rounded="xl"
         >
           {{ link }}
-        </v-btn>
+        </v-btn>-->
       </v-row>
 
       <v-divider></v-divider>

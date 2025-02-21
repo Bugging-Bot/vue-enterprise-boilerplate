@@ -1,7 +1,7 @@
 <template>
   <div class="auth-buttons">
     <button v-if="!isAuthenticated" @click="login">Log In</button>
-    <button v-else @click="logout">Log Out</button>
+    <button v-else @click="() => logout()">Log Out</button>
   </div>
 </template>
 
