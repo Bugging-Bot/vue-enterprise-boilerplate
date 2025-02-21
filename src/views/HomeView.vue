@@ -107,4 +107,8 @@ const deals = Array.from({ length: 25 }, (_, index) => ({
 })) as Deal[]
 
 const charts = [{ title: 'Average Ticket' }, { title: 'Revenue' }]
+console.log(
+  'Charts data:',
+  charts.map((chart) => chart.title)
+)
 </script>

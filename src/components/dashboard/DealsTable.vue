@@ -1,12 +1,20 @@
 <template>
-  <v-card>
-    <v-card-title>
-      List of Deals
-      <v-spacer></v-spacer>
-      <v-btn variant="text">See all</v-btn>
-    </v-card-title>
-    <v-data-table :items="deals" :headers="headers" class="data-table"></v-data-table>
-  </v-card>
+  <v-container fluid>
+    <v-card>
+      <v-card-title class="d-flex align-center">
+        List of Deals
+        <v-spacer></v-spacer>
+        <v-btn variant="text" @click="seeAllDeals">See all</v-btn>
+      </v-card-title>
+      <v-divider></v-divider>
+      <v-data-table
+        :items="deals"
+        :headers="headers"
+        class="data-table"
+        density="compact"
+      ></v-data-table>
+    </v-card>
+  </v-container>
 </template>
 
 <script setup lang="ts">
@@ -29,4 +37,9 @@ defineProps<{
     width?: string
   }>
 }>()
+
+const seeAllDeals = () => {
+  console.log('Navigate to full deals list or open modal')
+  // You can replace this with actual navigation logic
+}
 </script>
