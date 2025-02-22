@@ -17,6 +17,8 @@
   "dependencies": {
     "@auth0/auth0-vue": "^2.4.0",
     "@mdi/font": "^7.4.47",
+    "@mdi/svg": "^7.4.47",
+    "@mdi/util": "^0.3.2",
     "@vueuse/core": "^10.9.0",
     "date-fns": "^4.1.0",
     "pinia": "^2.0.36",

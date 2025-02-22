@@ -1,25 +1,30 @@
 <template>
-  <v-app-bar>
+  <v-app-bar class="d-flex align-center">
     <v-app-bar-nav-icon @click="$emit('toggle-drawer')"></v-app-bar-nav-icon>
     <v-app-bar-title>My Application</v-app-bar-title>
 
-    <!-- custom text field added for search -->
+    <v-btn v-if="!isSearchActive" icon @click="toggleSearch">
+      <v-icon>mdi-magnify</v-icon>
+    </v-btn>
+
     <v-text-field
+      v-if="isSearchActive"
       density="compact"
       variant="solo"
       label="Search"
-      append-inner-icon="mdi-magnify"
+      :append-inner-icon="isSearchActive ? 'mdi-magnify' : ''"
       single-line
       hide-details
-      class="mt-2 search-field"
-      style="max-width: 300px"
+      class="flex-grow-1"
+      @click:append-inner="toggleSearch"
     ></v-text-field>
-    <!-- <v-spacer></v-spacer> -->
 
-    <!-- <v-spacer></v-spacer> -->
-    <!-- <v-btn icon>
-      <v-icon>mdi-magnify</v-icon>
-    </v-btn> -->
+    <v-spacer v-if="isSearchActive"></v-spacer>
+
+    <v-btn icon>
+      <v-icon>mdi-account</v-icon>
+    </v-btn>
+
     <v-btn icon>
       <v-icon>mdi-bell</v-icon>
     </v-btn>
@@ -37,14 +42,18 @@
       </v-list>
     </v-menu>
 
-    <!-- <v-btn>Share</v-btn> -->
     <PlanMenu />
     <SettingsMenu />
   </v-app-bar>
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue'
 defineEmits(['toggle-drawer'])
+const isSearchActive = ref(false)
+const toggleSearch = () => {
+  isSearchActive.value = !isSearchActive.value
+}
 
 const settings = () => {
   alert('Settings clicked')
