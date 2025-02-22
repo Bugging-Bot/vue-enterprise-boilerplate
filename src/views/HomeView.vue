@@ -28,17 +28,15 @@
               <StatisticsCard v-bind="stat" />
             </v-col>
           </v-row>
-          <!-- This is the sales order tab -->
+
+          <!-- This is 3rd row / Deals Table-->
           <v-row>
-            <v-col cols="1" v-for="chart in charts" :key="chart.title">
-              <v-card :title="chart.title">
-                <div>Chart Here</div>
-              </v-card>
+            <v-col cols="12">
+              <!-- <BabylonCanvas /> -->
             </v-col>
           </v-row>
 
-          <!-- This is the sales order table -->
-          <!-- Renders a row with a single column that contains the `DealsTable` component. This component is likely responsible for displaying a table of sales deals or transactions. -->
+          <!-- This is 4th row / Deals Table-->
           <v-row>
             <v-col cols="12">
               <DealsTable />
@@ -60,7 +58,8 @@ import NavigationDrawer from '@/components/layout/NavigationDrawer.vue'
 import StatisticsCard from '@/components/dashboard/StatisticsCard.vue'
 import DealsTable from '@/components/dashboard/DealsTable.vue'
 import AppFooter from '@/components/layout/AppFooter.vue'
-import MoreOptions from '@/components/layout/MoreOptions.vue'
+import BabylonCanvas from '@/components/Babylon/BabylonCanvas.vue'
+//import MoreOptions from '@/components/layout/MoreOptions.vue'
 
 const activeTab = ref('overview')
 const isDrawerOpen = ref(false)
@@ -72,12 +71,12 @@ const statistics = [
   { title: 'Monthly Target', value: '68%', trend: 15 }
 ]
 
-const charts = [
-  { title: 'Average Ticket' },
-  { title: 'Revenue' },
-  { title: 'Sales' },
-  { title: 'Customers' },
-  { title: 'Orders' },
-  { title: 'Profit' }
-]
+// const charts = [
+//   { title: 'Average Ticket' },
+//   { title: 'Revenue' },
+//   { title: 'Sales' },
+//   { title: 'Customers' },
+//   { title: 'Orders' },
+//   { title: 'Profit' }
+// ]
 </script>
