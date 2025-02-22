@@ -32,7 +32,7 @@
           <!-- This is 3rd row / Deals Table-->
           <v-row>
             <v-col cols="12">
-              <!-- <BabylonCanvas /> -->
+              <BabylonCanvas />
             </v-col>
           </v-row>
 
