@@ -1,8 +1,12 @@
 <template>
   <div id="canvasZone">
     <canvas id="renderCanvas" ref="renderCanvas"></canvas>
-    <div class="connection-status" :class="{ connected: isConnected }">
+    <!-- <div class="connection-status" :class="{ connected: isConnected }">
       {{ isConnected ? 'Connected' : 'Disconnected' }}
+    </div> -->
+    <div class="connection-status">
+      <VIcon v-if="isConnected" icon="mdi-pipe" color="green"></VIcon>
+      <VIcon v-else icon="mdi-pipe-disconnected" color="red"></VIcon>
     </div>
     <div class="resize-controls">
       <VIcon @click="toggleFullscreen">
@@ -35,8 +39,8 @@ export default defineComponent({
     const renderCanvas = ref<HTMLCanvasElement | null>(null)
     const isConnected = ref<boolean>(false)
     const isFullscreen = ref<boolean>(false)
-    const originalWidth = ref<string>('100%')
-    const originalHeight = ref<string>('100%')
+    const originalWidth = ref<string>('70vh') // Store the original width
+    const originalHeight = ref<string>('70vh') // Store the original height
 
     let model: BABYLON.Mesh | null = null
     let gizmoManager: BABYLON.GizmoManager | null = null
@@ -66,8 +70,8 @@ export default defineComponent({
       const canvasZone = document.getElementById('canvasZone')
       if (canvasZone) {
         if (isFullscreen.value) {
-          canvasZone.style.width = '100%'
-          canvasZone.style.height = '100vh'
+          canvasZone.style.width = '100vh' //'100%'
+          canvasZone.style.height = '100vh' //'100vh'
         } else {
           canvasZone.style.width = originalWidth.value
           canvasZone.style.height = originalHeight.value
@@ -204,25 +208,34 @@ export default defineComponent({
 
 <style scoped>
 #canvasZone {
-  width: 100%;
-  height: 100vh;
-  position: relative;
+  width: 70vh; /* 100% of the parent container */ /* 80% of the viewport width */
+  height: 70vh; /* 100vh of the parent container */
+  position: relative; /* Make canvasZone a positioning context */
 }
 
 #renderCanvas {
-  width: 50%;
-  height: 50%;
+  width: 100%; /* 50% of the parent container */
+  height: 100%; /* 50% of the parent container */
   touch-action: none;
 }
 
 .connection-status {
   position: absolute;
   top: 10px;
-  right: 10px;
-  padding: 5px 10px;
+  right: 10px; /* Position to the right */
+  z-index: 10; /* Ensure it's above the canvas */
+  padding: 5px 10px; /*padding: 5px 10px */
   border-radius: 4px;
-  background: #ff4444;
+  /* background: #ff4444; */
   color: white;
+}
+
+.resize-controls {
+  position: absolute;
+  top: 10px;
+  right: 60px; /* Position to the right, adjust as needed */
+  z-index: 10; /* Ensure it's above the canvas */
+  cursor: pointer;
 }
 
 .connection-status.connected {

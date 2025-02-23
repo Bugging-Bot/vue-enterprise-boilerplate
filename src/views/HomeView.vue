@@ -31,7 +31,8 @@
 
           <!-- This is 3rd row / Deals Table-->
           <v-row>
-            <v-col cols="12">
+            <v-col cols="6">
+              <!--12 columns-->
               <BabylonCanvas />
             </v-col>
           </v-row>
