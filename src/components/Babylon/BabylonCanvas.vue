@@ -4,6 +4,11 @@
     <div class="connection-status" :class="{ connected: isConnected }">
       {{ isConnected ? 'Connected' : 'Disconnected' }}
     </div>
+    <div class="resize-controls">
+      <VIcon @click="toggleFullscreen">
+        {{ isFullscreen ? 'mdi-arrow-collapse' : 'mdi-arrow-expand' }}
+      </VIcon>
+    </div>
   </div>
 </template>
 
@@ -12,17 +17,27 @@ import { defineComponent, onMounted, onUnmounted, ref, type Ref } from 'vue'
 import * as BABYLON from 'babylonjs'
 import 'babylonjs-loaders'
 import { AxesViewer } from 'babylonjs'
+import { VIcon } from 'vuetify/components'
 
 interface ComponentData {
   renderCanvas: Ref<HTMLCanvasElement | null>
   isConnected: Ref<boolean>
+  isFullscreen: Ref<boolean>
+  toggleFullscreen: () => void
 }
 
 export default defineComponent({
   name: 'BabylonScene',
+  components: {
+    VIcon
+  },
   setup(): ComponentData {
     const renderCanvas = ref<HTMLCanvasElement | null>(null)
     const isConnected = ref<boolean>(false)
+    const isFullscreen = ref<boolean>(false)
+    const originalWidth = ref<string>('100%')
+    const originalHeight = ref<string>('100%')
+
     let model: BABYLON.Mesh | null = null
     let gizmoManager: BABYLON.GizmoManager | null = null
     let axes: AxesViewer | null = null
@@ -42,6 +57,25 @@ export default defineComponent({
       mesh.rotation.x = normalize(mesh.rotation.x)
       mesh.rotation.y = normalize(mesh.rotation.y)
       mesh.rotation.z = normalize(mesh.rotation.z)
+    }
+
+    let engine: BABYLON.Engine | undefined // Change to undefined
+
+    const toggleFullscreen = () => {
+      isFullscreen.value = !isFullscreen.value
+      const canvasZone = document.getElementById('canvasZone')
+      if (canvasZone) {
+        if (isFullscreen.value) {
+          canvasZone.style.width = '100%'
+          canvasZone.style.height = '100vh'
+        } else {
+          canvasZone.style.width = originalWidth.value
+          canvasZone.style.height = originalHeight.value
+        }
+        if (renderCanvas.value && engine) {
+          engine.resize()
+        }
+      }
     }
 
     onMounted(() => {
@@ -160,8 +194,10 @@ export default defineComponent({
 
     return {
       renderCanvas,
-      isConnected
-    }
+      isConnected,
+      isFullscreen,
+      toggleFullscreen
+    } as ComponentData
   }
 })
 </script>
@@ -170,11 +206,12 @@ export default defineComponent({
 #canvasZone {
   width: 100%;
   height: 100vh;
+  position: relative;
 }
 
 #renderCanvas {
-  width: 100%;
-  height: 100%;
+  width: 50%;
+  height: 50%;
   touch-action: none;
 }
 
