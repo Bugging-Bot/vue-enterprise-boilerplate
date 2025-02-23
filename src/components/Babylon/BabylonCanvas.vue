@@ -50,7 +50,7 @@ export default defineComponent({
     let zLabel: BABYLON.Mesh | null = null
 
     // const wsUrl = `ws://193.123.68.200:80/ws`;
-    const wsUrl = `ws://localhost:8080/ws`
+    const wsUrl = `ws://localhost:9090/ws`
     console.log('Connecting to:', wsUrl)
 
     const socket = new WebSocket(wsUrl)
