@@ -8,9 +8,7 @@
 </template>
 
 <script lang="ts">
-//import { defineComponent, onMounted, onUnmounted, ref, Ref } from 'vue'
-import { defineComponent, onMounted, onUnmounted, ref } from 'vue'
-import type { Ref } from 'vue'
+import { defineComponent, onMounted, onUnmounted, ref, type Ref } from 'vue'
 import * as BABYLON from 'babylonjs'
 import 'babylonjs-loaders'
 import { AxesViewer } from 'babylonjs'
@@ -86,28 +84,22 @@ export default defineComponent({
           const light = new BABYLON.HemisphericLight('light', new BABYLON.Vector3(0, 1, 0), scene)
           light.intensity = 0.8
 
-          BABYLON.SceneLoader.ImportMesh(
-            '',
-            'public/assets/',
-            'skateboard.glb',
-            scene,
-            (newMeshes) => {
-              model = newMeshes[0] as BABYLON.Mesh
-              model.scaling = new BABYLON.Vector3(0.75, 0.75, 0.75)
-              model.position = new BABYLON.Vector3(0, 1, 0)
+          BABYLON.SceneLoader.ImportMesh('', '/assets/', 'skateboard.glb', scene, (newMeshes) => {
+            model = newMeshes[0] as BABYLON.Mesh
+            model.scaling = new BABYLON.Vector3(0.75, 0.75, 0.75)
+            model.position = new BABYLON.Vector3(0, 1, 0)
 
-              gizmoManager = new BABYLON.GizmoManager(scene)
-              gizmoManager.attachToMesh(model)
-              gizmoManager.rotationGizmoEnabled = true
+            gizmoManager = new BABYLON.GizmoManager(scene)
+            gizmoManager.attachToMesh(model)
+            gizmoManager.rotationGizmoEnabled = true
 
-              axes = new BABYLON.Debug.AxesViewer(scene, 2)
-              axes.xAxis.parent = model
-              axes.yAxis.parent = model
-              axes.zAxis.parent = model
+            axes = new BABYLON.Debug.AxesViewer(scene, 2)
+            axes.xAxis.parent = model
+            axes.yAxis.parent = model
+            axes.zAxis.parent = model
 
-              createAxisLabels(scene)
-            }
-          )
+            createAxisLabels(scene)
+          })
 
           return scene
         }

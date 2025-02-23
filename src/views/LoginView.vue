@@ -10,10 +10,10 @@
           <!-- Main login card with shadow -->
           <!-- Theme toggle button (dark/light mode) -->
           <div class="d-flex justify-end mb-2">
-            <v-btn
+            <!-- <v-btn
               :icon="themePreference === 'dark' ? 'mdi-weather-night' : 'mdi-weather-sunny'"
               @click="toggleTheme"
-            />
+            /> -->
           </div>
 
           <!-- Login form title -->
