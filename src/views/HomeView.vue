@@ -13,7 +13,9 @@
             <v-col>
               <v-tabs v-model="activeTab">
                 <v-tab value="overview">Overview</v-tab>
-                <v-tab value="sales">Sales Order</v-tab>
+                <v-tab value="parts">Parts</v-tab>
+                <v-tab value="process">Process</v-tab>
+                <v-tab value="adminstration">adminstration</v-tab>
               </v-tabs>
             </v-col>
             <v-col class="text-right">
@@ -30,7 +32,7 @@
           </v-row>
 
           <!-- This is 3rd row / Deals Table-->
-          <v-row>
+          <v-row v-if="activeTab === 'overview'">
             <v-col cols="6">
               <!--12 columns-->
               <BabylonCanvas />
@@ -38,7 +40,7 @@
           </v-row>
 
           <!-- This is 4th row / Deals Table-->
-          <v-row>
+          <v-row v-if="activeTab === 'overview'">
             <v-col cols="12">
               <DealsTable />
             </v-col>

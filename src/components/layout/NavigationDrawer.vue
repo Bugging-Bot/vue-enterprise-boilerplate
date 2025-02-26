@@ -4,9 +4,25 @@
     @update:model-value="$emit('update:modelValue', $event)"
   >
     <v-list>
-      <v-list-item title="Dashboard" prepend-icon="mdi-view-dashboard"></v-list-item>
-      <v-list-item title="Updates" prepend-icon="mdi-update"></v-list-item>
-      <v-list-item title="Messages" prepend-icon="mdi-message"></v-list-item>
+      <v-list-item link to="/home" title="Home" prepend-icon="mdi-home"></v-list-item>
+      <v-list-item link to="/dashboard" title="Dashboard" prepend-icon="mdi-view-dashboard">
+      </v-list-item>
+      <v-list-item
+        link
+        to="/processes"
+        title="Processes"
+        prepend-icon="mdi-vector-triangle"
+      ></v-list-item>
+      <v-list-item link to="/simulation" title="Simulate" prepend-icon="mdi-stove"></v-list-item>
+      <v-list-item
+        link
+        to="/configuration"
+        title="Configuration"
+        prepend-icon="mdi-cog-outline"
+      ></v-list-item>
+      <v-list-item link to="/update" title="Updates" prepend-icon="mdi-update"></v-list-item>
+      <v-list-item link to="/messages" title="Messages" prepend-icon="mdi-message"></v-list-item>
+      <!-- <v-list-item-title>Messages</v-list-item-title> -->
     </v-list>
 
     <v-list-group value="RECORDS">
