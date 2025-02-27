@@ -2,8 +2,9 @@
   <Layout>
     <template #default>
       <v-card class="pa-4">
+        <div class="process-builder">Your message content here</div>
         <h1>Process Builder View</h1>
-        <div>Your message content here</div>
+        <DiagramEditor />
       </v-card>
     </template>
   </Layout>
@@ -11,6 +12,7 @@
 
 <script setup lang="ts">
 import Layout from '@/components/layout/LayoutView.vue'
+import DiagramEditor from '@/components/JointJs/DiagramEditor.vue'
 </script>
 
 <style scoped>
