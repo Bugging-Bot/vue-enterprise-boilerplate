@@ -5,8 +5,9 @@
         <div class="process-builder">Your message content here</div>
         <h1>Process Builder View</h1>
         <!-- <DiagramEditor /> -->
-        <DragDrop />
+        <!-- <DragDrop /> -->
         <!-- <DrawIOViewer /> -->
+        <ProcessPan />
       </v-card>
     </template>
   </Layout>
@@ -16,8 +17,9 @@
 import Layout from '@/components/layout/LayoutView.vue'
 // import DiagramEditor from '@/components/JointJs/ScadaView.vue'
 // import ScadaViewKonva from '@/components/KonvaJs/ScadaViewKonva.vue'
-import DragDrop from '@/components/KonvaJs/DragDrop.vue'
+//import DragDrop from '@/components/KonvaJs/DragDrop.vue'
 // import DrawIOViewer from '@/components/KonvaJs/DrawIOViewer.vue'
+import ProcessPan from '@/components/KonvaJs/ProcessPan.vue'
 </script>
 
 <style scoped>
