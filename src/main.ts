@@ -12,6 +12,7 @@ import '@mdi/font/css/materialdesignicons.css'
 import App from '@/App.vue'
 import router from '@/router/index'
 import { authConfig } from './auth/auth.config'
+import VueKonva from 'vue-konva'
 
 const vuetify = createVuetify({
   components,
@@ -30,6 +31,8 @@ const app = createApp(App)
 /** https://pinia.vuejs.org/ **/
 const pinia = createPinia()
 app.use(pinia)
+// app using konva
+app.use(VueKonva)
 
 /** Vue Router **/
 /** https://router.vuejs.org/ **/
