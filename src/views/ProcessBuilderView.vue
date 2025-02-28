@@ -5,6 +5,7 @@
         <div class="process-builder">Your message content here</div>
         <h1>Process Builder View</h1>
         <DiagramEditor />
+        <ScadaViewKonva />
       </v-card>
     </template>
   </Layout>
@@ -12,7 +13,8 @@
 
 <script setup lang="ts">
 import Layout from '@/components/layout/LayoutView.vue'
-import DiagramEditor from '@/components/JointJs/DiagramEditor.vue'
+import DiagramEditor from '@/components/JointJs/ScadaView.vue'
+import ScadaViewKonva from '@/components/KonvaJs/ScadaViewKonva.vue'
 </script>
 
 <style scoped>
