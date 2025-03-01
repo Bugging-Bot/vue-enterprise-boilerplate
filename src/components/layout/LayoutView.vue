@@ -2,8 +2,9 @@
   <AppBar @toggle-drawer="isDrawerOpen = !isDrawerOpen" />
   <NavigationDrawer v-model="isDrawerOpen" />
 
-  <v-main>
-    <v-container fluid>
+  <v-main style="height: 100vh; overflow: auto">
+    <!-- Ensure v-main takes the full viewport height -->
+    <v-container fluid style="height: 100%">
       <slot> </slot>
       <!-- Placeholder for content -->
     </v-container>

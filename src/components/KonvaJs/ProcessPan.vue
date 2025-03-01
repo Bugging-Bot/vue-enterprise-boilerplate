@@ -1,85 +1,105 @@
 <template>
-  <!-- this container hold everything stage, layer etc-->
-  <div ref="container" style="width: 1800px; height: 800px; border: 1px solid #ccc">
-    <!-- Stage is must for Konva -->
+  <div ref="container" style="width: 100%; height: 100%; border: 5px solid #ccc">
     <v-stage ref="stage" :config="stageConfig">
-      <!-- Layer 1: Background – Static background (images, grid, layout). -->
+      <!-- Layer 1: Background -->
       <v-layer ref="layer" :config="layer1Config">
-        <v-image v-if="image" :config="backgroundConfig" />
+        <v-image :config="backgroundConfig" />
       </v-layer>
 
-      <!-- Layer 2: Static Shapes – Represents equipment like tanks, valves, pipes, etc. -->
+      <!-- Layer 2: Static Shapes -->
       <v-layer :config="layer2Config" ref="layer">
         <v-group ref="group">
           <v-shape ref="shape"> </v-shape>
         </v-group>
       </v-layer>
 
-      <!-- Layer 3:
-       Process Flow – Represents logical connections (e.g., pipes or flow arrows).
-      Real-Time Data/Status Indicators – Shows sensors, gauges, and real-time status of components (like ON/OFF status)..
-      Labels/Annotations – Text labels, values, or tooltips for visual explanations.-->
+      <!-- Layer 3: Process Flow -->
       <v-layer :config="layer3Config" ref="layer"> </v-layer>
 
-      <!-- Layer 4:
-       Real-Time Data/Status Indicators – Shows sensors, gauges, and real-time status of components (like ON/OFF status).
-      Control Buttons/Interactive Elements – Buttons for user controls (start/stop pumps, alarms, etc.).
-      Modals/Popups (Optional) – Displays modals for detailed information, alerts, or settings. -->
+      <!-- Layer 4: Real-Time Data -->
       <v-layer :config="layer4Config" ref="layer"> </v-layer>
     </v-stage>
   </div>
 </template>
-
 <script>
-import VueKonva from 'vue-konva'
-import backgroundImage from '@/assets/process_flow_diagram.png'
+import Konva from 'konva'
+import { Canvg } from 'canvg'
 
 export default {
-  name: 'ProcessPan',
-  components: {
-    VStage: VueKonva.Stage,
-    VLayer: VueKonva.Layer,
-    VImage: VueKonva.Image,
-    VGroup: VueKonva.Group,
-    VShape: VueKonva.Shape
-  },
   data() {
     return {
+      stage: null,
+      konvaImage: null,
+      padding: 30, // border all around the container
+      prop: 0.8, /// 90% of the container size
       stageConfig: {
-        width: 1500,
-        height: 800
+        width: window.innerWidth,
+        height: window.innerHeight,
+        padding: 10
       },
       layer1Config: {},
-      backgroundConfig: {
-        x: 11,
-        y: 20,
-        width: 1500,
-        height: 700
-      },
-      image: null,
-      // Layer 2 configuration: Static Shapes
       layer2Config: {},
-      // Layer 3 configuration: Process Flow
       layer3Config: {},
-      // Layer 4 configuration: Real-Time Data/Status Indicators
       layer4Config: {}
     }
   },
+  methods: {
+    fitStageIntoParentContainer() {
+      const containerWidth = this.$refs.container.clientWidth - this.padding * 2
+      const containerHeight = this.$refs.container.clientHeight - this.padding * 2
 
-  mounted() {
-    const img = new Image()
-    img.onload = () => {
-      // Wait for image to load
-      this.image = img
-      this.backgroundConfig.image = img
-      this.$refs.layer.batchDraw()
+      // Set stage size with padding
+      this.stage.width(containerWidth * this.prop + this.padding * 2)
+      this.stage.height(containerHeight * this.prop + this.padding * 2)
+
+      if (this.konvaImage) {
+        // Set image size to 95% of container
+        this.konvaImage.width(containerWidth * this.prop)
+        this.konvaImage.height(containerHeight * this.prop)
+        this.konvaImage.x(this.padding)
+        this.konvaImage.y(this.padding)
+      }
+
+      this.stage.batchDraw()
     }
-    img.onerror = (error) => {
-      console.log('image load error', error)
-    }
-    img.src = backgroundImage
+  },
+  async mounted() {
+    const containerWidth = this.$refs.container.clientWidth - this.padding * 2
+    const containerHeight = this.$refs.container.clientHeight - this.padding * 2
+
+    this.stage = new Konva.Stage({
+      container: this.$refs.container,
+      width: containerWidth * this.prop + this.padding * 2,
+      height: containerHeight * this.prop + this.padding * 2
+    })
+
+    const layer1 = new Konva.Layer()
+    this.stage.add(layer1)
+    // const response = await fetch('/assets/process_flow_diagram_3.svg')
+    const response = await fetch('/assets/process_flow_diagram.png')
+    const svgContent = await response.text()
+
+    const canvas = document.createElement('canvas')
+    const ctx = canvas.getContext('2d')
+    const v = await Canvg.from(ctx, svgContent)
+    await v.render()
+
+    this.konvaImage = new Konva.Image({
+      image: canvas,
+      x: this.padding,
+      y: this.padding,
+      width: containerWidth * this.prop,
+      height: containerHeight * this.prop
+    })
+
+    layer1.add(this.konvaImage)
+    layer1.batchDraw()
+
+    window.addEventListener('resize', this.fitStageIntoParentContainer)
+  },
+  beforeUnmount() {
+    window.removeEventListener('resize', this.fitStageIntoParentContainer)
   }
 }
 </script>
-<!--Style section-->
 <style scoped></style>
