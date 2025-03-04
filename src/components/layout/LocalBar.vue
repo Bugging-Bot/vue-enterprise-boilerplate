@@ -1,26 +1,22 @@
 <!-- local bar listen the event (collapse & expand event) emit from the app bar. -->
 
 <template>
-  <v-toolbar
-    title="Local Bar"
-    class="local-bar"
-    elevation="2"
-    density="comfortable"
-    :style="{ height: isCollapsed ? '56px' : '64px' }"
-  >
+  <v-toolbar title="Local Bar" class="local-bar" elevation="2" density="comfortable">
     <v-spacer></v-spacer>
   </v-toolbar>
 </template>
 
-<script setup lang="ts">
+<!-- <script setup lang="ts"> -->
+<script lang="ts">
 // Component logic can be added here
 import { ref } from 'vue'
 import { useEventBusStore } from '@/stores/eventBus'
+//import { defineComponent } from 'vue'
 
-export default {}
-
-// State to track if the local bar is collapsed
-const isCollapsed = ref(false)
+export const LocalBar = {
+  name: 'LocalBar'
+  //setup():
+}
 </script>
 
 <style scoped>
