@@ -1,9 +1,15 @@
 /**
  * Event handler utilities for JointJS shapes and paper interactions
- * Provides centralized event management for SCADA diagram elements
  */
 
 import { dia } from 'jointjs'
+import { getMenuPosition } from './contextMenuHandler'
+
+interface ContextMenuState {
+  isVisible: boolean
+  position: { x: number; y: number }
+  shapeId: string
+}
 
 /**
  * Sets up event listeners for shape interactions
@@ -36,5 +42,36 @@ export const setupPaperEvents = (paper: dia.Paper): void => {
 
   paper.on('element:pointerdown', (elementView: dia.ElementView) => {
     console.log('Element interaction started:', elementView.model.id)
+  })
+}
+
+/**
+ * Sets up context menu events for paper
+ */
+export const setupContextMenuEvents = (
+  paper: dia.Paper,
+  contextMenuState: ContextMenuState
+): void => {
+  // Prevent default context menu on the paper container
+  paper.el.addEventListener('contextmenu', (evt: Event) => {
+    evt.preventDefault()
+  })
+
+  // Handle right-click on elements
+  paper.on(
+    'element:contextmenu',
+    (elementView: dia.ElementView, evt: JQuery.TriggeredEvent, x: number, y: number) => {
+      evt.preventDefault()
+      const shape = elementView.model
+
+      contextMenuState.isVisible = true
+      contextMenuState.position = getMenuPosition(evt.originalEvent as MouseEvent)
+      contextMenuState.shapeId = shape.id.toString()
+    }
+  )
+
+  // Close context menu on blank paper click
+  paper.on('blank:pointerdown', () => {
+    contextMenuState.isVisible = false
   })
 }

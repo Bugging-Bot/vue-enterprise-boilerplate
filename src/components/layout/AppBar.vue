@@ -40,6 +40,11 @@
         <v-icon>mdi-bell</v-icon>
       </v-btn>
 
+      <v-btn icon @click="toggleLocalBar" aria-label="Toggle Local Bar">
+        <v-icon>mdi-arrow-collapse-down</v-icon>
+        <!-- Example icon for toggling -->
+      </v-btn>
+
       <v-menu>
         <template #activator="{ props }">
           <v-btn icon v-bind="props" aria-label="More Options">
@@ -67,9 +72,15 @@
 import { ref } from 'vue'
 import { useAuth0 } from '@auth0/auth0-vue'
 import { useRouter } from 'vue-router'
+import { useEventBusStore } from '@/stores/eventBus'
+
+// defining evennt bus instance
+const eventBus = useEventBusStore()
 
 // Emits
-defineEmits(['toggle-drawer'])
+// toggle-drawer: Emitted when the drawer toggle button is clicked.
+// toggle-local-bar: Emitted when the local bar toggle button is clicked.
+const emit = defineEmits(['toggle-drawer', 'toggle-local-bar', 'toggle-local-bar-pub-sub'])
 
 // Composables
 const router = useRouter()
@@ -118,6 +129,15 @@ const handleMenuAction = (action: string) => {
       auth0Logout({ logoutParams: { returnTo: window.location.origin } })
       break
   }
+}
+
+// Emit event to toggle local bar collapse state
+const toggleLocalBar = () => {
+  // Emit toggle-local-bar event to parent component (or Local Bar itself)
+  emit('toggle-local-bar-pub-sub')
+  // emitting event using pub-sub mechanism
+  eventBus.emit('toggle-local-bar-pub-sub', { message: 'event from toggle-local-bar !' })
+  console.log('toggle-local-bar-pub-sub event emitted')
 }
 </script>
 
