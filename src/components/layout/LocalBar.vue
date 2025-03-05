@@ -25,7 +25,7 @@ import { onMounted, ref, onUnmounted } from 'vue'
 const eventBus = useEventBusStore()
 
 // Local/initial state for local bar visibility is set to hidden
-const localBarVisible = ref(true)
+const localBarVisible = ref(false)
 // data is the object { message: true }
 // data.message: This accesses the message property of the data object. i.e value of message.
 // Event handler for the toggle event
@@ -41,7 +41,7 @@ const handleToggleLocalBar = (data: any) => {
     // Emit event to change icon in AppBar
     eventBus.emit(
       'local-bar-icon-change',
-      localBarVisible.value ? 'mdi-arrow-collapse-down' : 'mdi-arrow-collapse-up'
+      localBarVisible.value ? 'mdi-arrow-collapse-up' : 'mdi-arrow-collapse-down'
     )
   }
 }

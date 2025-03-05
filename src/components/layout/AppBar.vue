@@ -86,7 +86,7 @@ const { logout: auth0Logout } = useAuth0()
 // State
 const isSearchActive = ref(false)
 const searchQuery = ref('')
-const localBarIcon = ref('mdi-arrow-collapse-down') // Initial icon
+const localBarIcon = ref('mdi-arrow-collapse-up') // Initial icon
 
 // Toggle Local Bar event - Emit globally
 const toggleLocalBar = () => {
