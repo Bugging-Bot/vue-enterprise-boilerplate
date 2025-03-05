@@ -24,12 +24,15 @@ const vuetify = createVuetify({
     }
   }
 })
-
-const app = createApp(App)
-
+// create pinia
 /** Pinia **/
 /** https://pinia.vuejs.org/ **/
 const pinia = createPinia()
+console.log('Pinia initialized/created:', pinia)
+
+const app = createApp(App)
+console.log('app initialized/app:', app)
+
 app.use(pinia)
 // app using konva
 app.use(VueKonva)

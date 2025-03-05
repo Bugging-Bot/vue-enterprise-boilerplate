@@ -13,7 +13,7 @@
         title="Processes"
         prepend-icon="mdi-vector-triangle"
       ></v-list-item>
-      <v-list-item link to="/simulation" title="Simulate" prepend-icon="mdi-stove"></v-list-item>
+      <v-list-item to="/simulation" title="Simulate" prepend-icon="mdi-stove"></v-list-item>
       <v-list-item
         link
         to="/configuration"
