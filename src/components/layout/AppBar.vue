@@ -41,7 +41,7 @@
       </v-btn>
 
       <v-btn icon @click="toggleLocalBar" aria-label="Toggle Local Bar">
-        <v-icon>mdi-arrow-collapse-down</v-icon>
+        <v-icon>{{ localBarIcon }}</v-icon>
         <!-- Example icon for toggling -->
       </v-btn>
 
@@ -76,6 +76,8 @@ import { useEventBusStore } from '@/stores/eventBus'
 
 // Access the EventBus store
 const eventBus = useEventBusStore()
+// State for local bar visibility
+const localBarVisible = ref(false)
 
 // Composables
 const router = useRouter()
@@ -84,13 +86,20 @@ const { logout: auth0Logout } = useAuth0()
 // State
 const isSearchActive = ref(false)
 const searchQuery = ref('')
+const localBarIcon = ref('mdi-arrow-collapse-down') // Initial icon
 
 // Toggle Local Bar event - Emit globally
 const toggleLocalBar = () => {
   console.log('Emitting toggle-local-bar event...')
   // Emit the global event 'toggle-local-bar-pub-sub'
-  eventBus.emit('toggle-local-bar', { message: true })
+  eventBus.emit('toggle-local-bar', { message: !localBarVisible.value })
+  //eventBus.emit('toggle-local-bar', { message: true })
 }
+
+// Listen for icon changes from LocalBar
+eventBus.on('local-bar-icon-change', (icon) => {
+  localBarIcon.value = icon
+})
 
 // Menu items configuration
 const menuItems = [

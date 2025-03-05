@@ -25,7 +25,7 @@ import { onMounted, ref, onUnmounted } from 'vue'
 const eventBus = useEventBusStore()
 
 // Local/initial state for local bar visibility is set to hidden
-const localBarVisible = ref(false)
+const localBarVisible = ref(true)
 // data is the object { message: true }
 // data.message: This accesses the message property of the data object. i.e value of message.
 // Event handler for the toggle event
@@ -37,12 +37,23 @@ const handleToggleLocalBar = (data: any) => {
   */
   if (data && data.message) {
     localBarVisible.value = !localBarVisible.value
+    //localBarVisible.value = data.message // updated to use the message property for icon in app bar
+    // Emit event to change icon in AppBar
+    eventBus.emit(
+      'local-bar-icon-change',
+      localBarVisible.value ? 'mdi-arrow-collapse-down' : 'mdi-arrow-collapse-up'
+    )
   }
 }
 
 // Subscribe to the 'toggle-local-bar-pub-sub' event when the component mounts
 onMounted(() => {
   eventBus.on('toggle-local-bar', handleToggleLocalBar)
+  // Emit initial icon state
+  eventBus.emit(
+    'local-bar-icon-change',
+    localBarVisible.value ? 'mdi-arrow-collapse-down' : 'mdi-arrow-collapse-up'
+  )
   console.log('OnMounted: Subscribed to event')
 })
 
