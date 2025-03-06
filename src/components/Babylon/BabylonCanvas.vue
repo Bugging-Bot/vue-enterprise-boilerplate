@@ -29,13 +29,13 @@ interface ComponentData {
   isFullscreen: Ref<boolean>
   toggleFullscreen: () => void
 }
-// export default defineComponent({
-//   name: 'BabylonScene',
-//   components: {
-//     VIcon
-//   },
-export const BabylonScene = {
+export default defineComponent({
   name: 'BabylonScene',
+  //   components: {
+  //     VIcon
+  //   },
+  // export const BabylonScene = {
+  //   name: 'BabylonScene',
   setup(): ComponentData {
     const renderCanvas = ref<HTMLCanvasElement | null>(null)
     const isConnected = ref<boolean>(false)
@@ -204,7 +204,7 @@ export const BabylonScene = {
       toggleFullscreen
     } as ComponentData
   }
-}
+})
 </script>
 
 <style scoped>
