@@ -4,7 +4,7 @@
   <v-toolbar
     title="Local Bar"
     class="local-bar"
-    elevation="2"
+    elevation="1"
     density="comfortable"
     :class="{ collapsed: !localBarVisible }"
   >
@@ -25,7 +25,7 @@ import { onMounted, ref, onUnmounted } from 'vue'
 const eventBus = useEventBusStore()
 
 // Local/initial state for local bar visibility is set to hidden
-const localBarVisible = ref(false)
+const localBarVisible = ref(true)
 // data is the object { message: true }
 // data.message: This accesses the message property of the data object. i.e value of message.
 // Event handler for the toggle event
@@ -52,7 +52,7 @@ onMounted(() => {
   // Emit initial icon state
   eventBus.emit(
     'local-bar-icon-change',
-    localBarVisible.value ? 'mdi-arrow-collapse-down' : 'mdi-arrow-collapse-up'
+    localBarVisible.value ? 'mdi-arrow-collapse-up' : 'mdi-arrow-collapse-down'
   )
   console.log('OnMounted: Subscribed to event')
 })

@@ -45,6 +45,10 @@
         <!-- Example icon for toggling -->
       </v-btn>
 
+      <v-btn icon @click="toggleLocalDrawer" aria-label="Toggle Local Drawer">
+        <v-icon>{{ localDrawerIcon }}</v-icon>
+      </v-btn>
+
       <v-menu>
         <template #activator="{ props }">
           <v-btn icon v-bind="props" aria-label="More Options">
@@ -74,20 +78,17 @@ import { useAuth0 } from '@auth0/auth0-vue'
 import { useRouter } from 'vue-router'
 import { useEventBusStore } from '@/stores/eventBus'
 
+/********General setup ********/
 // Access the EventBus store
 const eventBus = useEventBusStore()
-// State for local bar visibility
-const localBarVisible = ref(false)
-
 // Composables
 const router = useRouter()
 const { logout: auth0Logout } = useAuth0()
 
-// State
-const isSearchActive = ref(false)
-const searchQuery = ref('')
-const localBarIcon = ref('mdi-arrow-collapse-up') // Initial icon
-
+/********Local Bar setup ********/
+// State for local bar visibility
+const localBarVisible = ref(false)
+const localBarIcon = ref('mdi-arrow-collapse-down') // Initial icon
 // Toggle Local Bar event - Emit globally
 const toggleLocalBar = () => {
   console.log('Emitting toggle-local-bar event...')
@@ -95,11 +96,30 @@ const toggleLocalBar = () => {
   eventBus.emit('toggle-local-bar', { message: !localBarVisible.value })
   //eventBus.emit('toggle-local-bar', { message: true })
 }
-
 // Listen for icon changes from LocalBar
 eventBus.on('local-bar-icon-change', (icon) => {
   localBarIcon.value = icon
 })
+
+/******** Local Drawer setup ********/
+// state for local drawer visibility
+const localDrawerVisible = ref(false)
+const localDrawerIcon = ref('mdi-arrow-collapse-right') // Initial icon
+// Toggle Local Drawer event - Emit globally
+const toggleLocalDrawer = () => {
+  console.log('Emitting toggle-local-drawer event...')
+  // Emit the global event 'toggle-local-drawer-pub-sub'
+  eventBus.emit('toggle-local-drawer', { message: !localDrawerVisible.value })
+  //eventBus.emit('toggle-local-drawer', { message: true })
+}
+// listen for icon changes for LocalDrawer
+eventBus.on('local-drawer-icon-change', (icon) => {
+  localDrawerIcon.value = icon
+})
+
+// State
+const isSearchActive = ref(false)
+const searchQuery = ref('')
 
 // Menu items configuration
 const menuItems = [
@@ -147,6 +167,8 @@ const handleMenuAction = (action: string) => {
 .app-bar {
   display: flex;
   align-items: center;
+  /* height: 48px; /* Reduce the height */
+  /* min-height: 48px; /*Ensure it doesn't stretch */
 }
 
 .app-bar__nav {

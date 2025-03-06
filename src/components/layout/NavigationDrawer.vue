@@ -49,3 +49,12 @@ defineProps<{
 }>()
 defineEmits(['update:modelValue']) // Emit event when state changes
 </script>
+
+<style scoped>
+.color-preview {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  border: 2px solid #ddd;
+}
+</style>
