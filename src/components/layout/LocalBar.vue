@@ -1,20 +1,28 @@
 <!-- local bar listen the event (collapse & expand event) emit from the app bar. -->
 
 <template>
-  <v-toolbar
-    title="Local Bar"
-    class="local-bar"
-    elevation="1"
-    density="comfortable"
-    :class="{ collapsed: !localBarVisible }"
-  >
-    <!-- Toggle 'collapsed' class based on state -->
-    <v-spacer></v-spacer>
-    <!-- Buttons inside Local Bar -->
-    <v-btn>Button 1</v-btn>
-    <v-btn>Button 2</v-btn>
-    <v-btn>Button 3</v-btn>
-  </v-toolbar>
+  <v-card class="local-bar-container">
+    <div class="local-bar" :class="{ collapsed: !localBarVisible }">
+      <!-- Toggle 'collapsed' class based on state -->
+      <v-tabs v-model="activeTab">
+        <v-tab value="overview">Overview</v-tab>
+        <v-tab value="parts">Parts</v-tab>
+        <v-tab value="process">Process</v-tab>
+        <v-tab value="adminstration">adminstration</v-tab>
+      </v-tabs>
+    </div>
+    <v-card-text>
+      <v-tabs-window v-model="activeTab">
+        <v-tabs-window-item value="overview"> Overview </v-tabs-window-item>
+
+        <v-tabs-window-item value="parts"> Parts </v-tabs-window-item>
+
+        <v-tabs-window-item value="process"> Process </v-tabs-window-item>
+
+        <v-tabs-window-item value="adminstration"> Adminstration </v-tabs-window-item>
+      </v-tabs-window>
+    </v-card-text>
+  </v-card>
 </template>
 
 <script setup lang="ts">
@@ -26,6 +34,7 @@ const eventBus = useEventBusStore()
 
 // Local/initial state for local bar visibility is set to hidden
 const localBarVisible = ref(true)
+const activeTab = ref('overview')
 // data is the object { message: true }
 // data.message: This accesses the message property of the data object. i.e value of message.
 // Event handler for the toggle event
