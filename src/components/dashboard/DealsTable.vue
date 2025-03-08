@@ -1,19 +1,19 @@
 <template>
   <v-container fluid>
-    <v-card>
-      <v-card-title class="d-flex align-center">
-        List of Deals
-        <v-spacer></v-spacer>
-        <v-btn variant="text" @click="seeAllDeals">See all</v-btn>
-      </v-card-title>
-      <v-divider></v-divider>
-      <v-data-table
-        :items="deals"
-        :headers="headers as any"
-        class="data-table"
-        density="compact"
-      ></v-data-table>
-    </v-card>
+    <!-- <v-card> -->
+    <v-card-title class="d-flex align-center">
+      List of Deals
+      <v-spacer></v-spacer>
+      <v-btn variant="text" @click="seeAllDeals">See all</v-btn>
+    </v-card-title>
+    <v-divider></v-divider>
+    <v-data-table
+      :items="deals"
+      :headers="headers as any"
+      class="data-table"
+      density="compact"
+    ></v-data-table>
+    <!-- </v-card> -->
   </v-container>
 </template>
 

@@ -10,47 +10,47 @@
         <LocalDrawer />
         <LocalBar :tabs="tabs" @tab-changed="handleTabChanged">
           <template #overview>
-            <v-card>
-              <!-- <v-card-title>Overview Section</v-card-title> -->
-              <BabylonCanvas />
-              <!-- <v-card-text>
+            <!-- <v-card> -->
+            <!-- <v-card-title>Overview Section</v-card-title> -->
+            <BabylonCanvas />
+            <!-- <v-card-text>
                 <p>This is the overview content. You can add any components here.</p>
                 <v-btn color="primary">Do something</v-btn>
               </v-card-text> -->
-            </v-card>
+            <!-- </v-card> -->
           </template>
 
           <template #parts>
-            <v-card>
-              <v-card-title>Parts Section</v-card-title>
-              <v-card-text>
-                <v-data-table :headers="headers" :items="items"></v-data-table>
-              </v-card-text>
-            </v-card>
+            <!-- <v-card> -->
+            <v-card-title>Parts Section</v-card-title>
+            <v-card-text>
+              <v-data-table :headers="headers" :items="items"></v-data-table>
+            </v-card-text>
+            <!-- </v-card> -->
           </template>
 
           <template #process>
-            <v-card>
-              <v-card-title>Process Section</v-card-title>
-              <v-card-text>
-                <v-progress-circular
-                  :size="70"
-                  :width="5"
-                  color="purple"
-                  indeterminate
-                ></v-progress-circular>
-              </v-card-text>
-            </v-card>
+            <!-- <v-card> -->
+            <v-card-title>Process Section</v-card-title>
+            <v-card-text>
+              <v-progress-circular
+                :size="70"
+                :width="5"
+                color="purple"
+                indeterminate
+              ></v-progress-circular>
+            </v-card-text>
+            <!-- </v-card> -->
           </template>
 
           <template #deals>
-            <v-card>
-              <v-card-title>Administration Section</v-card-title>
-              <v-card-text>
-                <v-text-field label="Admin Input"></v-text-field>
-              </v-card-text>
-              <DealsTable />
-            </v-card>
+            <!-- <v-card> -->
+            <v-card-title>Administration Section</v-card-title>
+            <v-card-text>
+              <v-text-field label="Admin Input"></v-text-field>
+            </v-card-text>
+            <DealsTable />
+            <!-- </v-card> -->
           </template>
         </LocalBar>
       </v-container>
