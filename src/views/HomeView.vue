@@ -5,48 +5,10 @@
 
   <v-main>
     <v-container fluid>
-      <!-- Single sheet for handling overflow -->
-      <v-sheet>
-        <v-card>
-          <!-- Top bar with tabs and buttons -->
-          <v-row>
-            <v-col>
-              <v-tabs v-model="activeTab">
-                <v-tab value="overview">Overview</v-tab>
-                <v-tab value="parts">Parts</v-tab>
-                <v-tab value="process">Process</v-tab>
-                <v-tab value="adminstration">adminstration</v-tab>
-              </v-tabs>
-            </v-col>
-            <v-col class="text-right">
-              <v-btn>Filter</v-btn>
-              <v-btn>Export</v-btn>
-            </v-col>
-          </v-row>
-
-          <!--- This is second row--->
-          <v-row v-if="activeTab === 'overview'">
-            <v-col cols="1" v-for="stat in statistics" :key="stat.title">
-              <StatisticsCard v-bind="stat" />
-            </v-col>
-          </v-row>
-
-          <!-- This is 3rd row / Deals Table-->
-          <v-row v-if="activeTab === 'overview'">
-            <v-col cols="6">
-              <!--12 columns-->
-              <BabylonCanvas />
-            </v-col>
-          </v-row>
-
-          <!-- This is 4th row / Deals Table-->
-          <v-row v-if="activeTab === 'overview'">
-            <v-col cols="12">
-              <DealsTable />
-            </v-col>
-          </v-row>
-        </v-card>
-      </v-sheet>
+      <LocalBar />
+      <LocalDrawer />
+      <BabylonCanvas />
+      <DealsTable />
     </v-container>
   </v-main>
   <!-- this for footer-->
@@ -62,6 +24,8 @@ import StatisticsCard from '@/components/dashboard/StatisticsCard.vue'
 import DealsTable from '@/components/dashboard/DealsTable.vue'
 import AppFooter from '@/components/layout/AppFooter.vue'
 import BabylonCanvas from '@/components/Babylon/BabylonCanvas.vue'
+import LocalBar from '@/components/layout/LocalBar.vue'
+import LocalDrawer from '@/components/layout/LocalDrawer.vue'
 //import MoreOptions from '@/components/layout/MoreOptions.vue'
 
 const activeTab = ref('overview')
