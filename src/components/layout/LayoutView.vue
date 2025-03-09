@@ -11,6 +11,7 @@
         </v-col>
       </v-row>
       <!-- Placeholder for content -->
+       <slot></slot> <!-- This is where your child components will be inserted -->
     </v-container>
   </v-main>
 

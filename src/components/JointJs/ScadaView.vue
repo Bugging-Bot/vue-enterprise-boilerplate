@@ -3,6 +3,18 @@
   Provides a visual interface for industrial process control using JointJS
   Displays interactive elements like tanks, pumps, and valves with real-time updates
 -->
+
+<template>
+  <div class="d-flex">
+    <div id="jointjs-container" class="border rounded shadow-md"></div>
+    <ShapeInfoDrawer
+      v-model="showDrawer"
+      :selected-shape="selectedShape"
+      @action="handleShapeAction"
+    />
+  </div>
+</template>
+
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { usePaper } from './composables/usePaper'
@@ -14,17 +26,20 @@ import { dia } from 'jointjs'
 const { setupPaper } = usePaper()
 const showDrawer = ref(true)
 //const selectedShape = ref(null)
-const selectedShape = ref<dia.Element | null>(null)
+const selectedShape = ref<dia.Element<dia.Element.Attributes, dia.ModelSetOptions> | null>(null)
 
 onMounted(() => {
   const { graph, paper } = setupPaper('jointjs-container')
 
   paper.on('element:pointerclick', (elementView) => {
-    selectedShape.value = elementView.model
+    selectedShape.value = elementView.model as dia.Element<
+      dia.Element.Attributes,
+      dia.ModelSetOptions
+    >
     showDrawer.value = true
   })
 })
-const handleShapeAction = (action) => {
+const handleShapeAction = (action: any) => {
   // Handle shape actions
   if (action === 'delete' && selectedShape.value) {
     selectedShape.value.remove()
@@ -34,17 +49,6 @@ const handleShapeAction = (action) => {
 }
 </script>
 
-<template>
-  <div class="d-flex">
-    <div id="jointjs-container" class="border rounded shadow-md"></div>
-    <ShapeInfoDrawer
-      v-model="showDrawer"
-      :model-value="showDrawer"
-      :selected-shape="selectedShape"
-      @action="handleShapeAction"
-    />
-  </div>
-</template>
 <style scoped>
 #jointjs-container {
   border: 1px solid #ddd;

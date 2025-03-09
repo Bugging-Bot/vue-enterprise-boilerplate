@@ -6,6 +6,7 @@ import DashboardView from '@/views/DashboardView.vue'
 import SimulationView from '@/views/SimulationView.vue'
 import UpdateView from '@/views/UpdateView.vue'
 import ProcessBuilderView from '@/views/ProcessBuilderView.vue'
+import TestView from '@/views/TestView.vue'
 
 const routes = [
   {
@@ -57,6 +58,12 @@ const routes = [
     path: '/processes',
     // name: 'ConfigurationView',
     component: ProcessBuilderView,
+    meta: { requiresAuth: false }
+  },
+  {
+    path: '/test',
+    // name: 'ConfigurationView',
+    component: TestView,
     meta: { requiresAuth: false }
   }
 ]

@@ -134,4 +134,15 @@ const shapeInfo = computed(() => {
   border-radius: 4px;
   border: 1px solid #ddd;
 }
+.close-button,
+.open-button {
+  position: absolute;
+  top: 10px;
+  right: 0;
+  z-index: 100;
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
 </style>
