@@ -3,7 +3,7 @@
   <div
     ref="canvasRef"
     class="canvas"
-    style="width: 600px; height: 400px; border: 1px solid black"
+    style="width: 100%; height: 100%; border: 1px solid black"
   ></div>
 </template>
 
@@ -61,8 +61,8 @@ onMounted(() => {
       link.addTo(graph)
 
       // Fix the passive event listener warning
-      canvasRef.value.addEventListener('touchstart', (e) => {}, { passive: true })
-      canvasRef.value.addEventListener('wheel', (e) => {}, { passive: true })
+      // canvasRef.value.addEventListener('touchstart', (e) => {}, { passive: true })
+      // canvasRef.value.addEventListener('wheel', (e) => {}, { passive: true })
     } else {
       console.error('Canvas element not found.')
     }
