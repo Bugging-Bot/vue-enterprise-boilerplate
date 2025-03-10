@@ -1,10 +1,6 @@
 <!-- This going with tutorials-->
 <template>
-  <div
-    ref="canvasRef"
-    class="canvas"
-    style="width: 100%; height: 100%; border: 1px solid black"
-  ></div>
+  <div ref="canvasRef" class="canvas"></div>
 </template>
 
 <script setup lang="ts">
@@ -31,8 +27,8 @@ onMounted(() => {
       paper = new joint.dia.Paper({
         el: canvasRef.value,
         model: graph,
-        width: 600,
-        height: 100,
+        width: window.innerWidth, // Width of the window
+        height: window.innerHeight, // Height of the window
         gridSize: 1,
         cellViewNamespace: namespace
       })
@@ -80,4 +76,11 @@ onUnmounted(() => {
 })
 </script>
 
-<style scoped></style>
+<style scoped>
+.canvas {
+  width: 100vw;
+  height: 100vh;
+  border: 1px solid black;
+  background-color: lightgray; /* Optional: for visibility */
+}
+</style>
