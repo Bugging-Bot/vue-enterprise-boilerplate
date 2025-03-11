@@ -78,7 +78,7 @@ onUnmounted(() => {
 
 <style scoped>
 .canvas {
-  width: 100vw;
+  width: 100vh;
   height: 100vh;
   border: 1px solid black;
   background-color: lightgray; /* Optional: for visibility */

@@ -1,0 +1,174 @@
+/**
+ * chart-data-manager.ts
+ *
+ * This module provides a reactive data object (`chartData`) for managing JointJS chart data within a Vue.js application.
+ * It includes functions for loading chart data from a JSON structure, creating JointJS elements and links,
+ * and handling basic chart updates.
+ *
+ * The module is designed to work with a JSON format that defines shapes, links, and events for a JointJS diagram.
+ *
+ * Exports:
+ * - `chartData`: A reactive object containing JointJS chart data.
+ * - `loadChartFromJson(jsonData)`: Function to parse JSON and populate JointJS elements.
+ */
+
+import { reactive } from 'vue'
+import * as joint from 'jointjs'
+
+// Define interfaces for your JSON data
+interface Position {
+  x: number
+  y: number
+}
+
+interface Size {
+  width: number
+  height: number
+}
+
+interface ShapeStyle {
+  stroke?: string
+  strokeWidth?: number
+  [key: string]: any // Allow other style properties
+}
+
+interface ShapeData {
+  id: string
+  type: string
+  position: Position
+  size: Size
+  label: string
+  fill: string
+  styles?: ShapeStyle
+}
+
+interface LinkData {
+  link_id: string
+  source: string
+  target: string
+  stroke: string
+  strokeWidth: number
+}
+
+interface EventData {
+  event_id: string
+  status_value: number[]
+  color: string[]
+  shapes: string[]
+  links: string[]
+}
+
+interface ChartJsonData {
+  shapes: ShapeData[]
+  links?: LinkData[]
+  events?: EventData[]
+  width: number
+  height: number
+}
+
+interface PaperOptions {
+  width: number
+  height: number
+  gridSize: number
+  [key: string]: any // Allow other paper options
+}
+
+interface ChartData {
+  elements: joint.dia.Cell[]
+  links: joint.shapes.standard.Link[]
+  paperOptions: PaperOptions
+  jsonData: ChartJsonData | null
+  error: string | null
+}
+
+export const chartData = reactive<ChartData>({
+  elements: [],
+  links: [],
+  paperOptions: {
+    width: 600,
+    height: 400,
+    gridSize: 10
+  },
+  jsonData: null,
+  error: null
+})
+
+/**
+ * Parses JSON data and populates the `chartData` object with JointJS elements.
+ *
+ * //@param {ChartJsonData} jsonData - The JSON data representing the chart.
+ */
+// It take input as json data
+export function loadChartFromJson(jsonData: ChartJsonData): void {
+  try {
+    chartData.elements = []
+    chartData.links = []
+    chartData.error = null
+    chartData.jsonData = jsonData
+
+    if (!jsonData || !jsonData.shapes) {
+      throw new Error('Invalid JSON data: shapes array is missing.')
+    }
+
+    chartData.paperOptions.width = jsonData.width || chartData.paperOptions.width
+    chartData.paperOptions.height = jsonData.height || chartData.paperOptions.height
+
+    for (const shape of jsonData.shapes) {
+      console.log(`Creating shape of type: ${shape.type}`) // Added Log
+      try {
+        console.log('Within try')
+        const jointShape = new joint.shapes.standard.Rectangle({
+          // old: new (joint.shapes as any)[shape.type]
+          //new: new joint.shapes.standard.Rectangle
+          id: shape.id,
+          position: shape.position,
+          size: shape.size,
+          attrs: {
+            body: { fill: shape.fill },
+            label: { text: shape.label },
+            ...(shape.styles as any)
+          }
+        })
+        chartData.elements.push(jointShape)
+        console.log('joint shapes', joint.shapes)
+      } catch (e) {
+        console.error(`Error creating shape ${shape.id} of type ${shape.type}. Error: `, e)
+        chartData.error = `Error creating shape ${shape.id} of type ${shape.type}. Error: ${e}`
+        console.log(`shape.type value: ${shape.type}`)
+      }
+    }
+
+    if (jsonData.links) {
+      for (const link of jsonData.links) {
+        const jointLink = new joint.shapes.standard.Link({
+          id: link.link_id,
+          source: { id: link.source },
+          target: { id: link.target },
+          attrs: {
+            line: {
+              stroke: link.stroke,
+              strokeWidth: link.strokeWidth
+            }
+          }
+        })
+        chartData.links.push(jointLink)
+        chartData.elements.push(jointLink)
+      }
+    }
+
+    if (jsonData.events) {
+      jsonData.events.forEach((event) => {
+        event.shapes.forEach((shapeId) => {
+          const shape = chartData.elements.find((el) => el.id === shapeId)
+          if (shape) {
+            //event handling logic
+          }
+        })
+      })
+    }
+  } catch (err: any) {
+    chartData.error = err.message
+    console.error('Error loading chart from JSON:', err)
+  }
+  console.log('loadChartFromJson completed')
+}

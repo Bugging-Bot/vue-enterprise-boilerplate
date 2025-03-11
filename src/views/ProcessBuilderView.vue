@@ -8,10 +8,12 @@
         <LocalBar :tabs="tabs" @tab-changed="handleTabChanged">
           <!-- This is first part-->
           <template #overview>
-            <!-- <v-card-title>Overview Section</v-card-title> -->
-            <!-- <v-card-text style="padding: 0; width: 100%"> -->
-            <DigCanvas />
-            <!-- </v-card-text> -->
+            <v-card>
+              <v-card-title>Overview Section</v-card-title>
+              <v-card-text style="padding: 0; width: 90%">
+                <DigCanvas />
+              </v-card-text>
+            </v-card>
           </template>
           <!-- This is second part-->
           <template #parts>

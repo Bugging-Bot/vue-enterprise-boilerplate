@@ -10,7 +10,7 @@
 </template>
 
 <script setup lang="ts">
-import DigCanvas from '@/components/JointJs/components/DigCanvas.vue'
+import DigCanvas from '@/components/JointJs/components/DigCanvasV3.vue'
 import Layout from '@/components/layout/LayoutView.vue'
 // import DummyView from '@/components/JointJs/components/DummyView.vue'
 
