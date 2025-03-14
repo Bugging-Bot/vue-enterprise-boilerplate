@@ -50,7 +50,7 @@ const Bulb2 = new GenericShape({
   fill: '#ffcc00',
   stroke: '#333333',
   strokeWidth: 0.5,
-  label: '60 Watt',
+  label: '100 Watt',
   labelFontSize: 14,
   labelPosition: { x: 42, y: 80 },
   AssetTrackingID: 'Bedroom Light',

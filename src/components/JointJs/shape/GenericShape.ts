@@ -11,6 +11,8 @@ export interface GenericShapeProps {
   label?: string
   labelFontSize?: number
   labelPosition?: { x: number; y: number }
+  AssetTrackingID?: string
+  SN?: string
 }
 
 // Function to sanitize SVG Path (basic example)
@@ -37,7 +39,9 @@ export class GenericShape extends dia.Element {
       strokeWidth = 1, // Default stroke width
       label = '', // Default label
       labelFontSize = 12, // Default label font size
-      labelPosition // Default label position
+      labelPosition, // Default label position
+      AssetTrackingID = 'Not Assigned',
+      SN = 'Not Assigned'
     } = props
 
     // Sanitize the SVG path before using it
@@ -71,6 +75,10 @@ export class GenericShape extends dia.Element {
           x: labelX, //'50%', //'calc(w / 2)',
           y: labelY, //'50%', //'calc(h / 2)',
           fontSize: labelFontSize
+        },
+        tracking: {
+          AssetTrackingID,
+          SN
         }
       },
       markup: [
