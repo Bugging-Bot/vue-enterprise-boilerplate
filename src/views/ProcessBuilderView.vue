@@ -38,7 +38,7 @@ import NavigationDrawer from '@/components/layout/NavigationDrawer.vue'
 import LocalBar from '@/components/layout/LocalBar.vue'
 import LocalDrawer from '@/components/layout/LocalDrawer.vue'
 import AppFooter from '@/components/layout/AppFooter.vue'
-import DigCanvas from '@/components/JointJs/components/DigCanvas.vue'
+import DigCanvas from '@/components/JointJs/charts/GenericChart.vue'
 
 //const activeTab = ref('overview')
 const isDrawerOpen = ref(false)

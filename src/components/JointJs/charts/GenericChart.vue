@@ -9,14 +9,16 @@ import { ref, onMounted, onUnmounted } from 'vue'
 import { GenericShape } from '@/components/JointJs/shape/GenericShape'
 import { GenericLink } from '@/components/JointJs/shape/GenericLink'
 import { dia, shapes, routers } from 'jointjs'
-// import { link } from 'fs'
-// import { Label } from 'konva/lib/shapes/Label'
 
-// // Declare the paper variable that will hold the Paper instance (but don't pass the `el` yet), as it can be use in OnMounted hook
+/*
+####################################################################################################
+                        Initializing the paper and adding shapes to the paper
+####################################################################################################
+*/
+// Declare the paper variable that will hold the Paper instance (but don't pass the `el` yet), as it can be use in OnMounted hook
 let genericPaper: dia.Paper | null = null
 
-// namespace contains all the objects that you will use to build your diagrams
-// this contains list of out of box shapes and custome shapes like GenericShape
+// namespace contains all the objects that you will use to build your diagrams, // this contains list of out of box shapes and custome shapes like GenericShape
 const genericNamespace = { ...shapes, GenericShape }
 
 // dia.Graph is the model holding all cells (elements and links) of the diagram. (ref: https://docs.jointjs.com/api/dia/Graph/)
@@ -34,6 +36,11 @@ const selectedShape = ref<dia.Element | null>(null)
 // Paper transforms an ordinary <div> HTML element into an interactive diagram area.
 // joint.dia.Paper is the view for the joint.dia.Graph model. (ref: https://docs.jointjs.com/api/dia/Paper/)
 
+/*
+####################################################################################################
+                        Create Shapes
+####################################################################################################
+*/
 // Creating custom shape Bulb
 const Bulb1 = new GenericShape({
   position: { x: 685, y: 244 },
@@ -139,13 +146,21 @@ const wire2 = new GenericLink({
 wire2.appendLabel({ attrs: { text: { text: wire2.getCustomData().Wirelabel } } })
 wire1.appendLabel({ attrs: { text: { text: wire1.getCustomData().Wirelabel } } })
 
+/*
+####################################################################################################
+                        Link all Shapes in Graph
+####################################################################################################
+*/
 // Function to create a shape and add it to the graph
 const createShape = () => {
-  genericGraph.addCell([Bulb1, Bulb2]) // Add the shape to the graph
-  genericGraph.addCell(Generator) // Add the shape to the graph
-  genericGraph.addCell([wire1, wire2]) // Add the shape to the graph
+  genericGraph.addCell([Bulb1, Bulb2, Generator, wire1, wire2]) // Add the shape to the graph
 }
 
+/*
+####################################################################################################
+                        For debugging graph - should be removed once graph is signed off
+####################################################################################################
+*/
 // [Dev Mode]: Function to log shape details
 const logShapeDetails = (shape: dia.Element) => {
   const position = shape.position()
@@ -169,6 +184,12 @@ const selectShape = (shape: dia.Element) => {
   selectedShape.value = shape
   updateShapePosition(shape) // Log details of the selected shape
 }
+
+/*
+####################################################################################################
+                       Initialize graph
+####################################################################################################
+*/
 
 // Initialize the Paper and add shapes once the component is mounted
 onMounted(() => {
@@ -207,7 +228,11 @@ onMounted(() => {
     })
   }
 })
-
+/*
+####################################################################################################
+                       End of life of graph
+####################################################################################################
+*/
 onUnmounted(() => {
   // Clean up the paper when the component is unmounted
   // Cleanup when the component is unmounted
