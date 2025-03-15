@@ -16,7 +16,7 @@ const defaultAttrs: dia.Link.Attributes = {
   line: {
     connection: true,
     stroke: '#346f83',
-    strokeWidth: 2,
+    strokeWidth: 1,
     strokeLinejoin: 'round',
     strokeLinecap: 'round',
     fill: 'transparent' // Set fill to transparent for line, to avoid filling after routing
@@ -24,14 +24,14 @@ const defaultAttrs: dia.Link.Attributes = {
   outline: {
     connection: true,
     stroke: '#004456',
-    strokeWidth: 4,
+    strokeWidth: 1,
     strokeLinejoin: 'round',
     strokeLinecap: 'round',
     fill: 'transparent' //Set fill to transparent for line, to avoid filling after routing
   },
   label: {
     text: '',
-    fontSize: 14,
+    fontSize: 12,
     fill: 'black',
     ref: 'line',
     refX: 0.5,

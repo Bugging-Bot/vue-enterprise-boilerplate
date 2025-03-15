@@ -89,17 +89,21 @@ const wire1 = new GenericLink({
   customData: {
     serialNumber: 'SN-001',
     description: 'Power link',
-    Load: '10 amps'
+    Load: '10 amps',
+    Wirelabel: '10 amps Power Link'
   },
   attrs: {
     line: {
       stroke: '#ab5b68',
       strokeWidth: 1
-    },
-    label: {
-      text: '10 amps Power Link',
-      fill: '#cb4335',
-      fontSize: 12
+    }
+  },
+  router: {
+    name: 'rightAngle',
+    options: {
+      margin: 0,
+      sourceDirection: routers.rightAngle.Directions.RIGHT,
+      targetDirection: routers.rightAngle.Directions.LEFT
     }
   }
 })
@@ -125,23 +129,15 @@ const wire2 = new GenericLink({
   router: {
     name: 'rightAngle',
     options: {
-      margin: 10,
+      margin: 1,
       sourceDirection: routers.rightAngle.Directions.RIGHT,
-      targetDirection: routers.rightAngle.Directions.BOTTOM
+      targetDirection: routers.rightAngle.Directions.LEFT
     }
   }
 })
 // Appending labels to the links
 wire2.appendLabel({ attrs: { text: { text: wire2.getCustomData().Wirelabel } } })
-// Apply router
-//wire2.router('orthogonal')
-// wire2.router('rightAngle', {
-//   margin: 10,
-//   sourceDirection: routers.rightAngle.Directions.TOP,
-//   targetDirection: routers.rightAngle.Directions.BOTTOM
-// })
-
-//
+wire1.appendLabel({ attrs: { text: { text: wire1.getCustomData().Wirelabel } } })
 
 // Function to create a shape and add it to the graph
 const createShape = () => {
