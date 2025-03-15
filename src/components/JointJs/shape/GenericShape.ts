@@ -87,4 +87,12 @@ export class GenericShape extends dia.Element {
       ]
     })
   }
+  // Adding methods to access custom properties in a type-safe manner
+  getAssetTrackingID(): string {
+    return this.attr('tracking/AssetTrackingID') || 'Not Assigned'
+  }
+
+  getSN(): string {
+    return this.attr('tracking/SN') || 'Not Assigned'
+  }
 }
