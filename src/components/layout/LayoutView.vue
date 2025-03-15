@@ -11,18 +11,19 @@
         </v-col>
       </v-row>
       <!-- Placeholder for content -->
-       <slot></slot> <!-- This is where your child components will be inserted -->
+      <slot></slot>
+      <!-- This is where your child components will be inserted -->
     </v-container>
   </v-main>
 
-  <AppFooter />
+  <!-- <AppFooter /> -->
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
 import AppBar from '@/components/layout/AppBar.vue'
 import NavigationDrawer from '@/components/layout/NavigationDrawer.vue'
-import AppFooter from '@/components/layout/AppFooter.vue'
+// import AppFooter from '@/components/layout/AppFooter.vue'
 import LocalBar from './LocalBar.vue'
 import LocalDrawer from './LocalDrawer.vue'
 

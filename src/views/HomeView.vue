@@ -56,7 +56,7 @@
       </v-container>
     </v-main>
     <!-- this for footer-->
-    <AppFooter />
+    <!-- <AppFooter /> -->
     <!-- </v-app> -->
   </div>
 </template>
@@ -67,7 +67,7 @@ import AppBar from '@/components/layout/AppBar.vue'
 import NavigationDrawer from '@/components/layout/NavigationDrawer.vue'
 //import StatisticsCard from '@/components/dashboard/StatisticsCard.vue'
 import DealsTable from '@/components/dashboard/DealsTable.vue'
-import AppFooter from '@/components/layout/AppFooter.vue'
+// import AppFooter from '@/components/layout/AppFooter.vue'
 import BabylonCanvas from '@/components/Babylon/BabylonCanvas.vue'
 import LocalBar from '@/components/layout/LocalBar.vue'
 import LocalDrawer from '@/components/layout/LocalDrawer.vue'

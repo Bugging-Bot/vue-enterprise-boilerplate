@@ -27,7 +27,7 @@
         </LocalBar>
       </v-container>
     </v-main>
-    <AppFooter />
+    <!-- <AppFooter /> -->
   </div>
 </template>
 
@@ -37,7 +37,7 @@ import AppBar from '@/components/layout/AppBar.vue'
 import NavigationDrawer from '@/components/layout/NavigationDrawer.vue'
 import LocalBar from '@/components/layout/LocalBar.vue'
 import LocalDrawer from '@/components/layout/LocalDrawer.vue'
-import AppFooter from '@/components/layout/AppFooter.vue'
+// import AppFooter from '@/components/layout/AppFooter.vue'
 import DigCanvas from '@/components/JointJs/charts/GenericChart.vue'
 
 //const activeTab = ref('overview')
