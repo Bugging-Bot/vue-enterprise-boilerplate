@@ -1,5 +1,6 @@
 <template>
-  <v-app-bar class="app-bar">
+  <!-- Set elevation to 0 here to remove shadow from app bar-->
+  <v-app-bar class="app-bar" elevation="0">
     <!-- Navigation Section -->
     <div class="app-bar__nav">
       <v-app-bar-nav-icon @click="$emit('toggle-drawer')" />
@@ -167,23 +168,36 @@ const handleMenuAction = (action: string) => {
 .app-bar {
   display: flex;
   align-items: center;
-  /* height: 48px; /* Reduce the height */
-  /* min-height: 48px; /*Ensure it doesn't stretch */
+  height: 48px; /* Reduce the height */
+  min-height: 48px; /*Ensure it doesn't stretch */
+  /*box-shadow: none; /* Remove the shadow */
+  /* border: 1px solid var(--primary-color);*/ /* Add a border for debugging only*/
+  box-sizing: border-box; /* Add this to include borders in the element's dimensions */
 }
 
 .app-bar__nav {
   display: flex;
   align-items: center;
+  /* border: 1px solid blue; Add a border for debugging only */
+  /* border-color: var(--info-color); */
+  padding: 0px 0px; /* Add padding for better spacing */
+  height: 46px; /* Reduce the height */
+  min-height: 46px; /*Ensure it doesn't stretch */
+  box-sizing: border-box;
 }
 .app-bar__search {
   width: auto;
   transition: all 0.3s ease;
+  /* border: 1px solid green; Add a border for debugging only */
+  box-sizing: border-box;
 }
 
 .app-bar__search--active {
   flex-grow: 1;
   max-width: 600px;
   margin: 0 16px;
+  padding: 0px 0px; /* Padding for better spacing when search is active */
+  box-sizing: border-box;
 }
 
 .app-bar__search-field {
@@ -193,5 +207,10 @@ const handleMenuAction = (action: string) => {
   display: flex;
   align-items: center;
   gap: 8px;
+  /* border: 1px solid orange; Add a border for debugging only */
+  padding: 0px 0px; /* Add padding to the action buttons */
+  height: 46px; /* Reduce the height */
+  min-height: 46px; /*Ensure it doesn't stretch */
+  box-sizing: border-box;
 }
 </style>

@@ -13,6 +13,8 @@ import App from '@/App.vue'
 import router from '@/router/index'
 import { authConfig } from './auth/auth.config'
 import VueKonva from 'vue-konva'
+// Import your global CSS file here
+import '@/assets/styles/main.scss' // Make sure the path is correct
 
 const vuetify = createVuetify({
   components,
