@@ -6,7 +6,7 @@
 // this linked with power slider and adjustment bulb light, these control have to be with vue control
 //import DigCanvas from '@/components/JointJs/components/DigCanvasV6.vue'
 // Genric chart template
-import DigCanvas from '@/components/JointJs/charts/GenericChart.vue'
+import DigCanvas from '@/components/JointJs/charts/MakeSourdoughLoaf.vue'
 // this is just a dummy component
 //import DigCanvas from '@/components/JointJs/components/DummyView.vue'
 
