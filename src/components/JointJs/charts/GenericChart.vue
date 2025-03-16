@@ -1,7 +1,8 @@
 <!-- This is charting template for replicating again and again -->
 
 <template>
-  <div ref="paperContainer" style="width: 100%; height: 100%; border: 2px solid red"></div>
+  <!-- <div ref="paperContainer" style="width: 100%; height: 100%; border: 2px solid red"></div> -->
+  <div ref="paperContainer"></div>
 </template>
 
 <script setup lang="ts">
@@ -197,7 +198,9 @@ onMounted(() => {
   if (paperContainer.value) {
     // get width of paprent container
     const containerWidth = paperContainer.value.offsetWidth // can try with paperContainer.value.clientWidth
-    const containerHeight = paperContainer.value.offsetHeight
+    let containerHeight = paperContainer.value.offsetHeight
+    if (containerHeight < 600) containerHeight = 600 // set a minimum height of 500px
+
     console.log('containerWidth', containerWidth)
     console.log('containerHeight', containerHeight)
     // Initialize the JointJS paper after the component has been mounted
@@ -205,7 +208,7 @@ onMounted(() => {
       model: genericGraph,
       width: containerWidth,
       height: containerHeight,
-      background: { color: '#F5F5F5' },
+      background: { color: '#ffffff' },
       cellViewNamespace: genericNamespace,
       el: paperContainer.value, // Pass the ref here, which is guaranteed to be non-null
       async: true
