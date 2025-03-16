@@ -32,9 +32,11 @@ import LocalBar from '@/components/layout/LocalBar.vue'
 import LocalDrawer from '@/components/layout/LocalDrawer.vue'
 // import AppFooter from '@/components/layout/AppFooter.vue'
 import DigCanvas from '@/components/JointJs/charts/GenericChart.vue'
+import { useEventBusStore } from '@/stores/eventBus'
 
 //const activeTab = ref('overview')
 const isDrawerOpen = ref(false)
+const eventBus = useEventBusStore()
 
 interface Tab {
   value: string
@@ -48,6 +50,9 @@ const tabs: Tab[] = [
 ]
 const handleTabChanged = (tabValue: string) => {
   console.log('Tab changed to:', tabValue)
+  // Emit the tab change event to the event bus
+  eventBus.emit('ProcessBuilder-tab-changed', tabValue)
+  console.log('emitting event for tab changed', tabValue)
 }
 
 const headers = ref([
