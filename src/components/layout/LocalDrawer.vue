@@ -60,11 +60,11 @@ onUnmounted(() => {
 })
 </script>
 
-<style scoped>
+<!-- <style scoped>
 .color-preview {
   width: 20px;
   height: 20px;
   border-radius: 4px;
   border: 1px solid #ddd;
 }
-</style>
+</style> -->

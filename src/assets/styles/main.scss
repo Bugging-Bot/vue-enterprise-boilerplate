@@ -72,22 +72,22 @@
 }
 
 /* Remove elevation from card components globally */
-.v-card {
-  box-shadow: none !important;
-  background-color: transparent !important;
-}
+// .v-card {
+//   box-shadow: none !important;
+//   background-color: transparent !important;
+// }
 
 /* Reduce padding in card titles */
-.v-card-title {
-  padding: 8px 12px !important; //8,12
-}
+// .v-card-title {
+//   padding: 8px 12px !important; //8,12
+// }
 
 /* Reduce padding in card text */
-.v-card-text {
-  padding: 8px 12px !important; //8,12
-}
+// .v-card-text {
+//   padding: 8px 12px !important; //8,12
+// }
 
 /* For v-sheets used as containers */
-.v-sheet {
-  background-color: transparent !important;
-}
+// .v-sheet {
+//   background-color: transparent !important;
+// }

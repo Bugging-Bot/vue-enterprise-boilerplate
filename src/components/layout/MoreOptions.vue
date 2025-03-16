@@ -45,8 +45,8 @@ withDefaults(
 )
 </script>
 
-<style scoped>
+<!-- <style scoped>
 .more-options-btn {
   margin-left: 8px;
 }
-</style>
+</style> -->
