@@ -25,7 +25,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import AppBar from '@/components/layout/AppBar.vue'
 import NavigationDrawer from '@/components/layout/NavigationDrawer.vue'
 import LocalBar from '@/components/layout/LocalBar.vue'
@@ -48,6 +48,18 @@ const tabs: Tab[] = [
   { value: 'overview', label: 'Overview' },
   { value: 'parts', label: 'Parts' }
 ]
+
+// Notify the LocalDrawer which view is active when component mounts
+onMounted(() => {
+  eventBus.emit('view-changed', 'ProcessBuilderView')
+  console.log('ProcessBuilderView mounted, emitted view-changed event')
+})
+
+// Clean up when component unmounts
+onUnmounted(() => {
+  console.log('ProcessBuilderView unmounted')
+})
+
 const handleTabChanged = (tabValue: string) => {
   console.log('Tab changed to:', tabValue)
   // Emit the tab change event to the event bus

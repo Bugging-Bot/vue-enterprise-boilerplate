@@ -10,7 +10,22 @@
 </template>
 
 <script setup lang="ts">
+import { onMounted, onUnmounted } from 'vue'
 import Layout from '@/components/layout/LayoutView.vue'
+import { useEventBusStore } from '@/stores/eventBus'
+
+const eventBus = useEventBusStore()
+
+// Notify the LocalDrawer which view is active when component mounts
+onMounted(() => {
+  eventBus.emit('view-changed', 'MessageView')
+  console.log('SimulationView mounted, emitted view-changed event')
+})
+
+// Clean up when component unmounts
+onUnmounted(() => {
+  console.log('SimulationView unmounted')
+})
 </script>
 
 <style scoped>
