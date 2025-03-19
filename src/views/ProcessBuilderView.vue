@@ -31,7 +31,7 @@ import NavigationDrawer from '@/components/layout/NavigationDrawer.vue'
 import LocalBar from '@/components/layout/LocalBar.vue'
 import LocalDrawer from '@/components/layout/LocalDrawer.vue'
 // import AppFooter from '@/components/layout/AppFooter.vue'
-import DigCanvas from '@/components/JointJs/charts/GenericChart.vue'
+import DigCanvas from '@/components/JointJs/charts/MakeSourdoughLoaf.vue'
 import { useEventBusStore } from '@/stores/eventBus'
 
 //const activeTab = ref('overview')

@@ -1,5 +1,5 @@
 // src/components/JointJs/shapes/GenericShape.ts
-import { dia, shapes } from 'jointjs'
+import { dia, shapes } from '@joint/core' //'jointjs'
 
 export interface GenericShapeProps {
   position: { x: number; y: number }

@@ -9,7 +9,7 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 import { GenericShape } from '@/components/JointJs/shape/GenericShape'
 import { GenericLink } from '@/components/JointJs/shape/GenericLink'
-import { dia, shapes, routers } from 'jointjs'
+import { dia, shapes, routers } from '@joint/core' //'jointjs'
 
 /*
 ####################################################################################################
@@ -208,7 +208,15 @@ onMounted(() => {
       model: genericGraph,
       width: containerWidth,
       height: containerHeight,
-      background: { color: '#ffffff' },
+      gridSize: 10, // REQUIRED for grid to render
+      background: { color: '#f8f9fa' },
+      drawGrid: {
+        name: 'doubleMesh', // Available options: 'mesh', 'doubleMesh'
+        args: [
+          { color: 'rgba(0, 255, 0, 0.3)', thickness: 1 }, // Small grid
+          { color: 'rgba(255, 0, 0, 0.3)', scaleFactor: 5, thickness: 2 } // Larger grid
+        ]
+      },
       cellViewNamespace: genericNamespace,
       el: paperContainer.value, // Pass the ref here, which is guaranteed to be non-null
       async: true

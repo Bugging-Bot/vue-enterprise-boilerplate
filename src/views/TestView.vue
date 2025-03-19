@@ -12,6 +12,8 @@ import DigCanvas from '@/components/JointJs/charts/MakeSourdoughLoaf.vue'
 
 //import Layout from '@/components/layout/LayoutView.vue'
 
+//import DigCanvas from '@/components/JointJs/charts/blankChart.vue'
+
 console.log('TestView loaded')
 </script>
 

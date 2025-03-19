@@ -1,4 +1,4 @@
-import { dia } from 'jointjs'
+import { dia } from '@joint/core' //'jointjs'
 
 // Define an interface for the properties (props) expected in the constructor
 export interface GenericLinkProps {
