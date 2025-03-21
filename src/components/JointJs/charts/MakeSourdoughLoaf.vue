@@ -10,6 +10,7 @@ import { ref, onMounted, onUnmounted } from 'vue'
 import { GenericShape } from '@/components/JointJs/shape/GenericShape'
 import { GenericLink } from '@/components/JointJs/shape/GenericLink'
 import { dia, shapes, routers } from '@joint/core' //'jointjs'
+import { link } from 'fs'
 
 /*
 ####################################################################################################
@@ -710,6 +711,163 @@ const temperature7 = new GenericShape({
 
 /*
 ####################################################################################################
+                        Creating weblinks Shapes in Graph
+####################################################################################################
+*/
+const link1 = new shapes.standard.Link({
+  linkID: 'link1',
+  source: { id: start.id },
+  target: { id: Container0.id }
+})
+const link2 = new shapes.standard.Link({
+  linkID: 'link2',
+  source: { id: Container0.id },
+  target: { id: clock1.id }
+})
+const link3 = new shapes.standard.Link({
+  linkID: 'link2',
+  source: { id: clock1.id },
+  target: { id: Container5.id }
+})
+const link4 = new shapes.standard.Link({
+  linkID: 'link3',
+  source: { id: Container5.id },
+  target: { id: rhombus2.id }
+})
+const link5 = new shapes.standard.Link({
+  linkID: 'link4',
+  source: { id: rhombus2.id },
+  target: { id: Jar.id }
+})
+
+const link6 = new shapes.standard.Link({
+  linkID: 'link5',
+  source: { id: rhombus2.id },
+  target: { id: rhombus1.id }
+})
+
+const link7 = new shapes.standard.Link({
+  linkID: 'link5',
+  source: { id: rhombus2.id },
+  target: { id: clock1.id }
+})
+
+const link8 = new shapes.standard.Link({
+  linkID: 'link5',
+  source: { id: rhombus1.id },
+  target: { id: start.id }
+})
+const link9 = new shapes.standard.Link({
+  linkID: 'link6',
+  source: { id: Jar.id },
+  target: { id: Container1.id }
+})
+const link10 = new shapes.standard.Link({
+  linkID: 'link6',
+  source: { id: Container1.id },
+  target: { id: Balance1.id }
+})
+const link11 = new shapes.standard.Link({
+  linkID: 'link6',
+  source: { id: FContainer1.id },
+  target: { id: Balance1.id }
+})
+const link12 = new shapes.standard.Link({
+  linkID: 'link6',
+  source: { id: funnel1.id },
+  target: { id: Balance1.id }
+})
+
+const link13 = new shapes.standard.Link({
+  linkID: 'link6',
+  source: { id: Balance1.id },
+  target: { id: Mixer1.id }
+})
+
+const link14 = new shapes.standard.Link({
+  linkID: 'link6',
+  source: { id: Mixer1.id },
+  target: { id: Container2.id }
+})
+const link15 = new shapes.standard.Link({
+  linkID: 'link6',
+  source: { id: Container2.id },
+  target: { id: Mixer3.id }
+})
+
+const link16 = new shapes.standard.Link({
+  linkID: 'link6',
+  source: { id: FContainer2.id },
+  target: { id: Balance2.id }
+})
+
+const link17 = new shapes.standard.Link({
+  linkID: 'link6',
+  source: { id: funnel2.id },
+  target: { id: Balance2.id }
+})
+const link18 = new shapes.standard.Link({
+  linkID: 'link6',
+  source: { id: Balance2.id },
+  target: { id: Mixer2.id }
+})
+const link19 = new shapes.standard.Link({
+  linkID: 'link6',
+  source: { id: Mixer2.id },
+  target: { id: Container3.id }
+})
+const link20 = new shapes.standard.Link({
+  linkID: 'link6',
+  source: { id: Container3.id },
+  target: { id: Mixer3.id }
+})
+const link21 = new shapes.standard.Link({
+  linkID: 'link6',
+  source: { id: funnel3.id },
+  target: { id: Balance3.id }
+})
+const link22 = new shapes.standard.Link({
+  linkID: 'link6',
+  source: { id: funnel4.id },
+  target: { id: Balance3.id }
+})
+const link23 = new shapes.standard.Link({
+  linkID: 'link6',
+  source: { id: Balance3.id },
+  target: { id: Mixer3.id }
+})
+const link24 = new shapes.standard.Link({
+  linkID: 'link6',
+  source: { id: Mixer3.id },
+  target: { id: Container4.id }
+})
+const link25 = new shapes.standard.Link({
+  linkID: 'link6',
+  source: { id: Container4.id },
+  target: { id: ShapeLoof.id }
+})
+const link26 = new shapes.standard.Link({
+  linkID: 'link6',
+  source: { id: ShapeLoof.id },
+  target: { id: Proof.id }
+})
+const link27 = new shapes.standard.Link({
+  linkID: 'link6',
+  source: { id: Proof.id },
+  target: { id: Oven2.id }
+})
+const link28 = new shapes.standard.Link({
+  linkID: 'link6',
+  source: { id: Oven1.id },
+  target: { id: Oven2.id }
+})
+const link29 = new shapes.standard.Link({
+  linkID: 'link6',
+  source: { id: Oven2.id },
+  target: { id: Bread.id }
+})
+/*
+####################################################################################################
                         Link all Shapes in Graph
 ####################################################################################################
 */
@@ -755,7 +913,36 @@ const createShape = () => {
     temperature7,
     start,
     rhombus1,
-    rhombus2
+    rhombus2,
+    link1,
+    link2,
+    link3,
+    link4,
+    link5,
+    link6,
+    link7,
+    link8,
+    link9,
+    link10,
+    link11,
+    link12,
+    link13,
+    link14,
+    link15,
+    link16,
+    link17,
+    link18,
+    link19,
+    link20,
+    link21,
+    link22,
+    link23,
+    link24,
+    link25,
+    link26,
+    link27,
+    link28,
+    link29
   ]) // Add the shape to the graph
 }
 
