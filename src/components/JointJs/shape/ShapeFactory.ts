@@ -1,7 +1,9 @@
 // src/components/JointJs/shapes/GenericShape.ts
 import { dia, shapes } from '@joint/core' //'jointjs'
 
-export interface GenericShapeProps {
+export interface CustomShapeProps {
+  shapeId?: string // Custom shape ID
+  customData?: any // Custom data for the shape (can be any type)
   position: { x: number; y: number }
   size?: { width: number; height: number }
   svgPath: string // The SVG path (refD)
@@ -27,10 +29,11 @@ const sanitizeSvgPath = (path: string): string => {
   return path // Return the sanitized path
 }
 
-export class GenericShape extends dia.Element {
-  constructor(props: GenericShapeProps) {
+export class ShapeFactory extends dia.Element {
+  constructor(props: CustomShapeProps) {
     // Destructure props and set default values for optional properties
     const {
+      shapeId = '',
       position,
       size = { width: 30, height: 100 }, // Default size
       svgPath,
@@ -59,6 +62,7 @@ export class GenericShape extends dia.Element {
 
     super({
       type: 'GenericShape',
+      shapeId,
       position,
       size,
       attrs: {

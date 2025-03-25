@@ -7,9 +7,10 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
-import { GenericShape } from '@/components/JointJs/shape/GenericShape'
-import { GenericLink } from '@/components/JointJs/shape/GenericLink'
+import { ShapeFactory } from '@/components/JointJs/shape/ShapeFactory'
+import { LinkFactory } from '@/components/JointJs/shape/LinkFactory'
 import { dia, shapes, routers } from '@joint/core' //'jointjs'
+//import { GenericLink } from '../shape/LinkDefineEg'
 
 /*
 ####################################################################################################
@@ -19,8 +20,8 @@ import { dia, shapes, routers } from '@joint/core' //'jointjs'
 // Declare the paper variable that will hold the Paper instance (but don't pass the `el` yet), as it can be use in OnMounted hook
 let genericPaper: dia.Paper | null = null
 
-// namespace contains all the objects that you will use to build your diagrams, // this contains list of out of box shapes and custome shapes like GenericShape
-const genericNamespace = { ...shapes, GenericShape }
+// namespace contains all the objects that you will use to build your diagrams, // this contains list of out of box shapes and custome shapes like ShapeFactory
+const genericNamespace = { ...shapes, ShapeFactory, LinkFactory }
 
 // dia.Graph is the model holding all cells (elements and links) of the diagram. (ref: https://docs.jointjs.com/api/dia/Graph/)
 // In this we are using namespace created above
@@ -43,7 +44,8 @@ const selectedShape = ref<dia.Element | null>(null)
 ####################################################################################################
 */
 // Creating custom shape Bulb
-const Bulb1 = new GenericShape({
+const Bulb1 = new ShapeFactory({
+  shapeId: 'Bulb1',
   position: { x: 685, y: 244 },
   size: { width: 100, height: 200 }, //custom size of shape, but this changes the position of label
   svgPath:
@@ -58,7 +60,8 @@ const Bulb1 = new GenericShape({
   SN: 'Philips-01'
 })
 
-const Bulb2 = new GenericShape({
+const Bulb2 = new ShapeFactory({
+  shapeId: 'Bulb2',
   position: { x: 685, y: 430 },
   size: { width: 100, height: 200 }, //custom size of shape, but this changes the position of label
   svgPath:
@@ -74,7 +77,8 @@ const Bulb2 = new GenericShape({
 })
 
 // Creating custom shape Generator
-const Generator = new GenericShape({
+const Generator = new ShapeFactory({
+  shapeId: 'Generator',
   position: { x: 150, y: 302 },
   size: { width: 100, height: 200 }, //custom size of shape, but this changes the position of label
   svgPath:
@@ -90,48 +94,93 @@ const Generator = new GenericShape({
 })
 
 // creating wire for connecting generator and bulb 60 watt
-const wire1 = new GenericLink({
-  linkID: 'wire1',
-  source: { id: Generator.id as string },
-  target: { id: Bulb1.id as string },
-  customData: {
-    serialNumber: 'SN-001',
-    description: 'Power link',
-    Load: '10 amps',
-    Wirelabel: '10 amps Power Link'
-  },
-  attrs: {
-    line: {
-      stroke: '#ab5b68',
-      strokeWidth: 1
-    }
-  },
-  router: {
-    name: 'rightAngle',
-    options: {
-      margin: 0,
-      sourceDirection: routers.rightAngle.Directions.RIGHT,
-      targetDirection: routers.rightAngle.Directions.LEFT
-    }
-  }
+
+//const wire1 = createLink(Generator, Bulb1, { Use: 'This is nuteral wire' }, ['To-wire01'])
+//const wire2 = createLink(Generator, Bulb2, { Use: 'This is nuteral wire' }, ['To-wire02'])
+
+// const wire1 = new LinkFactory({
+//   source: { id: Generator.id as string },
+//   target: { id: Bulb1.id as string },
+//   customData: {
+//     LineId: 'Wire1',
+//     serialNumber: 'SN-001',
+//     description: 'Power link',
+//     Load: '10 amps',
+//     Wirelabel: '10 amps Power Link'
+//   },
+//   attrs: {
+//     line: {
+//       stroke: '#ab5b68',
+//       strokeWidth: 1
+//     }
+//   },
+//   router: {
+//     name: 'rightAngle',
+//     options: {
+//       margin: 0,
+//       sourceDirection: routers.rightAngle.Directions.RIGHT,
+//       targetDirection: routers.rightAngle.Directions.LEFT
+//     }
+//   }
+// })
+// // creating wire for connecting generator and bulb 100 watt
+// // Create a simple dia.Link (wire2) between Generator and Bulb2
+// const wire2 = new LinkFactory({
+//   source: { id: Generator.id as string },
+//   target: { id: Bulb2.id as string },
+//   customData: {
+//     LineId: 'Wire2',
+//     serialNumber: 'SN-002',
+//     description: 'Power link',
+//     Load: '20 amps',
+//     Wirelabel: '20 amps Power Link'
+//   },
+//   attrs: {
+//     line: {
+//       stroke: '#cb4335',
+//       strokeWidth: 1,
+//       fill: 'transparent'
+//     }
+//   },
+//   router: {
+//     name: 'rightAngle',
+//     options: {
+//       margin: 1,
+//       sourceDirection: routers.rightAngle.Directions.RIGHT,
+//       targetDirection: routers.rightAngle.Directions.LEFT
+//     }
+//   }
+// })
+
+// Appending labels to the links
+//wire2.appendLabel({ attrs: { text: { text: wire2.getCustomData().Wirelabel } } })
+//wire1.appendLabel({ attrs: { text: { text: wire1.getCustomData().Wirelabel } } })
+
+// out of the box
+const wire1 = new shapes.standard.Link({
+  linkID: 'link1',
+  source: { id: Bulb1.id },
+  target: { id: Generator.id }
 })
-// creating wire for connecting generator and bulb 100 watt
-// Create a simple dia.Link (wire2) between Generator and Bulb2
-const wire2 = new GenericLink({
-  linkID: 'wire2',
-  source: { id: Generator.id as string },
-  target: { id: Bulb2.id as string },
-  customData: {
-    serialNumber: 'SN-002',
-    description: 'Power link',
-    Load: '20 amps',
-    Wirelabel: '20 amps Power Link'
-  },
+
+const wire2Data = {
+  LineId: 'Wire2',
+  serialNumber: 'SN-001',
+  description: 'Power link',
+  Load: '10 amps',
+  Wirelabel: '10 amps Power Link'
+}
+//const eventTopics = ['connect', 'disconnect']
+
+const wire002 = new GenericLink({
+  source: { id: Bulb1.id },
+  target: { id: Bulb2.id },
+  customData: wire2Data,
   attrs: {
     line: {
-      stroke: '#cb4335',
+      stroke: '#000000',
       strokeWidth: 1,
-      fill: 'transparent'
+      fill: '#000000'
     }
   },
   router: {
@@ -143,9 +192,28 @@ const wire2 = new GenericLink({
     }
   }
 })
-// Appending labels to the links
-wire2.appendLabel({ attrs: { text: { text: wire2.getCustomData().Wirelabel } } })
-wire1.appendLabel({ attrs: { text: { text: wire1.getCustomData().Wirelabel } } })
+// const wire002 = new LinkFactory({
+//   source: { id: Bulb1.id as string },
+//   target: { id: Bulb2.id as string },
+//   customData: wire2Data,
+//   attrs: {
+//     line: {
+//       stroke: '#000000',
+//       strokeWidth: 1,
+//       fill: '#000000'
+//     }
+//   },
+//   router: {
+//     name: 'rightAngle',
+//     options: {
+//       margin: 1,
+//       sourceDirection: routers.rightAngle.Directions.RIGHT,
+//       targetDirection: routers.rightAngle.Directions.LEFT
+//     }
+//   }
+// })
+
+// const customLink = createLink(Bulb1, Generator, wire2Data, eventTopics)
 
 /*
 ####################################################################################################
@@ -154,7 +222,7 @@ wire1.appendLabel({ attrs: { text: { text: wire1.getCustomData().Wirelabel } } }
 */
 // Function to create a shape and add it to the graph
 const createShape = () => {
-  genericGraph.addCell([Bulb1, Bulb2, Generator, wire1, wire2]) // Add the shape to the graph
+  genericGraph.addCell([Bulb1, Bulb2, Generator, wire1, wire002]) // Add the shape to the graph
 }
 
 /*
@@ -166,8 +234,8 @@ const createShape = () => {
 const logShapeDetails = (shape: dia.Element) => {
   const position = shape.position()
   const label = shape.attr('label/text')
-  const assetTrackingId = (shape as GenericShape).getAssetTrackingID() // Accessing custom property
-  const sn = (shape as GenericShape).getSN() // Accessing custom property
+  const assetTrackingId = (shape as ShapeFactory).getAssetTrackingID() // Accessing custom property
+  const sn = (shape as ShapeFactory).getSN() // Accessing custom property
   console.log(
     `Shape Info - Label: ${label}, AssetTrackingID: ${assetTrackingId}, SN: ${sn}, Position - X: ${position.x}, Y: ${position.y}`
   )
