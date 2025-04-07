@@ -3,8 +3,8 @@
  * Provides reusable methods for shape positioning and linking operations.
  */
 
-import * as joint from 'jointjs'
-import { dia } from 'jointjs'
+import * as joint from '@joint/core'
+//import { dia } from 'jointjs'
 
 interface Position {
   x: number
@@ -19,10 +19,10 @@ interface Position {
  * @returns The added shape instance
  */
 export const addShapeToGraph = (
-  shape: dia.Element,
-  graph: dia.Graph,
+  shape: joint.dia.Element,
+  graph: joint.dia.Graph,
   position: Position
-): dia.Element => {
+): joint.dia.Element => {
   shape.position(position.x, position.y)
   shape.addTo(graph)
   return shape
@@ -36,10 +36,10 @@ export const addShapeToGraph = (
  * @returns The created link instance
  */
 export const connectShapes = (
-  source: dia.Element,
-  target: dia.Element,
-  graph: dia.Graph
-): dia.Link => {
+  source: joint.dia.Element,
+  target: joint.dia.Element,
+  graph: joint.dia.Graph
+): joint.dia.Link => {
   const link = new joint.shapes.standard.Link()
   link.source(source)
   link.target(target)

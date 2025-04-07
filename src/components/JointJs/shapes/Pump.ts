@@ -2,7 +2,7 @@
  * Pump shape definition for SCADA diagrams
  * Represents fluid transfer equipment with customizable properties
  */
-import * as joint from 'jointjs'
+import * as joint from '@joint/core'
 
 export const Pump = joint.dia.Element.extend({
   defaults: joint.util.defaultsDeep(

@@ -1,5 +1,6 @@
 // src/components/JointJs/shapes/GenericShape.ts
-import { dia, shapes } from '@joint/core' //'jointjs'
+//import { dia, shapes } from '@joint/core' //'jointjs'
+import * as joint from '@joint/core'
 
 export interface CustomShapeProps {
   shapeId?: string // Custom shape ID
@@ -13,8 +14,8 @@ export interface CustomShapeProps {
   label?: string
   labelFontSize?: number
   labelPosition?: { x: number; y: number }
-  AssetTrackingID?: string
-  SN?: string
+  AssetTrackingID?: string // remove this
+  SN?: string // remove this
 }
 
 // Function to sanitize SVG Path (basic example)
@@ -29,7 +30,7 @@ const sanitizeSvgPath = (path: string): string => {
   return path // Return the sanitized path
 }
 
-export class ShapeFactory extends dia.Element {
+export class ShapeFactory extends joint.dia.Element {
   constructor(props: CustomShapeProps) {
     // Destructure props and set default values for optional properties
     const {
@@ -99,4 +100,45 @@ export class ShapeFactory extends dia.Element {
   getSN(): string {
     return this.attr('tracking/SN') || 'Not Assigned'
   }
+}
+
+// creating function to create custom shape
+export function CreateShape(
+  position: { x: number; y: number },
+  size: { width: number; height: number },
+  svgpath: string,
+  label: string,
+  labelPosition: { x: number; y: number },
+  fill: string,
+  customAttributes: any = {},
+  graph: joint.dia.Graph
+  // props: CustomShapeProps
+): joint.dia.Element {
+  const shapeInstance = new ShapeFactory({
+    position: position,
+    size: size, //custom size of shape, but this changes the position of label
+    svgPath: svgpath, // Example path
+    fill: 'transparent',
+    stroke: '#0f0f0f',
+    strokeWidth: 0.5,
+    label: label,
+    labelFontSize: 14,
+    labelPosition: labelPosition,
+    customData: customAttributes
+  })
+  // add shape to graph
+
+  /*
+  // namespace contains all the objects that you will use to build your diagrams, // this contains list of out of box shapes and custome shapes like ShapeFactory
+const genericNamespace = { ...shapes, ShapeFactory }
+const genericGraph = new dia.Graph({}, { cellNamespace: genericNamespace })
+  */
+  graph.addCell(shapeInstance)
+  if (graph.getCells().length === 0) {
+    console.log('Graph is empty')
+  } else {
+    console.log('Graph contains cells', graph.getCells())
+  }
+
+  return shapeInstance
 }

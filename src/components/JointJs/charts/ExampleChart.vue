@@ -25,7 +25,7 @@ export default defineComponent({
         selector: 'button',
         attributes: {
           r: 7,
-          fill: '#001DFF',
+          fill: '#000000', //'#001DFF',
           cursor: 'pointer'
         }
       },
@@ -35,7 +35,7 @@ export default defineComponent({
         attributes: {
           d: 'M -2 4 2 4 M 0 3 0 0 M -2 -1 1 -1 M -1 -4 1 -4',
           fill: 'none',
-          stroke: '#FFFFFF',
+          stroke: '#ffffff', //'#FFFFFF',
           'stroke-width': 2,
           'pointer-events': 'none'
         }
@@ -62,11 +62,13 @@ export default defineComponent({
         element.findView(paper).addTools(
           new joint.dia.ToolsView({
             tools: [removeTool, button, connectTool]
+            //tools: [button]
           })
         )
       }
     }
 
+    // these are the function for adding tools to link
     function addLinkTools(link: joint.dia.Link, scale: number) {
       const verticesTool = new joint.linkTools.Vertices({ scale })
       const targetArrowheadTool = new joint.linkTools.TargetArrowhead({ scale })
@@ -82,6 +84,7 @@ export default defineComponent({
       }
     }
 
+    // this is adding tools to each element and link
     function setScaleValue(value: number) {
       if (graph) {
         graph.getLinks().forEach((link) => addLinkTools(link, value))
