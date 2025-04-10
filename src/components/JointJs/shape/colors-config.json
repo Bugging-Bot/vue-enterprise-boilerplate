@@ -1,0 +1,49 @@
+{
+  "Thermometer": [
+    {
+      "temperature": 10,
+      "color": "#0000FF",
+      "description": "Cool Blue - Very Cold"
+    },
+    {
+      "temperature": 15,
+      "color": "#3399FF",
+      "description": "Light Blue - Cold"
+    },
+    {
+      "temperature": 20,
+      "color": "#00FF99",
+      "description": "Turquoise Green - Mild"
+    },
+    {
+      "temperature": 25,
+      "color": "#66FF33",
+      "description": "Lime Green - Pleasant"
+    },
+    {
+      "temperature": 30,
+      "color": "#FFFF00",
+      "description": "Yellow - Warm"
+    },
+    {
+      "temperature": 35,
+      "color": "#FFCC00",
+      "description": "Amber - Hot"
+    },
+    {
+      "temperature": 40,
+      "color": "#FF9900",
+      "description": "Orange - Very Hot"
+    },
+    {
+      "temperature": 45,
+      "color": "#FF3300",
+      "description": "Reddish Orange - Scorching"
+    },
+    {
+      "temperature": 50,
+      "color": "#FF0000",
+      "description": "Red - Extreme Heat"
+    }
+  ]
+}
