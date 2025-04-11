@@ -12,7 +12,7 @@ The `setupDragAndDrop` function sets up event listeners for dragging and droppin
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
-import * as joint from 'jointjs'
+import * as joint from '@joint/core'
 
 const stencilContainer = ref<HTMLElement | null>(null)
 const paperContainer = ref<HTMLElement | null>(null)

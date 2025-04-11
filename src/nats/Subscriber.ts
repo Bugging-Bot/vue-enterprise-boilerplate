@@ -1,6 +1,6 @@
-import { connect, StringCodec } from 'nats'
+import { connect, StringCodec } from 'nats.ws'
 // Import NatsConnection as a type-only import
-import type { NatsConnection } from 'nats'
+import type { NatsConnection } from 'nats.ws'
 
 interface NATSConfig {
   serverUrl: string // The NATS server URL (e.g., nats://localhost:4222)

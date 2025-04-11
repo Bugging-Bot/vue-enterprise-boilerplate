@@ -99,7 +99,7 @@
 </template>
 <script setup lang="ts">
 import { computed } from 'vue'
-import { dia } from 'jointjs'
+import { dia } from '@joint/core'
 
 interface Props {
   selectedShape: dia.Element | null

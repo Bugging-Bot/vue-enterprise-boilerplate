@@ -7,7 +7,7 @@ describe('@components/BaseInputText', () => {
     const wrapper = mount(BaseInputText, {
       props: {
         modelValue: 'aaa',
-        'onUpdate:modelValue': (e) => wrapper.setProps({ modelValue: e })
+        'onUpdate:modelValue': (e: string) => wrapper.setProps({ modelValue: e })
       }
     })
     const inputWrapper = wrapper.find('input')

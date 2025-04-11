@@ -172,29 +172,9 @@ const wire2Data = {
 }
 //const eventTopics = ['connect', 'disconnect']
 
-const wire002 = new GenericLink({
-  source: { id: Bulb1.id },
-  target: { id: Bulb2.id },
-  customData: wire2Data,
-  attrs: {
-    line: {
-      stroke: '#000000',
-      strokeWidth: 1,
-      fill: '#000000'
-    }
-  },
-  router: {
-    name: 'rightAngle',
-    options: {
-      margin: 1,
-      sourceDirection: routers.rightAngle.Directions.RIGHT,
-      targetDirection: routers.rightAngle.Directions.LEFT
-    }
-  }
-})
-// const wire002 = new LinkFactory({
-//   source: { id: Bulb1.id as string },
-//   target: { id: Bulb2.id as string },
+// const wire002 = new GenericLink({
+//   source: { id: Bulb1.id },
+//   target: { id: Bulb2.id },
 //   customData: wire2Data,
 //   attrs: {
 //     line: {
@@ -212,6 +192,26 @@ const wire002 = new GenericLink({
 //     }
 //   }
 // })
+const wire002 = new LinkFactory({
+  source: { id: Bulb1.id as string },
+  target: { id: Bulb2.id as string },
+  customData: wire2Data,
+  attrs: {
+    line: {
+      stroke: '#000000',
+      strokeWidth: 1,
+      fill: '#000000'
+    }
+  },
+  router: {
+    name: 'rightAngle',
+    options: {
+      margin: 1,
+      sourceDirection: routers.rightAngle.Directions.RIGHT,
+      targetDirection: routers.rightAngle.Directions.LEFT
+    }
+  }
+})
 
 // const customLink = createLink(Bulb1, Generator, wire2Data, eventTopics)
 

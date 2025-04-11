@@ -26,9 +26,14 @@ const vuetify = createVuetify({
     }
   }
 })
+
+console.log('Running in mode:', import.meta.env.MODE)
+console.log('Simulate NATS:', import.meta.env.VITE_USE_SIMULATED_NATS)
+
 // create pinia
 /** Pinia **/
 /** https://pinia.vuejs.org/ **/
+
 const pinia = createPinia()
 console.log('Pinia initialized/created:', pinia)
 

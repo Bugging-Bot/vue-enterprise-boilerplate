@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import { dia, shapes } from '@jointjs/core'
+import { dia, shapes } from '@joint/core'
 
 // Create JointJS graph and paper
 const graph = new dia.Graph()

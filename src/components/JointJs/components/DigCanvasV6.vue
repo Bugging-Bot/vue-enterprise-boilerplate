@@ -1,11 +1,10 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref } from 'vue'
-import * as joint from 'jointjs'
+import * as joint from '@joint/core'
 
 // Refs for power and JointJS elements
 const powerLevel = ref(50) // Initial power level
 const paperContainer = ref<HTMLDivElement | null>(null) // Vue ref for the container
-
 
 let graph: joint.dia.Graph
 let paper: joint.dia.Paper
@@ -33,8 +32,14 @@ const updateAnimations = () => {
 const initializeJointJS = () => {
   graph = new joint.dia.Graph()
 
+  const container = document.getElementById('paper-container')
+  if (!container) {
+    console.error('Paper container element not found.')
+    return
+  }
+
   paper = new joint.dia.Paper({
-    el: document.getElementById('paper-container'),
+    el: container,
     model: graph,
     width: 600,
     height: 400,

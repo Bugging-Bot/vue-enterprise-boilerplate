@@ -15,8 +15,8 @@ import { CreateLink } from '../composables/LinkFactory'
 import * as joint from '@joint/core'
 import { CreateLayout, CleanGraph } from '../composables/LayoutFactory'
 import colorConfig from '../shape/colors-config.json'
-import { connect, StringCodec } from 'nats'
-import type { NatsConnection } from 'nats'
+import { connect, StringCodec } from 'nats.ws'
+import type { NatsConnection } from 'nats.ws'
 
 // Create a ref for the container
 const paperContainer = ref<HTMLElement | null>(null)

@@ -5,7 +5,7 @@
 -->
 <script setup lang="ts">
 import { computed } from 'vue'
-import { dia } from 'jointjs'
+import { dia } from '@joint/core'
 
 interface Props {
   position: { x: number; y: number }
@@ -14,7 +14,7 @@ interface Props {
 }
 
 const props = defineProps<Props>()
-const emit = defineEmits(['close', 'action'])
+const emit = defineEmits(['close', 'action', 'update:isVisible'])
 
 // Computed shape properties for display
 const shapeInfo = computed(() => {
