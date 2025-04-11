@@ -14,7 +14,7 @@ import { CreateShape } from '@/components/JointJs/composables/ShapeFactory'
 import { CreateLink } from '../composables/LinkFactory'
 import * as joint from '@joint/core'
 import { CreateLayout, CleanGraph } from '../composables/LayoutFactory'
-import colorConfig from '../shape/colors-config.json'
+import colorConfig from '../shapes/colors-config.json'
 import { connect, StringCodec } from 'nats.ws'
 import type { NatsConnection } from 'nats.ws'
 

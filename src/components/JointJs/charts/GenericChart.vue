@@ -8,7 +8,7 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { ShapeFactory } from '@/components/JointJs/composables/ShapeFactory'
-import { LinkFactory } from '@/components/JointJs/shape/LinkFactory'
+import { LinkFactory } from '@/components/JointJs/shapes/LinkFactory'
 import { dia, shapes, routers } from '@joint/core' //'jointjs'
 //import { GenericLink } from '../shape/LinkDefineEg'
 

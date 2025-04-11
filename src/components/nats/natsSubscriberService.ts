@@ -52,34 +52,34 @@ export async function subscribeToTopics(
     // This block fakes data in development mode (like when testing in the browser):
     // Simulates receiving random data every 3 seconds per topic.
     // Calls messageHandler(topic, message) with fake data.
-    if (process.env.NODE_ENV === 'development' && typeof window !== 'undefined') {
-      console.log(
-        `Simulating subscription to topics: ${topics.join(', ')} for element ${elementId}`
-      )
+    // if (process.env.NODE_ENV === 'development' && typeof window !== 'undefined') {
+    //   console.log(
+    //     `Simulating subscription to topics: ${topics.join(', ')} for element ${elementId}`
+    //   )
 
-      // Simulate receiving data updates every 3 seconds for each topic
-      topics.forEach((topic: string) => {
-        const simulateDataUpdates = () => {
-          // Generate random values between 5 and 55
-          const randomValue = Math.floor(Math.random() * 50) + 5
-          console.log(
-            `Received simulated data: ${randomValue} for topic: ${topic}, element: ${elementId}`
-          )
-          messageHandler(topic, randomValue.toString())
-        }
+    //   // Simulate receiving data updates every 3 seconds for each topic
+    //   topics.forEach((topic: string) => {
+    //     const simulateDataUpdates = () => {
+    //       // Generate random values between 5 and 55
+    //       const randomValue = Math.floor(Math.random() * 50) + 5
+    //       console.log(
+    //         `Received simulated data: ${randomValue} for topic: ${topic}, element: ${elementId}`
+    //       )
+    //       messageHandler(topic, randomValue.toString())
+    //     }
 
-        // Initial update
-        simulateDataUpdates()
+    //     // Initial update
+    //     simulateDataUpdates()
 
-        // Set interval for updates
-        const intervalId = setInterval(simulateDataUpdates, 3000)
+    //     // Set interval for updates
+    //     const intervalId = setInterval(simulateDataUpdates, 3000)
 
-        // Store interval ID for cleanup
-        subscriptions[elementId].push(intervalId)
-      })
+    //     // Store interval ID for cleanup
+    //     subscriptions[elementId].push(intervalId)
+    //   })
 
-      return
-    }
+    //   return
+    // }
 
     // For production or if we can connect to NATS
     // Connect to the NATS server with authentication if not already connected
