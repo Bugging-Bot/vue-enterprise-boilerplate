@@ -2,6 +2,10 @@ import { connect, StringCodec } from 'nats.ws'
 // Import NatsConnection as a type-only import
 import type { NatsConnection } from 'nats.ws'
 
+
+// Set the NODE_TLS_REJECT_UNAUTHORIZED environment variable to 0 to ignore TLS errors
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
+
 interface NATSConfig {
   serverUrl: string // The NATS server URL (e.g., nats://localhost:4222)
   topic: string // Topic to subscribe to (e.g., mystream.humidity)
@@ -35,11 +39,10 @@ async function createNATSSubscriber(config: NATSConfig): Promise<void> {
   } catch (error) {
     console.error('Error connecting to NATS or subscribing:', error)
   }
-}
-
-// Usage example:
+} // Usage example:
 const config: NATSConfig = {
-  serverUrl: 'nats://localhost:4222', // NATS server URL (change to your actual server URL)
+  // serverUrl: 'nats://localhost:4222',
+  serverUrl: 'wss://localhost:8181', // NATS server URL (change to your actual server URL)
   topic: 'f.1.p.1.m.1.s.1.t', // Topic to subscribe to
   username: 'sys_user', // NATS username
   password: 'Sys_P@ss' // NATS password
