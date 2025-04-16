@@ -2,6 +2,7 @@ import { CreateShape } from '@/components/JointJs/composables/ShapeFactory'
 import * as joint from '@joint/core'
 //import { create } from 'domain'
 import { CreateLink } from '@/components/JointJs/composables/LinkFactory'
+//import { link } from 'fs'
 const customAttributesOfShape1 = {
   SN: 'Mouldy',
   topics: ['f.1.p.1.m.1.s.1.t', 'f.1.p.1.m.1.s.1.h'] // Array of topics for shape 1 (temperature, humidity, etc.)
@@ -13,10 +14,15 @@ const customAttributesOfShape2 = {
 const customAttributesOfLink = {
   SN: 'Mouldy'
 }
+/**
+ * A dictionary to store JointJS diagram elements created during chart generation.
+ * Allows dynamic storage and retrieval of shapes by their assigned keys.
+ */
 const shapes: { [key: string]: joint.dia.Element } = {}
+const links: { [key: string]: joint.dia.Link } = {}
 
-// creating shapes
-function createShapesInChart(graph: joint.dia.Graph) {
+// creating all shapes in the chart and return dictionary of shapes.
+function createShapesInChart(graph: joint.dia.Graph): { [key: string]: joint.dia.Element } {
   // Add shapes to the graph
   shapes.obj1 = CreateShape(
     { x: 250, y: 87 },
@@ -48,12 +54,27 @@ function createShapesInChart(graph: joint.dia.Graph) {
   return shapes
 }
 
-// creating links
-function createLinksInChart(graph: joint.dia.Graph): void {
-  void CreateLink(shapes.obj1, shapes.obj2, 'Link 1', customAttributesOfLink, graph)
+// creating links and return dictionary of links.
+function createLinksInChart(graph: joint.dia.Graph): { [key: string]: joint.dia.Link } {
+  links.obj1_obj2 = CreateLink(shapes.obj1, shapes.obj2, 'Link 1', customAttributesOfLink, graph)
+
+  return links
 }
 
-export function createShapesandLinks(graph: joint.dia.Graph) {
-  void createShapesInChart(graph)
-  createLinksInChart(graph)
+/**
+ * Creates shapes and links in the provided graph and returns references to them
+ * @param graph - The JointJS graph to add shapes and links to
+ * @returns An object containing dictionaries of shapes and links
+ */
+export function createShapesandLinks(graph: joint.dia.Graph): {
+  shapes: { [key: string]: joint.dia.Element }
+  links: { [key: string]: joint.dia.Link }
+} {
+  // First create shapes
+  const shapesResult = createShapesInChart(graph)
+
+  // Then create links (which depend on shapes)
+  const linksResult = createLinksInChart(graph)
+  // Return both
+  return { shapes: shapesResult, links: linksResult }
 }

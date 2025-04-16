@@ -1,7 +1,8 @@
 // this contain local function for egchart1
 
+import factoryConfig from '@/components/JointJs/shapes/factory_config.json'
 import {
-  getSensorValueColor,
+  //getSensorValueColor,
   getSensorTopic
 } from '@/components/JointJs/composables/chartConfiguration'
 
@@ -11,10 +12,6 @@ const factory_setup = {
   machine_id: 1,
   sensor_id: 1
 }
-
-// Reactive data for UI display
-// const temperature = ref<string>('--')
-// const current = ref<string>('--')
 
 export const localTopics = {
   temperature: getSensorTopic(
@@ -46,25 +43,78 @@ export const localTopics = {
     'Flow'
   )
 }
-// Function to get color based on temperature
-// const getColorForTemperature = (temperature: number): string => {
-//   const thermometerColors = colorConfig.Thermometer
 
-//   // Default color if no match is found
-//   let color = '#CCCCCC'
+// Define color constants
+const OPERATIONAL_COLOR = '#00FF00' // Green
+const WARNING_COLOR = '#FFFF00' // Yellow
+const ERROR_COLOR = '#FFA500' // Orange
+const DANGER_COLOR = '#FF0000' // Red
+const DEFAULT_COLOR = '#CCCCCC' // Gray for unknown values
 
-//   // Find the appropriate color based on temperature
-//   for (let i = thermometerColors.length - 1; i >= 0; i--) {
-//     if (temperature >= thermometerColors[i].temperature) {
-//       color = thermometerColors[i].color
-//       break
-//     }
-//   }
+/**
+ * Generic function to get color for any sensor type based on its value
+ * @param sensorType - The type of sensor (e.g., 'Temperature', 'Current')
+ * @param value - The sensor value to evaluate
+ * @returns The color corresponding to the value's range
+ */
+export function getSensorColor(sensorType: string, value: number | string): string {
+  // Convert to number if it's a string
+  const numValue = typeof value === 'string' ? parseFloat(value) : value
 
-//   return color
-// }
+  // Handle NaN or invalid values
+  if (isNaN(numValue)) {
+    return DEFAULT_COLOR
+  }
 
-export function getColorForTemperature(): void {
-  console.log('Temperature ->', localTopics.temperature)
-  console.log('Current ->', localTopics.current)
+  // Find the sensor configuration in factory_config.json
+  const factories = factoryConfig.factories
+  const sensor = factories[0]?.production_lines[0]?.machines[0]?.sensors.find(
+    (s) => s.sensor === sensorType
+  )
+
+  if (!sensor) {
+    console.warn(`${sensorType} sensor configuration not found`)
+    return DEFAULT_COLOR
+  }
+
+  // Check ranges in order of priority (danger > error > warning > operational)
+  if (sensor.danger_range) {
+    for (const range of sensor.danger_range) {
+      if (numValue >= range.min && numValue <= range.max) {
+        return DANGER_COLOR
+      }
+    }
+  }
+
+  if (sensor.error_range) {
+    for (const range of sensor.error_range) {
+      if (numValue >= range.min && numValue <= range.max) {
+        return ERROR_COLOR
+      }
+    }
+  }
+
+  if (sensor.warning_range) {
+    for (const range of sensor.warning_range) {
+      if (numValue >= range.min && numValue <= range.max) {
+        return WARNING_COLOR
+      }
+    }
+  }
+
+  if (sensor.operational_range) {
+    for (const range of sensor.operational_range) {
+      if (numValue >= range.min && numValue <= range.max) {
+        return OPERATIONAL_COLOR
+      }
+    }
+  }
+
+  // If not in any defined range but within overall range
+  if (sensor.range && numValue >= sensor.range.min && numValue <= sensor.range.max) {
+    return DEFAULT_COLOR
+  }
+
+  // Out of all ranges
+  return DEFAULT_COLOR
 }

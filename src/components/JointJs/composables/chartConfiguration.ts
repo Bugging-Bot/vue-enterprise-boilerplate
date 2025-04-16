@@ -21,6 +21,7 @@ export function getSensorConfig(sensorName: string) {
 }
 
 // Function to determine color based on sensor value and ranges
+// remove this function as it have hard coded values, first check it's refrences.
 export function getSensorValueColor(sensorName: string, value: string): string {
   // Default color for inactive or invalid values
   if (value === '--' || isNaN(parseFloat(value))) {

@@ -1,5 +1,6 @@
 <template>
-  <DigCanvas />
+  <DigCanvas :chartConfig="chartConfig"
+  />
 </template>
 
 <script setup lang="ts">
@@ -15,7 +16,16 @@
 
 //import DigCanvas from '@/components/JointJs/charts/blankChart.vue'
 
-import DigCanvas from '@/components/JointJs/charts/ExampleChart5.vue'
+import DigCanvas from '@/components/JointJs/charts/EgChart1/EgChart1.vue'
+import { ref } from 'vue'
+// Define a chartConfig object
+const chartConfig = ref({
+  // Add necessary configuration properties here
+  // This is a placeholder - adjust based on what EgChart1 expects
+  title: 'Example Chart',
+  description: 'This is an example chart'
+  // Add other required properties
+})
 console.log('TestView loaded')
 </script>
 

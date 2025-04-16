@@ -17,7 +17,7 @@ import {
   DEFAULT_TIMEOUT,
   DEFAULT_RETRY_INTERVAL,
   DEFAULT_MAX_RETRIES
-} from '../EgChart1/LocalSubscriber'
+} from '../LocalSubscriber'
 
 import {
   initNatsClient,
@@ -26,7 +26,7 @@ import {
   cleanupAllSubscriptions,
   checkPublisherExists
 } from '@/components/nats/natsSubscriberService'
-import { localTopics } from '../EgChart1/LocalFunctions'
+import { localTopics } from '../LocalFunctions'
 import { logger } from '@/utils/logger'
 
 // Mock the natsSubscriberService

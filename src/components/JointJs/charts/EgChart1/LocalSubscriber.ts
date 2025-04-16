@@ -22,8 +22,10 @@ import {
   checkPublisherExists
 } from '@/components/nats/natsSubscriberService'
 import type { NatsConnectionConfig } from '@/components/nats/natsSubscriberService'
-import { localTopics } from './LocalFunctions'
+import { localTopics, getSensorColor } from './LocalFunctions'
+
 import { logger } from '@/utils/logger'
+import * as joint from '@joint/core'
 
 // Constants for timeouts and retry settings
 export const DEFAULT_TIMEOUT = 5000
@@ -118,7 +120,7 @@ export async function subscribeToLocalTopic(
  * Initializes the NATS client and subscribes to all required topics
  * @returns Promise with the result of the subscription process
  */
-export async function localSubscriber(): Promise<{
+export async function localSubscriber(shapesRef?: { [key: string]: joint.dia.Element }): Promise<{
   success: boolean
   connectionStatus: string
   subscriptions: SubscriptionResult[]
@@ -153,6 +155,13 @@ export async function localSubscriber(): Promise<{
         logger.info('Temperature in Oven:', msg)
         // Update the local topic value
         localTopics.temperature = msg
+        // Update the color of shape1 based on temperature
+        if (shapesRef && shapesRef.obj1) {
+          const color = getSensorColor('Temperature', msg)
+          shapesRef.obj1.attr('body/fill', color)
+          logger.debug(`Updated shape1 color to ${color} based on temperature ${msg}`)
+        }
+
         // Emit an event that can be listened to by components
         window.dispatchEvent(new CustomEvent('temperature-update', { detail: msg }))
       }
@@ -164,6 +173,13 @@ export async function localSubscriber(): Promise<{
       logger.info('Current in Oven:', msg)
       // Update the local topic value
       localTopics.current = msg
+
+      // Update the color of shape2 based on current
+      if (shapesRef && shapesRef.obj2) {
+        const color = getSensorColor('Current', msg)
+        shapesRef.obj2.attr('body/fill', color)
+        logger.debug(`Updated shape2 color to ${color} based on current ${msg}`)
+      }
       // Emit an event that can be listened to by components
       window.dispatchEvent(new CustomEvent('current-update', { detail: msg }))
     })

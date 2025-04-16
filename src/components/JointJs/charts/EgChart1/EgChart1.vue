@@ -5,7 +5,7 @@ Handling the Vue component lifecycle
 -->
 
 <template>
-  <div ref="paperContainer" :style="containerStyle"></div>
+  <div ref="paperContainer"></div>
 </template>
 
 <script setup lang="ts">
@@ -19,37 +19,55 @@ import { CreateLayout, CleanGraph } from '@/components/JointJs/composables/Layou
 import { createShapesandLinks } from './LocalShapes'
 import { localCleanup, localSubscriber } from './LocalSubscriber'
 
-// Define props for configuration for chart
-const props = defineProps({
-  chartConfig: {
-    type: Object,
-    required: true
-  },
-  width: { type: Number, default: 800 },
-  height: { type: Number, default: 600 },
-  gridSize: { type: Number, default: 10 }
-})
+// // Define props for configuration for chart
+// const props = defineProps({
+//   chartConfig: {
+//     type: Object,
+//     required: false,
+//     default: () => ({
+//       // Default chart configuration
+//       title: 'Default Chart',
+//       description: 'Auto-configured chart'
+//     })
+//   },
+//   width: { type: Number, default: 800 },
+//   height: { type: Number, default: 600 },
+//   gridSize: { type: Number, default: 10 }
+// })
 
 // Computed styles
-const containerStyle = computed(() => ({
-  width: `${props.width}px`,
-  height: `${props.height}px`
-}))
+// const containerStyle = computed(() => ({
+//   width: `${props.width}px`,
+//   height: `${props.height}px`
+// }))
 
 // Create a ref for the container
 const paperContainer = ref<HTMLElement | null>(null)
 let paper: joint.dia.Paper
 let graph: joint.dia.Graph
+const default_width = 800
+const default_height = 600
+const default_gridSize = 10
 
 // Initialize the Paper and add shapes once the component is mounted
 onMounted(async () => {
   if (paperContainer.value) {
+    // Get container dimensions
+    const containerWidth =
+      default_width > paperContainer.value.clientWidth
+        ? default_width
+        : paperContainer.value.clientWidth
+    const containerHeight =
+      default_height > paperContainer.value.clientHeight
+        ? default_height
+        : paperContainer.value.clientHeight
+
     // Initialize the paper and graph using CreateLayout
     const result = CreateLayout(
       paperContainer.value, // Pass the DOM element reference
-      props.width, // Default width if container width is not available
-      props.height, // Default height if container height is not available
-      props.gridSize // Grid size (10px)
+      containerWidth, // Default width if container width is not available
+      containerHeight, // Default height if container height is not available
+      default_gridSize // Grid size (10px)
     )
 
     // Store the paper and graph references
@@ -57,9 +75,12 @@ onMounted(async () => {
     graph = result.graph
 
     // Create shapes and links from configuration
-    createShapesandLinks(graph)
+    //const { shapes, links } = createShapesandLinks(graph)
+    const { shapes } = createShapesandLinks(graph)
     // Initialize NATS subscriber for each shape with its array of topics
-    localSubscriber()
+    // Pass the shapes object to the subscriber
+
+    await localSubscriber(shapes)
   }
 })
 
