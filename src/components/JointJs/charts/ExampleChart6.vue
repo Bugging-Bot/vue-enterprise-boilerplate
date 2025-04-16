@@ -4,7 +4,7 @@ import {
   subscribeToTopic,
   cleanupAllSubscriptions,
   checkPublisherExists
-} from '@/components/nats/natsSubscriberService3'
+} from '@/components/nats/natsSubscriberService'
 //import factoryConfig from '@/components/JointJs/shapes/factory_config.json'
 import { getSensorValueColor, getSensorTopic } from '../composables/chartConfiguration'
 
@@ -13,6 +13,12 @@ const temperature = ref<string>('--')
 const current = ref<string>('--')
 const gas = ref<string>('--')
 const flow = ref<string>('--')
+const factory_setup = {
+  factory_id: 1,
+  production_line_id: 1,
+  machine_id: 1,
+  sensor_id: 1
+}
 
 // Track subscription status
 const connectionStatus = ref<'connected' | 'connecting' | 'error'>('connecting')
@@ -27,10 +33,10 @@ const subscriptionStatuses = ref({
 const unsubscribeFunctions: (() => void)[] = []
 
 // Computed properties for sensor value colors
-const temperatureColor = computed(() => getSensorValueColor('t', temperature.value))
-const currentColor = computed(() => getSensorValueColor('a', current.value))
-const gasColor = computed(() => getSensorValueColor('z', gas.value))
-const flowColor = computed(() => getSensorValueColor('w', flow.value))
+const temperatureColor = computed(() => getSensorValueColor('Temperature', temperature.value))
+const currentColor = computed(() => getSensorValueColor('Current', current.value))
+const gasColor = computed(() => getSensorValueColor('Gas', gas.value))
+const flowColor = computed(() => getSensorValueColor('Flow', flow.value))
 
 onMounted(async () => {
   try {
@@ -38,10 +44,34 @@ onMounted(async () => {
 
     // Define topics
     const topics = {
-      temperature: getSensorTopic(1, 1, 1, 'Temperature'),
-      current: getSensorTopic(1, 1, 1, 'Current'),
-      gas: getSensorTopic(1, 1, 1, 'Gas'),
-      flow: getSensorTopic(1, 1, 1, 'Flow')
+      temperature: getSensorTopic(
+        factory_setup.factory_id,
+        factory_setup.production_line_id,
+        factory_setup.machine_id,
+        factory_setup.sensor_id,
+        'Temperature'
+      ),
+      current: getSensorTopic(
+        factory_setup.factory_id,
+        factory_setup.production_line_id,
+        factory_setup.machine_id,
+        factory_setup.sensor_id,
+        'Current'
+      ),
+      gas: getSensorTopic(
+        factory_setup.factory_id,
+        factory_setup.production_line_id,
+        factory_setup.machine_id,
+        factory_setup.sensor_id,
+        'Gas'
+      ),
+      flow: getSensorTopic(
+        factory_setup.factory_id,
+        factory_setup.production_line_id,
+        factory_setup.machine_id,
+        factory_setup.sensor_id,
+        'Flow'
+      )
     }
 
     // Check if publishers exist (optional)
@@ -66,6 +96,8 @@ onMounted(async () => {
       subscriptionStatuses.value.temperature = true
       unsubscribeFunctions.push(tempSubscription.unsubscribe)
     }
+
+    //console.log('topics', topics)
 
     // Subscribe to current
     const currentSubscription = await subscribeToTopic(topics.current, (msg: string) => {

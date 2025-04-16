@@ -15,7 +15,7 @@
 
 //import DigCanvas from '@/components/JointJs/charts/blankChart.vue'
 
-import DigCanvas from '@/components/JointJs/charts/ExampleChart4.vue'
+import DigCanvas from '@/components/JointJs/charts/ExampleChart5.vue'
 console.log('TestView loaded')
 </script>
 

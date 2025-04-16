@@ -10,6 +10,7 @@
               "machine_id": 1,
               "sensors": [
                 {
+                  "Id": 1,
                   "sensor": "Temperature",
                   "code": "t",
                   "unit": "\u00b0C / \u00b0F",
@@ -62,6 +63,7 @@
                   }
                 },
                 {
+                  "Id": 1,
                   "sensor": "Pressure",
                   "code": "p",
                   "unit": "bar / psi / Pa",
@@ -109,6 +111,7 @@
                   ]
                 },
                 {
+                  "Id": 1,
                   "sensor": "Proximity",
                   "code": "x",
                   "unit": "Boolean (0/1)",
@@ -116,6 +119,7 @@
                   "topic": "f.1.p.1.m.1.s.1.x"
                 },
                 {
+                  "Id": 1,
                   "sensor": "Photoelectric",
                   "code": "e",
                   "unit": "Boolean (0/1)",
@@ -123,6 +127,7 @@
                   "topic": "f.1.p.1.m.1.s.1.e"
                 },
                 {
+                  "Id": 1,
                   "sensor": "Inductive",
                   "code": "i",
                   "unit": "Boolean (0/1)",
@@ -130,6 +135,7 @@
                   "topic": "f.1.p.1.m.1.s.1.i"
                 },
                 {
+                  "Id": 1,
                   "sensor": "Capacitive",
                   "code": "c",
                   "unit": "Boolean (0/1)",
@@ -137,6 +143,7 @@
                   "topic": "f.1.p.1.m.1.s.1.c"
                 },
                 {
+                  "Id": 1,
                   "sensor": "Optical",
                   "code": "o",
                   "unit": "mm / logic",
@@ -184,6 +191,7 @@
                   ]
                 },
                 {
+                  "Id": 1,
                   "sensor": "Vibration",
                   "code": "v",
                   "unit": "mm/s / g",
@@ -231,6 +239,7 @@
                   ]
                 },
                 {
+                  "Id": 1,
                   "sensor": "Ultrasonic",
                   "code": "u",
                   "unit": "mm / cm / m",
@@ -278,6 +287,7 @@
                   ]
                 },
                 {
+                  "Id": 1,
                   "sensor": "Force/Torque",
                   "code": "f",
                   "unit": "N / Nm",
@@ -325,6 +335,7 @@
                   ]
                 },
                 {
+                  "Id": 1,
                   "sensor": "Strain Gauge",
                   "code": "g",
                   "unit": "\u00b5\u03b5",
@@ -372,6 +383,7 @@
                   ]
                 },
                 {
+                  "Id": 1,
                   "sensor": "Load Cell",
                   "code": "l",
                   "unit": "kg / N / lb",
@@ -419,6 +431,7 @@
                   ]
                 },
                 {
+                  "Id": 1,
                   "sensor": "LVDT",
                   "code": "d",
                   "unit": "mm / inch",
@@ -466,6 +479,7 @@
                   ]
                 },
                 {
+                  "Id": 1,
                   "sensor": "Rotary Encoder",
                   "code": "r",
                   "unit": "\u00b0 / pulses",
@@ -513,6 +527,7 @@
                   ]
                 },
                 {
+                  "Id": 1,
                   "sensor": "Linear Encoder",
                   "code": "n",
                   "unit": "mm / \u00b5m",
@@ -560,6 +575,7 @@
                   ]
                 },
                 {
+                  "Id": 1,
                   "sensor": "Current",
                   "code": "a",
                   "unit": "A",
@@ -607,6 +623,7 @@
                   ]
                 },
                 {
+                  "Id": 1,
                   "sensor": "Voltage",
                   "code": "vlt",
                   "unit": "V",
@@ -654,6 +671,7 @@
                   ]
                 },
                 {
+                  "Id": 1,
                   "sensor": "Speed",
                   "code": "s",
                   "unit": "RPM / Hz",
@@ -701,6 +719,7 @@
                   ]
                 },
                 {
+                  "Id": 1,
                   "sensor": "Hall Effect",
                   "code": "h",
                   "unit": "mT",
@@ -748,6 +767,7 @@
                   ]
                 },
                 {
+                  "Id": 1,
                   "sensor": "Flow",
                   "code": "w",
                   "unit": "L/min / m\u00b3/h",
@@ -795,6 +815,7 @@
                   ]
                 },
                 {
+                  "Id": 1,
                   "sensor": "Humidity",
                   "code": "m",
                   "unit": "% RH",
@@ -842,6 +863,7 @@
                   ]
                 },
                 {
+                  "Id": 1,
                   "sensor": "Gas",
                   "code": "z",
                   "unit": "ppm / %",
@@ -889,6 +911,7 @@
                   ]
                 },
                 {
+                  "Id": 1,
                   "sensor": "Vision",
                   "code": "q",
                   "unit": "image/frame",
@@ -896,6 +919,7 @@
                   "topic": "f.1.p.1.m.1.s.1.q"
                 },
                 {
+                  "Id": 1,
                   "sensor": "Infrared",
                   "code": "y",
                   "unit": "\u00b0C / W/m\u00b2",
@@ -948,6 +972,7 @@
                   }
                 },
                 {
+                  "Id": 1,
                   "sensor": "Color",
                   "code": "k",
                   "unit": "RGB / HEX",
@@ -995,6 +1020,7 @@
                   ]
                 },
                 {
+                  "Id": 1,
                   "sensor": "Tactile",
                   "code": "b",
                   "unit": "N / Boolean",
@@ -1042,6 +1068,7 @@
                   ]
                 },
                 {
+                  "Id": 1,
                   "sensor": "Laser Distance",
                   "code": "j",
                   "unit": "mm / \u00b5m",
@@ -1089,6 +1116,7 @@
                   ]
                 },
                 {
+                  "Id": 1,
                   "sensor": "Accelerometer",
                   "code": "ac",
                   "unit": "m/s\u00b2 / g",
@@ -1136,6 +1164,7 @@
                   ]
                 },
                 {
+                  "Id": 1,
                   "sensor": "Gyroscope",
                   "code": "gy",
                   "unit": "\u00b0/s",
@@ -1183,6 +1212,7 @@
                   ]
                 },
                 {
+                  "Id": 1,
                   "sensor": "RFID",
                   "code": "r",
                   "unit": "ID / String",

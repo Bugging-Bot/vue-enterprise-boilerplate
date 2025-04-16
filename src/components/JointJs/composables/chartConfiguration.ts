@@ -1,7 +1,7 @@
 import factoryConfig from '@/components/JointJs/shapes/factory_config.json'
 
 // Function to get sensor configuration from factory_config.json
-export function getSensorConfig(sensorCode: string) {
+export function getSensorConfig(sensorName: string) {
   // Find the sensor in the factory configuration
   const factories = factoryConfig.factories || []
 
@@ -9,7 +9,7 @@ export function getSensorConfig(sensorCode: string) {
     for (const productionLine of factory.production_lines || []) {
       for (const machine of productionLine.machines || []) {
         for (const sensor of machine.sensors || []) {
-          if (sensor.code === sensorCode) {
+          if (sensor.sensor === sensorName) {
             return sensor
           }
         }
@@ -21,14 +21,14 @@ export function getSensorConfig(sensorCode: string) {
 }
 
 // Function to determine color based on sensor value and ranges
-export function getSensorValueColor(sensorCode: string, value: string): string {
+export function getSensorValueColor(sensorName: string, value: string): string {
   // Default color for inactive or invalid values
   if (value === '--' || isNaN(parseFloat(value))) {
     return '#808080' // Gray for inactive
   }
 
   const numericValue = parseFloat(value)
-  const sensorConfig = getSensorConfig(sensorCode)
+  const sensorConfig = getSensorConfig(sensorName)
 
   if (!sensorConfig || !sensorConfig.range) {
     return '#808080' // Gray if no configuration found
@@ -79,6 +79,7 @@ export function getSensorTopic(
   factoryId: number,
   productionLineId: number,
   machineId: number,
+  sensorId: number,
   sensorName: string
 ): string {
   // Find the sensor in the factory configuration
@@ -97,6 +98,10 @@ export function getSensorTopic(
   // Find the specific machine
   const machine = productionLine.machines?.find((m) => m.machine_id === machineId)
   if (!machine) return ''
+
+  // Find the specific sensor
+  const sensorID = machine.sensors?.find((s) => s.Id === sensorId)
+  if (!sensorID) return ''
 
   // Find the specific sensor
   const sensor = machine.sensors?.find((s) => s.sensor === sensorName)
