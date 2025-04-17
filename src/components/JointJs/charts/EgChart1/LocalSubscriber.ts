@@ -23,6 +23,11 @@ import {
 } from '@/components/nats/natsSubscriberService'
 import type { NatsConnectionConfig } from '@/components/nats/natsSubscriberService'
 import { localTopics, getSensorColor } from './LocalFunctions'
+import {
+  CONNECTION_STATES,
+  updateConnectionStatus,
+  checkNATSConnectionStatus
+} from './LocalFunctions'
 
 import { logger } from '@/utils/logger'
 import * as joint from '@joint/core'
@@ -126,6 +131,9 @@ export async function localSubscriber(shapesRef?: { [key: string]: joint.dia.Ele
   subscriptions: SubscriptionResult[]
   error?: Error
 }> {
+  // update status to connecting
+  updateConnectionStatus(CONNECTION_STATES.CONNECTING)
+
   const subscriptionResults: SubscriptionResult[] = []
 
   try {
@@ -137,14 +145,19 @@ export async function localSubscriber(shapesRef?: { [key: string]: joint.dia.Ele
     if (!client || !isConnected()) {
       const error = new Error('Failed to connect to NATS server')
       logger.error(error.message)
+
+      // Update status to disconnected
+      updateConnectionStatus(CONNECTION_STATES.DISCONNECTED)
+
       return {
         success: false,
-        connectionStatus: 'disconnected',
+        connectionStatus: CONNECTION_STATES.DISCONNECTED,
         subscriptions: [],
         error
       }
     }
-
+    // Update status to connected
+    updateConnectionStatus(CONNECTION_STATES.CONNECTED)
     logger.info('Successfully connected to NATS server')
 
     // Step 3: Subscribe to topics
@@ -190,16 +203,19 @@ export async function localSubscriber(shapesRef?: { [key: string]: joint.dia.Ele
 
     return {
       success: allSuccessful,
-      connectionStatus: 'connected',
+      connectionStatus: checkNATSConnectionStatus(),
       subscriptions: subscriptionResults
     }
   } catch (error) {
+    // Update status to error/disconnected
+    updateConnectionStatus(CONNECTION_STATES.DISCONNECTED)
+
     const errorMessage = error instanceof Error ? error.message : 'Unknown error'
     logger.error(`Error setting up NATS subscriptions: ${errorMessage}`)
 
     return {
       success: false,
-      connectionStatus: 'error',
+      connectionStatus: CONNECTION_STATES.DISCONNECTED,
       subscriptions: subscriptionResults,
       error: error instanceof Error ? error : new Error('Unknown error in NATS subscription')
     }
@@ -235,7 +251,8 @@ export function unsubscribeFromTopic(topic: string): boolean {
 export async function localCleanup(): Promise<boolean> {
   try {
     logger.info('Cleaning up NATS subscriptions')
-
+    // Update connection status
+    updateConnectionStatus(CONNECTION_STATES.DISCONNECTED)
     // Clean up individual subscriptions
     unsubscribeFunctions.forEach((unsubscribe, topic) => {
       try {
@@ -264,9 +281,9 @@ export async function localCleanup(): Promise<boolean> {
  * Gets the current connection status
  * @returns The current connection status
  */
-export function getConnectionStatus(): string {
-  return isConnected() ? 'connected' : 'disconnected'
-}
+// export function checkNATSConnectionStatus(): string {
+//   return isConnected() ? 'connected' : 'disconnected'
+// }
 
 /**
  * Gets the list of active subscriptions
