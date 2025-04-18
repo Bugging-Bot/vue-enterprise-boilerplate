@@ -2,9 +2,9 @@
 This contain all the shapes for the MakeSourdoughLoaf chart
 */
 
-import { CreateShape, ShapeFactory } from '@/components/JointJs/composables/ShapeFactory'
+import { ShapeFactory } from '@/components/JointJs/composables/ShapeFactory'
 import * as joint from '@joint/core'
-const shapes: { [key: string]: joint.dia.Element } = {}
+export const MakeSourdoughLoafshapes: { [key: string]: joint.dia.Element } = {}
 
 const strokeWidthStroke = 1
 const strokeColor = '#0f0f0f'
@@ -14,7 +14,7 @@ const BalanceLabelPosition = { x: 52, y: 30 }
 
 // creating all shapes in the chart and return dictionary of shapes.
 function createShapesInChart(graph: joint.dia.Graph): { [key: string]: joint.dia.Element } {
-  shapes.start = new ShapeFactory({
+  MakeSourdoughLoafshapes.start = new ShapeFactory({
     position: { x: 50, y: 93 },
     customData: {
       SN: 'Start-01',
@@ -35,7 +35,7 @@ function createShapesInChart(graph: joint.dia.Graph): { [key: string]: joint.dia
     SN: 'start of flow chart'
   })
 
-  shapes.knead = new ShapeFactory({
+  MakeSourdoughLoafshapes.knead = new ShapeFactory({
     position: { x: 870, y: 530 },
     size: { width: 45, height: 200 }, //custom size of shape, but this changes the position of label
     svgPath: 'M1 10H44V34H1ZM1 22 8.59 22 16.18 13.6 28.82 30.4 38.94 22 44 22', // Example path
@@ -49,7 +49,7 @@ function createShapesInChart(graph: joint.dia.Graph): { [key: string]: joint.dia
     SN: 'Mouldy'
   })
 
-  shapes.rhombus1 = new ShapeFactory({
+  MakeSourdoughLoafshapes.rhombus1 = new ShapeFactory({
     position: { x: 250, y: 87 },
     size: { width: 120, height: 350 }, //custom size of shape, but this changes the position of label
     svgPath:
@@ -64,7 +64,7 @@ function createShapesInChart(graph: joint.dia.Graph): { [key: string]: joint.dia
     SN: 'Mouldy'
   })
 
-  shapes.rhombus2 = new ShapeFactory({
+  MakeSourdoughLoafshapes.rhombus2 = new ShapeFactory({
     position: { x: 390, y: 130 },
     size: { width: 120, height: 350 }, //custom size of shape, but this changes the position of label
     svgPath:
@@ -79,7 +79,7 @@ function createShapesInChart(graph: joint.dia.Graph): { [key: string]: joint.dia
     SN: 'Ready'
   })
 
-  shapes.Balance1 = new ShapeFactory({
+  MakeSourdoughLoafshapes.Balance1 = new ShapeFactory({
     position: { x: 1005, y: 190 },
     size: { width: BalanceSize.width, height: BalanceSize.height }, //custom size of shape, but this changes the position of label
     svgPath:
@@ -94,7 +94,7 @@ function createShapesInChart(graph: joint.dia.Graph): { [key: string]: joint.dia
     SN: '40g : 80g : 80g'
   })
 
-  shapes.Balance2 = new ShapeFactory({
+  MakeSourdoughLoafshapes.Balance2 = new ShapeFactory({
     position: { x: 130, y: 480 },
     size: { width: BalanceSize.width, height: BalanceSize.height }, //custom size of shape, but this changes the position of label
     svgPath:
@@ -109,7 +109,7 @@ function createShapesInChart(graph: joint.dia.Graph): { [key: string]: joint.dia
     SN: '940g : 600g'
   })
 
-  shapes.Balance3 = new ShapeFactory({
+  MakeSourdoughLoafshapes.Balance3 = new ShapeFactory({
     position: { x: 1000, y: 480 },
     size: { width: BalanceSize.width, height: BalanceSize.height }, //custom size of shape, but this changes the position of label
     svgPath:
@@ -124,7 +124,7 @@ function createShapesInChart(graph: joint.dia.Graph): { [key: string]: joint.dia
     SN: '50g : 20g'
   })
 
-  shapes.Bread = new ShapeFactory({
+  MakeSourdoughLoafshapes.Bread = new ShapeFactory({
     position: { x: 50, y: 743 },
     size: { width: 3, height: 11 }, //custom size of shape, but this changes the position of label
     svgPath:
@@ -140,7 +140,7 @@ function createShapesInChart(graph: joint.dia.Graph): { [key: string]: joint.dia
   })
 
   const MixerSize = { width: 40, height: 90 }
-  shapes.Mixer1 = new ShapeFactory({
+  MakeSourdoughLoafshapes.Mixer1 = new ShapeFactory({
     position: { x: 1020, y: 260 },
     size: { width: MixerSize.width, height: MixerSize.height }, //custom size of shape, but this changes the position of label
     svgPath:
@@ -155,7 +155,7 @@ function createShapesInChart(graph: joint.dia.Graph): { [key: string]: joint.dia
     SN: 'Mix'
   })
 
-  shapes.Mixer2 = new ShapeFactory({
+  MakeSourdoughLoafshapes.Mixer2 = new ShapeFactory({
     position: { x: 400, y: 455 },
     size: { width: MixerSize.width, height: MixerSize.height }, //custom size of shape, but this changes the position of label
     svgPath:
@@ -170,7 +170,7 @@ function createShapesInChart(graph: joint.dia.Graph): { [key: string]: joint.dia
     SN: 'Mix'
   })
 
-  shapes.Mixer3 = new ShapeFactory({
+  MakeSourdoughLoafshapes.Mixer3 = new ShapeFactory({
     position: { x: 810, y: 455 },
     size: { width: MixerSize.width, height: MixerSize.height }, //custom size of shape, but this changes the position of label
     svgPath:
@@ -186,7 +186,7 @@ function createShapesInChart(graph: joint.dia.Graph): { [key: string]: joint.dia
   })
 
   const OvenSize = { width: 30, height: 100 }
-  shapes.Oven1 = new ShapeFactory({
+  MakeSourdoughLoafshapes.Oven1 = new ShapeFactory({
     position: { x: 190, y: 560 },
     size: { width: OvenSize.width, height: OvenSize.height }, //custom size of shape, but this changes the position of label
     svgPath:
@@ -201,7 +201,7 @@ function createShapesInChart(graph: joint.dia.Graph): { [key: string]: joint.dia
     SN: 'Preheat'
   })
 
-  shapes.Oven2 = new ShapeFactory({
+  MakeSourdoughLoafshapes.Oven2 = new ShapeFactory({
     position: { x: 190, y: 721 },
     size: { width: OvenSize.width, height: OvenSize.height }, //custom size of shape, but this changes the position of label
     svgPath:
@@ -218,7 +218,7 @@ function createShapesInChart(graph: joint.dia.Graph): { [key: string]: joint.dia
 
   const ContainerSize = { width: 50, height: 100 }
   const ContainerLabelPosition = { x: 60, y: 30 }
-  shapes.Container0 = new ShapeFactory({
+  MakeSourdoughLoafshapes.Container0 = new ShapeFactory({
     position: { x: 50, y: 250 },
     size: { width: ContainerSize.width, height: ContainerSize.height }, //custom size of shape, but this changes the position of label
     svgPath: 'M4.6 5.07L4.6 62L69.4 62L69.4 5.07M1 9.13L1 1L73 1L73 9.13',
@@ -231,7 +231,7 @@ function createShapesInChart(graph: joint.dia.Graph): { [key: string]: joint.dia
     AssetTrackingID: 'Container0',
     SN: 'Initial Starter'
   })
-  shapes.Container1 = new ShapeFactory({
+  MakeSourdoughLoafshapes.Container1 = new ShapeFactory({
     position: { x: 870, y: 70 },
     size: { width: ContainerSize.width, height: ContainerSize.height }, //custom size of shape, but this changes the position of label
     svgPath: 'M4.6 5.07L4.6 62L69.4 62L69.4 5.07M1 9.13L1 1L73 1L73 9.13',
@@ -245,7 +245,7 @@ function createShapesInChart(graph: joint.dia.Graph): { [key: string]: joint.dia
     SN: 'Container1'
   })
 
-  shapes.Container2 = new ShapeFactory({
+  MakeSourdoughLoafshapes.Container2 = new ShapeFactory({
     position: { x: 786, y: 270 },
     size: { width: ContainerSize.width, height: ContainerSize.height }, //custom size of shape, but this changes the position of label
     svgPath: 'M4.6 5.07L4.6 62L69.4 62L69.4 5.07M1 9.13L1 1L73 1L73 9.13',
@@ -259,7 +259,7 @@ function createShapesInChart(graph: joint.dia.Graph): { [key: string]: joint.dia
     SN: 'Levain'
   })
 
-  shapes.Container3 = new ShapeFactory({
+  MakeSourdoughLoafshapes.Container3 = new ShapeFactory({
     position: { x: 570, y: 465 },
     size: { width: ContainerSize.width, height: ContainerSize.height }, //custom size of shape, but this changes the position of label
     svgPath: 'M4.6 5.07L4.6 62L69.4 62L69.4 5.07M1 9.13L1 1L73 1L73 9.13',
@@ -273,7 +273,7 @@ function createShapesInChart(graph: joint.dia.Graph): { [key: string]: joint.dia
     SN: 'Autolyse'
   })
 
-  shapes.Container4 = new ShapeFactory({
+  MakeSourdoughLoafshapes.Container4 = new ShapeFactory({
     position: { x: 786.5, y: 750 },
     size: { width: ContainerSize.width, height: ContainerSize.height }, //custom size of shape, but this changes the position of label
     svgPath: 'M4.6 5.07L4.6 62L69.4 62L69.4 5.07M1 9.13L1 1L73 1L73 9.13',
@@ -287,7 +287,7 @@ function createShapesInChart(graph: joint.dia.Graph): { [key: string]: joint.dia
     SN: 'Bulk Fermentation'
   })
 
-  shapes.Container5 = new ShapeFactory({
+  MakeSourdoughLoafshapes.Container5 = new ShapeFactory({
     position: { x: 290, y: 250 },
     size: { width: ContainerSize.width, height: ContainerSize.height }, //custom size of shape, but this changes the position of label
     svgPath: 'M4.6 5.07L4.6 62L69.4 62L69.4 5.07M1 9.13L1 1L73 1L73 9.13',
@@ -303,7 +303,7 @@ function createShapesInChart(graph: joint.dia.Graph): { [key: string]: joint.dia
 
   const FContainerSize = { width: 72, height: 125 }
   const FContainerLabelPosition = { x: 55, y: 40 }
-  shapes.FContainer1 = new ShapeFactory({
+  MakeSourdoughLoafshapes.FContainer1 = new ShapeFactory({
     position: { x: 1005, y: 70 },
     size: { width: FContainerSize.width, height: FContainerSize.height }, //custom size of shape, but this changes the position of label
     svgPath: 'M1 1L45 1L45 32.67L23 48.5L1 32.67ZM16.4 13.47C20.41 11.59 25.59 11.59 29.6 13.47',
@@ -317,7 +317,7 @@ function createShapesInChart(graph: joint.dia.Graph): { [key: string]: joint.dia
     SN: 'Flour'
   })
 
-  shapes.FContainer2 = new ShapeFactory({
+  MakeSourdoughLoafshapes.FContainer2 = new ShapeFactory({
     position: { x: 60, y: 370 },
     size: { width: FContainerSize.width, height: FContainerSize.height }, //custom size of shape, but this changes the position of label
     svgPath: 'M1 1L45 1L45 32.67L23 48.5L1 32.67ZM16.4 13.47C20.41 11.59 25.59 11.59 29.6 13.47',
@@ -333,7 +333,7 @@ function createShapesInChart(graph: joint.dia.Graph): { [key: string]: joint.dia
 
   const funnelSize = { width: 100, height: 130 }
   const funnelLabelPositioion = { x: -70, y: 23 }
-  shapes.funnel1 = new ShapeFactory({
+  MakeSourdoughLoafshapes.funnel1 = new ShapeFactory({
     position: { x: 1250, y: 80 },
     size: { width: funnelSize.width, height: funnelSize.height }, //custom size of shape, but this changes the position of label
     svgPath:
@@ -348,7 +348,7 @@ function createShapesInChart(graph: joint.dia.Graph): { [key: string]: joint.dia
     SN: 'funnel1'
   })
 
-  shapes.funnel2 = new ShapeFactory({
+  MakeSourdoughLoafshapes.funnel2 = new ShapeFactory({
     position: { x: 320, y: 375 },
     size: { width: funnelSize.width, height: funnelSize.height }, //custom size of shape, but this changes the position of label
     svgPath:
@@ -363,7 +363,7 @@ function createShapesInChart(graph: joint.dia.Graph): { [key: string]: joint.dia
     SN: 'funnel2'
   })
 
-  shapes.funnel3 = new ShapeFactory({
+  MakeSourdoughLoafshapes.funnel3 = new ShapeFactory({
     position: { x: 1060, y: 390 },
     size: { width: funnelSize.width, height: funnelSize.height }, //custom size of shape, but this changes the position of label
     svgPath:
@@ -378,7 +378,7 @@ function createShapesInChart(graph: joint.dia.Graph): { [key: string]: joint.dia
     SN: 'funnel3'
   })
 
-  shapes.funnel4 = new ShapeFactory({
+  MakeSourdoughLoafshapes.funnel4 = new ShapeFactory({
     position: { x: 1190, y: 390 },
     size: { width: funnelSize.width, height: funnelSize.height }, //custom size of shape, but this changes the position of label
     svgPath:
@@ -393,7 +393,7 @@ function createShapesInChart(graph: joint.dia.Graph): { [key: string]: joint.dia
     SN: 'funnel4'
   })
 
-  shapes.ShapeLoof = new ShapeFactory({
+  MakeSourdoughLoafshapes.ShapeLoof = new ShapeFactory({
     position: { x: 620, y: 760.5 },
     size: { width: 30, height: 70 }, //custom size of shape, but this changes the position of label
     svgPath: 'M1 60.5L101 60.5L81 0.5L21 0.5ZM6 45.5L96 45.5M16 45.5L16 60.5M86 45.5L86 60.5',
@@ -407,7 +407,7 @@ function createShapesInChart(graph: joint.dia.Graph): { [key: string]: joint.dia
     SN: 'Philips-01'
   })
 
-  shapes.Proof = new ShapeFactory({
+  MakeSourdoughLoafshapes.Proof = new ShapeFactory({
     position: { x: 350, y: 693 },
     size: { width: 130, height: 370 }, //custom size of shape, but this changes the position of label
     svgPath:
@@ -422,7 +422,7 @@ function createShapesInChart(graph: joint.dia.Graph): { [key: string]: joint.dia
     SN: 'Philips-01'
   })
   // Creating custom shape Generator
-  shapes.Jar = new ShapeFactory({
+  MakeSourdoughLoafshapes.Jar = new ShapeFactory({
     position: { x: 700, y: 70 },
     size: { width: ContainerSize.width + 20, height: ContainerSize.height + 10 }, //custom size of shape, but this changes the position of label
     svgPath:
@@ -439,7 +439,7 @@ function createShapesInChart(graph: joint.dia.Graph): { [key: string]: joint.dia
 
   const clockSize = { width: 20, height: 60 }
   const clockLabelPosition = { x: 13, y: 40 }
-  shapes.clock1 = new ShapeFactory({
+  MakeSourdoughLoafshapes.clock1 = new ShapeFactory({
     position: { x: 210, y: 260 },
     size: { width: clockSize.width, height: clockSize.height }, //custom size of shape, but this changes the position of label
     svgPath:
@@ -453,7 +453,7 @@ function createShapesInChart(graph: joint.dia.Graph): { [key: string]: joint.dia
     AssetTrackingID: 'Society Generator',
     SN: 'clock1'
   })
-  shapes.clock2 = new ShapeFactory({
+  MakeSourdoughLoafshapes.clock2 = new ShapeFactory({
     position: { x: 950, y: 240 },
     size: { width: clockSize.width, height: clockSize.height }, //custom size of shape, but this changes the position of label
     svgPath:
@@ -467,7 +467,7 @@ function createShapesInChart(graph: joint.dia.Graph): { [key: string]: joint.dia
     AssetTrackingID: 'Society Generator',
     SN: 'clock2'
   })
-  shapes.clock3 = new ShapeFactory({
+  MakeSourdoughLoafshapes.clock3 = new ShapeFactory({
     position: { x: 290, y: 435 },
     size: { width: clockSize.width, height: clockSize.height }, //custom size of shape, but this changes the position of label
     svgPath:
@@ -481,7 +481,7 @@ function createShapesInChart(graph: joint.dia.Graph): { [key: string]: joint.dia
     AssetTrackingID: 'Society Generator',
     SN: 'clock3'
   })
-  shapes.clock4 = new ShapeFactory({
+  MakeSourdoughLoafshapes.clock4 = new ShapeFactory({
     position: { x: 880, y: 610 },
     size: { width: clockSize.width, height: clockSize.height }, //custom size of shape, but this changes the position of label
     svgPath:
@@ -495,7 +495,7 @@ function createShapesInChart(graph: joint.dia.Graph): { [key: string]: joint.dia
     AssetTrackingID: 'Society Generator',
     SN: 'clock4'
   })
-  shapes.clock5 = new ShapeFactory({
+  MakeSourdoughLoafshapes.clock5 = new ShapeFactory({
     position: { x: 540, y: 720 },
     size: { width: clockSize.width, height: clockSize.height }, //custom size of shape, but this changes the position of label
     svgPath:
@@ -510,7 +510,7 @@ function createShapesInChart(graph: joint.dia.Graph): { [key: string]: joint.dia
     SN: 'clock5'
   })
 
-  shapes.clock6 = new ShapeFactory({
+  MakeSourdoughLoafshapes.clock6 = new ShapeFactory({
     position: { x: 300, y: 610 },
     size: { width: clockSize.width, height: clockSize.height }, //custom size of shape, but this changes the position of label
     svgPath:
@@ -527,7 +527,7 @@ function createShapesInChart(graph: joint.dia.Graph): { [key: string]: joint.dia
 
   const temperatureSize = { width: 60, height: 150 }
   const temperatureLabelPosition = { x: 23, y: 50 }
-  shapes.temperature1 = new ShapeFactory({
+  MakeSourdoughLoafshapes.temperature1 = new ShapeFactory({
     position: { x: 170, y: 55 },
     size: { width: temperatureSize.width, height: temperatureSize.height }, //custom size of shape, but this changes the position of label
     svgPath:
@@ -542,7 +542,7 @@ function createShapesInChart(graph: joint.dia.Graph): { [key: string]: joint.dia
     SN: 'Cummins-100KVA'
   })
 
-  shapes.temperature2 = new ShapeFactory({
+  MakeSourdoughLoafshapes.temperature2 = new ShapeFactory({
     position: { x: 870, y: 670 },
     size: { width: temperatureSize.width, height: temperatureSize.height }, //custom size of shape, but this changes the position of label
     svgPath:
@@ -557,7 +557,7 @@ function createShapesInChart(graph: joint.dia.Graph): { [key: string]: joint.dia
     SN: 'temperature2'
   })
 
-  shapes.temperature3 = new ShapeFactory({
+  MakeSourdoughLoafshapes.temperature3 = new ShapeFactory({
     position: { x: 500, y: 440 },
     size: { width: temperatureSize.width, height: temperatureSize.height }, //custom size of shape, but this changes the position of label
     svgPath:
@@ -572,7 +572,7 @@ function createShapesInChart(graph: joint.dia.Graph): { [key: string]: joint.dia
     SN: 'temperature3'
   })
 
-  shapes.temperature4 = new ShapeFactory({
+  MakeSourdoughLoafshapes.temperature4 = new ShapeFactory({
     position: { x: 940, y: 310 },
     size: { width: temperatureSize.width, height: temperatureSize.height }, //custom size of shape, but this changes the position of label
     svgPath:
@@ -587,7 +587,7 @@ function createShapesInChart(graph: joint.dia.Graph): { [key: string]: joint.dia
     SN: 'temperature4'
   })
 
-  shapes.temperature5 = new ShapeFactory({
+  MakeSourdoughLoafshapes.temperature5 = new ShapeFactory({
     position: { x: 580, y: 720 },
     size: { width: temperatureSize.width, height: temperatureSize.height }, //custom size of shape, but this changes the position of label
     svgPath:
@@ -602,7 +602,7 @@ function createShapesInChart(graph: joint.dia.Graph): { [key: string]: joint.dia
     SN: 'temperature5'
   })
 
-  shapes.temperature6 = new ShapeFactory({
+  MakeSourdoughLoafshapes.temperature6 = new ShapeFactory({
     position: { x: 130, y: 610 },
     size: { width: temperatureSize.width, height: temperatureSize.height }, //custom size of shape, but this changes the position of label
     svgPath:
@@ -617,7 +617,7 @@ function createShapesInChart(graph: joint.dia.Graph): { [key: string]: joint.dia
     SN: 'Cummins-100KVA'
   })
 
-  shapes.temperature7 = new ShapeFactory({
+  MakeSourdoughLoafshapes.temperature7 = new ShapeFactory({
     position: { x: 130, y: 700 },
     size: { width: temperatureSize.width, height: temperatureSize.height }, //custom size of shape, but this changes the position of label
     svgPath:
@@ -631,6 +631,15 @@ function createShapesInChart(graph: joint.dia.Graph): { [key: string]: joint.dia
     AssetTrackingID: 'Society Generator',
     SN: 'Cummins-100KVA'
   })
+  graph.addCells([
+    MakeSourdoughLoafshapes.temperature1,
+    MakeSourdoughLoafshapes.temperature2,
+    MakeSourdoughLoafshapes.temperature3,
+    MakeSourdoughLoafshapes.temperature4,
+    MakeSourdoughLoafshapes.temperature5,
+    MakeSourdoughLoafshapes.temperature6,
+    MakeSourdoughLoafshapes.temperature7
+  ])
 
-  return shapes
+  return MakeSourdoughLoafshapes
 }
