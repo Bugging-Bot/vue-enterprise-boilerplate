@@ -1,6 +1,5 @@
 <template>
-  <DigCanvas :chartConfig="chartConfig"
-  />
+  <DigCanvas :chartConfig="chartConfig" />
 </template>
 
 <script setup lang="ts">
@@ -11,12 +10,11 @@
 //import DigCanvas from '@/components/JointJs/charts/MakeSourdoughLoaf.vue'
 // this is just a dummy component
 //import DigCanvas from '@/components/JointJs/components/DummyView.vue'
-
 //import Layout from '@/components/layout/LayoutView.vue'
-
 //import DigCanvas from '@/components/JointJs/charts/blankChart.vue'
+//import DigCanvas from '@/components/JointJs/charts/EgChart1/EgChart1.vue'
+import DigCanvas from '@/components/JointJs/charts/MakeSourDoughLoaf/MakeSourDoughLoaf.vue'
 
-import DigCanvas from '@/components/JointJs/charts/EgChart1/EgChart1.vue'
 import { ref } from 'vue'
 // Define a chartConfig object
 const chartConfig = ref({

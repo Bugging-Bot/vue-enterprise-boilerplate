@@ -1,9 +1,9 @@
 import * as joint from '@joint/core'
-import { MakeSourdoughLoafshapes } from '@/components/JointJs/charts/MakeSourdoughLoaf/MakeSourdoughLoaf_Shapes'
+import { MakeSourdoughLoafshapes } from './MakeSourDoughLoaf_Shapes'
 
 const links: { [key: string]: joint.dia.Link } = {}
 
-function createLinksInChart(graph: joint.dia.Graph): { [key: string]: joint.dia.Link } {
+export function createLinksInChart(graph: joint.dia.Graph): { [key: string]: joint.dia.Link } {
   //links.obj1_obj2 = CreateLink(shapes.obj1, shapes.obj2, 'Link 1', customAttributesOfLink, graph)
 
   links.start_Container0 = new joint.shapes.standard.Link({
@@ -634,8 +634,8 @@ function createLinksInChart(graph: joint.dia.Graph): { [key: string]: joint.dia.
       }
     }
   })
-
-  graph.addCells([links.start_Container0])
+  // add all links  to the graph
+  graph.addCells(Object.values(links))
 
   return links
 }

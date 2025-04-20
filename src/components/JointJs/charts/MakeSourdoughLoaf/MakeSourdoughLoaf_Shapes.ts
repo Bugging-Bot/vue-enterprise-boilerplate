@@ -13,7 +13,7 @@ const BalanceSize = { width: 25, height: 80 }
 const BalanceLabelPosition = { x: 52, y: 30 }
 
 // creating all shapes in the chart and return dictionary of shapes.
-function createShapesInChart(graph: joint.dia.Graph): { [key: string]: joint.dia.Element } {
+export function createShapesInChart(graph: joint.dia.Graph): { [key: string]: joint.dia.Element } {
   MakeSourdoughLoafshapes.start = new ShapeFactory({
     position: { x: 50, y: 93 },
     customData: {
@@ -631,15 +631,8 @@ function createShapesInChart(graph: joint.dia.Graph): { [key: string]: joint.dia
     AssetTrackingID: 'Society Generator',
     SN: 'Cummins-100KVA'
   })
-  graph.addCells([
-    MakeSourdoughLoafshapes.temperature1,
-    MakeSourdoughLoafshapes.temperature2,
-    MakeSourdoughLoafshapes.temperature3,
-    MakeSourdoughLoafshapes.temperature4,
-    MakeSourdoughLoafshapes.temperature5,
-    MakeSourdoughLoafshapes.temperature6,
-    MakeSourdoughLoafshapes.temperature7
-  ])
+  // adding all shapes to graph
+  graph.addCells(Object.values(MakeSourdoughLoafshapes))
 
   return MakeSourdoughLoafshapes
 }
