@@ -16,7 +16,7 @@ import * as joint from '@joint/core'
 import { CreateLayout, CleanGraph } from '@/components/JointJs/composables/LayoutFactory'
 // move this function out from single chart specific function
 import { createConnectionIndicator } from '@/components/JointJs/charts/EgChart1/LocalFunctions'
-import { localCleanup, localSubscriber } from '@/components/JointJs/charts/EgChart1/LocalSubscriber'
+import { localCleanup } from '@/components/JointJs/charts/EgChart1/LocalSubscriber'
 import { logger } from '@/utils/logger'
 import { createShapesInChart } from '@/components/JointJs/charts/MakeSourDoughLoaf/MakeSourDoughLoaf_Shapes'
 import { createLinksInChart } from '@/components/JointJs/charts/MakeSourDoughLoaf/MakeSourDoughLoaf_Links'
@@ -51,7 +51,10 @@ let isMounted = false
  * Initializes the chart by creating the paper, graph, shapes, and subscriptions
  */
 const initializeChart = async (): Promise<void> => {
-  if (!paperContainer.value || !isMounted) return
+  if (!paperContainer.value || !isMounted) {
+    logger.error('Chart initialization failed: Paper or Graph is not defined')
+    return
+  }
 
   try {
     logger.info('Initializing chart')
@@ -96,7 +99,9 @@ const initializeChart = async (): Promise<void> => {
 
     // Create shapes and links from configuration
     const { shapes } = createShapesInChart(graph)
+    //void createShapesInChart(graph)
     const { likes } = createLinksInChart(graph)
+    //void createLinksInChart(graph)
 
     // Initialize NATS subscriber with error handling
     try {
@@ -109,7 +114,7 @@ const initializeChart = async (): Promise<void> => {
 
     logger.info('Chart initialization complete')
   } catch (error) {
-    logger.error('Error initializing chart', error)
+    logger.error('Error initializing chart', { error })
     throw new Error('Failed to initialize chart')
   }
 }
@@ -215,7 +220,12 @@ onMounted(async () => {
   try {
     await initializeChart()
   } catch (error) {
-    logger.error('Failed to initialize chart on mount', error)
+    logger.error(
+      'Failed to initialize chart on mount',
+      error instanceof Error ? error.message : error
+    )
+    console.error('Stack trace:', error)
+    throw new Error('Failed to initialize chart')
   }
 })
 

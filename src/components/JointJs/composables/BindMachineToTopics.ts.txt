@@ -1,0 +1,99 @@
+/*
+Objective:
+To dynamically bind multiple JointJS shapes to their respective machines and sensors, and subscribe those sensors to real-time NATS updates in a scalable and modular way.
+This allows each shape in your chart to update its color in real-time based on sensor data, with multiple shapes potentially representing the same machine.
+
+Core Logic:
+1. Extract Machine IDs from Shapes:
+  Iterate through all provided shapes.
+  Collect unique machine_ids from customData.
+2. For Each Machine:
+  Use FactoryProcessor to get all sensor configs for that machine from the config.
+  Create RawSensor instances from those configs.
+  Create a RawMachine instance using those sensors.
+3. Match Shapes to Machine:
+  Find all shapes whose customData.machine_id matches the current machine.
+  Call bindToShapes(shapes) on the machine to subscribe all its sensors.
+4. Live Binding:
+  Each sensor listens to NATS topic updates.
+  When new sensor data arrives, machine calculates the color.
+  All bound shapes get their fill color updated.
+*/
+
+import * as joint from '@joint/core'
+import { logger } from '@/utils/logger'
+import type { RawFactoryConfig } from '@/components/JointJs/composables/Factory'
+import type { RawSensor as RawSensorData } from '@/components/JointJs/composables/Sensor'
+import { FactoryProcessor } from '@/components/JointJs/composables/FactoryProcessor'
+import { RawMachine } from '@/components/JointJs/composables/Machine'
+import { RawSensor } from '@/components/JointJs/composables/Sensor'
+
+/**
+ * Binds machine sensors to their corresponding JointJS shapes and subscribes them to NATS.
+ *
+ * @param shapes - A dictionary of JointJS elements keyed by identifier
+ * @param factoryConfig - The full factory configuration object
+ * @param factory_id - Factory ID to scope the machine search
+ * @param production_line_id - Production line ID to scope the machine search
+ * @returns Array of RawMachine instances
+ */
+export function bindMachinesToShapes(
+  shapes: { [key: string]: joint.dia.Element },
+  factoryConfig: RawFactoryConfig,
+  factory_id: number,
+  production_line_id: number
+): RawMachine[] {
+  logger.info('Binding machines to shapes')
+  const factoryProcessor = new FactoryProcessor(factoryConfig)
+  const machines: RawMachine[] = []
+
+  // Get all unique machine IDs present in shapes
+  const allMachineIds = Array.from(
+    new Set(
+      Object.values(shapes)
+        .map((shape) => shape.get('customData')?.machine_id)
+        .filter((id): id is number => typeof id === 'number')
+    )
+  )
+
+  for (const machineId of allMachineIds) {
+    const sensorConfigs = factoryProcessor.getAllSensorOfMachine(
+      factory_id,
+      production_line_id,
+      machineId
+    )
+
+    const sensors = sensorConfigs.map(
+      (config) =>
+        new RawSensor(
+          config.id,
+          config.sensor,
+          config.code,
+          config.unit,
+          config.measure,
+          config.topic,
+          config.range,
+          config.operational_range,
+          config.warning_range,
+          config.error_range,
+          config.danger_range,
+          config.accuracy,
+          config.reading
+        )
+    )
+
+    const machine = new RawMachine(machineId, {}, sensors)
+    machines.push(machine)
+
+    // Get ALL shapes that match this machine ID
+    const matchingShapes = Object.values(shapes).filter(
+      (shape) => shape.get('customData')?.machine_id === machineId
+    )
+
+    if (matchingShapes.length > 0) {
+      machine.bindToShapes(matchingShapes)
+    }
+  }
+
+  return machines
+}

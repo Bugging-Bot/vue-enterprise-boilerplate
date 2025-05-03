@@ -1,5 +1,6 @@
 import { connect } from 'nats.ws'
 import type { NatsConnection, Subscription, ConnectionOptions } from 'nats.ws'
+import { logger } from '@/utils/logger'
 
 let nc: NatsConnection | null = null
 let connectionAttempts = 0

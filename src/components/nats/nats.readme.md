@@ -18,6 +18,7 @@
 
 4. publisher: command: `nats pub mystream.foo "Hello JetStream!"`
 5. subscriber: command: `nats sub mystream.foo`
+   `nats sub --user sys_user --password Sys_P@ss f.1.p.1.m.17.s.1.a`
 
 # this is for JetStream
 

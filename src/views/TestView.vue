@@ -14,6 +14,7 @@
 //import DigCanvas from '@/components/JointJs/charts/blankChart.vue'
 //import DigCanvas from '@/components/JointJs/charts/EgChart1/EgChart1.vue'
 import DigCanvas from '@/components/JointJs/charts/MakeSourDoughLoaf/MakeSourDoughLoaf.vue'
+//import DigCanvas from '@/components/JointJs/charts/TestChart/testChart.vue'
 
 import { ref } from 'vue'
 // Define a chartConfig object

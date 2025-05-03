@@ -101,7 +101,7 @@ export function getSensorTopic(
   if (!machine) return ''
 
   // Find the specific sensor
-  const sensorID = machine.sensors?.find((s) => s.Id === sensorId)
+  const sensorID = machine.sensors?.find((s) => s.id === sensorId)
   if (!sensorID) return ''
 
   // Find the specific sensor

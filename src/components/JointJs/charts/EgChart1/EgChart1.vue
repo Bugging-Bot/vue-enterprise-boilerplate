@@ -23,7 +23,7 @@ import * as joint from '@joint/core'
 import { CreateLayout, CleanGraph } from '@/components/JointJs/composables/LayoutFactory'
 import { createShapesandLinks } from './LocalShapes'
 import { localCleanup, localSubscriber } from './LocalSubscriber'
-import { createConnectionIndicator } from './LocalFunctions'
+import { createConnectionIndicator } from '../../../nats/LocalFunctions'
 import { logger } from '@/utils/logger'
 
 // Define types for the component

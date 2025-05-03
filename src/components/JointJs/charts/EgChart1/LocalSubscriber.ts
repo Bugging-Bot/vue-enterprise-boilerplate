@@ -22,12 +22,12 @@ import {
   checkPublisherExists
 } from '@/components/nats/natsSubscriberService'
 import type { NatsConnectionConfig } from '@/components/nats/natsSubscriberService'
-import { localTopics, getSensorColor } from './LocalFunctions'
+import { localTopics, getSensorColor } from '../../../nats/LocalFunctions'
 import {
   CONNECTION_STATES,
   updateConnectionStatus,
   checkNATSConnectionStatus
-} from './LocalFunctions'
+} from '../../../nats/LocalFunctions'
 
 import { logger } from '@/utils/logger'
 import * as joint from '@joint/core'
@@ -125,7 +125,7 @@ export async function subscribeToLocalTopic(
  * Initializes the NATS client and subscribes to all required topics
  * @returns Promise with the result of the subscription process
  */
-export async function localSubscriber(shapesRef?: { [key: string]: joint.dia.Element }): Promise<{
+export async function localSubscriber(shapesRef: { [key: string]: joint.dia.Element }): Promise<{
   success: boolean
   connectionStatus: string
   subscriptions: SubscriptionResult[]

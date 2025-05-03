@@ -89,7 +89,6 @@
                   "unit": "A",
                   "measure": "Electric current",
                   "topic": "f.1.p.1.m.7.s.1.a",
-                  "reading": null,
                   "range": {
                     "min": 0.0,
                     "max": 2000.0
@@ -138,7 +137,6 @@
                   "unit": "V",
                   "measure": "Voltage",
                   "topic": "f.1.p.1.m.7.s.2.vlt",
-                  "reading": null,
                   "range": {
                     "min": 0.0,
                     "max": 1000.0
@@ -197,7 +195,6 @@
                   "unit": "A",
                   "measure": "Electric current",
                   "topic": "f.1.p.1.m.8.s.1.a",
-                  "reading": null,
                   "range": {
                     "min": 0.0,
                     "max": 2000.0
@@ -246,7 +243,6 @@
                   "unit": "V",
                   "measure": "Voltage",
                   "topic": "f.1.p.1.m.8.s.2.vlt",
-                  "reading": null,
                   "range": {
                     "min": 0.0,
                     "max": 1000.0
@@ -295,7 +291,6 @@
                   "unit": "N / Nm",
                   "measure": "Force/torque",
                   "topic": "f.1.p.1.m.8.s.3.f",
-                  "reading": null,
                   "range": {
                     "min": 0.0,
                     "max": 10000.0
@@ -363,7 +358,6 @@
                   "unit": "A",
                   "measure": "Electric current",
                   "topic": "f.1.p.1.m.10.s.1.a",
-                  "reading": null,
                   "range": {
                     "min": 0.0,
                     "max": 2000.0
@@ -412,7 +406,6 @@
                   "unit": "V",
                   "measure": "Voltage",
                   "topic": "f.1.p.1.m.10.s.2.vlt",
-                  "reading": null,
                   "range": {
                     "min": 0.0,
                     "max": 1000.0
@@ -461,7 +454,6 @@
                   "unit": "N / Nm",
                   "measure": "Force/torque",
                   "topic": "f.1.p.1.m.10.s.3.f",
-                  "reading": null,
                   "range": {
                     "min": 0.0,
                     "max": 10000.0
@@ -538,7 +530,6 @@
                   "unit": "A",
                   "measure": "Electric current",
                   "topic": "f.1.p.1.m.13.s.1.a",
-                  "reading": null,
                   "range": {
                     "min": 0.0,
                     "max": 2000.0
@@ -587,7 +578,6 @@
                   "unit": "V",
                   "measure": "Voltage",
                   "topic": "f.1.p.1.m.13.s.2.vlt",
-                  "reading": null,
                   "range": {
                     "min": 0.0,
                     "max": 1000.0
@@ -664,7 +654,6 @@
                   "unit": "A",
                   "measure": "Electric current",
                   "topic": "f.1.p.1.m.16.s.1.a",
-                  "reading": null,
                   "range": {
                     "min": 0.0,
                     "max": 2000.0
@@ -713,7 +702,6 @@
                   "unit": "V",
                   "measure": "Voltage",
                   "topic": "f.1.p.1.m.16.s.2.vlt",
-                  "reading": null,
                   "range": {
                     "min": 0.0,
                     "max": 1000.0
@@ -772,7 +760,6 @@
                   "unit": "A",
                   "measure": "Electric current",
                   "topic": "f.1.p.1.m.17.s.1.a",
-                  "reading": null,
                   "range": {
                     "min": 0.0,
                     "max": 2000.0
@@ -821,7 +808,6 @@
                   "unit": "V",
                   "measure": "Voltage",
                   "topic": "f.1.p.1.m.17.s.2.vlt",
-                  "reading": null,
                   "range": {
                     "min": 0.0,
                     "max": 1000.0
@@ -870,7 +856,6 @@
                   "unit": "N / Nm",
                   "measure": "Force/torque",
                   "topic": "f.1.p.1.m.17.s.3.f",
-                  "reading": null,
                   "range": {
                     "min": 0.0,
                     "max": 10000.0
@@ -965,7 +950,6 @@
                   "unit": "A",
                   "measure": "Electric current",
                   "topic": "f.1.p.1.m.22.s.1.a",
-                  "reading": null,
                   "range": {
                     "min": 0.0,
                     "max": 2000.0
@@ -1014,7 +998,6 @@
                   "unit": "V",
                   "measure": "Voltage",
                   "topic": "f.1.p.1.m.22.s.2.vlt",
-                  "reading": null,
                   "range": {
                     "min": 0.0,
                     "max": 1000.0
@@ -1063,7 +1046,6 @@
                   "unit": "\u00b0C / \u00b0F",
                   "measure": "Heat",
                   "topic": "f.1.p.1.m.22.s.3.t",
-                  "reading": null,
                   "range": {
                     "min": -40.0,
                     "max": 150.0
@@ -1127,7 +1109,6 @@
                   "unit": "A",
                   "measure": "Electric current",
                   "topic": "f.1.p.1.m.23.s.1.a",
-                  "reading": null,
                   "range": {
                     "min": 0.0,
                     "max": 2000.0
@@ -1176,7 +1157,6 @@
                   "unit": "V",
                   "measure": "Voltage",
                   "topic": "f.1.p.1.m.23.s.2.vlt",
-                  "reading": null,
                   "range": {
                     "min": 0.0,
                     "max": 1000.0
@@ -1225,7 +1205,6 @@
                   "unit": "\u00b0C / \u00b0F",
                   "measure": "Heat",
                   "topic": "f.1.p.1.m.23.s.3.t",
-                  "reading": null,
                   "range": {
                     "min": -40.0,
                     "max": 150.0

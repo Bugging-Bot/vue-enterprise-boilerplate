@@ -1,6 +1,8 @@
 // src/components/JointJs/shapes/GenericShape.ts
 //import { dia, shapes } from '@joint/core' //'jointjs'
+import { logger } from '@/utils/logger'
 import * as joint from '@joint/core'
+import { FactoryProcessor } from '@/components/JointJs/composables/FactoryProcessor'
 
 export interface CustomShapeProps {
   shapeId?: string // Custom shape ID
@@ -92,6 +94,12 @@ export class ShapeFactory extends joint.dia.Element {
       ]
     })
   }
+  // Method to update the color of the shape dynamically
+  setColor(newColor: string): void {
+    this.attr('body/fill', newColor) // Updates the fill color of the shape
+    logger.info('Color updated to:', newColor)
+  }
+
   // Adding methods to access custom properties in a type-safe manner
   getAssetTrackingID(): string {
     return this.attr('tracking/AssetTrackingID') || 'Not Assigned'
