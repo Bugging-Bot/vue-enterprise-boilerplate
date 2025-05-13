@@ -40,6 +40,16 @@ export const LocalDrawerConfigs: {
         { title: 'Filter Parts', icon: 'mdi-filter', action: 'filter-parts' },
         { title: 'Export List', icon: 'mdi-export', action: 'export-parts' }
       ]
+    },
+    // added this for the builder right navigation bar
+    // this is the place where options need to be added
+    builder: {
+      title: 'Builder Options',
+      items: [
+        { title: 'View workflow', icon: 'mdi-eye', action: 'view-diagram' },
+        { title: 'Save workflow', icon: 'mdi-content-save', action: 'save-diagram' },
+        { title: 'Export workflow', icon: 'mdi-file-export', action: 'export-worflow' }
+      ]
     }
   },
 

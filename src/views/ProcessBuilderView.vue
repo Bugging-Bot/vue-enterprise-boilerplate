@@ -17,6 +17,9 @@
               <v-data-table :headers="headers" :items="items"></v-data-table>
             </v-card-text>
           </template>
+          <template #builder>
+            <v-card-title>This is for building workflows</v-card-title>
+          </template>
         </LocalBar>
       </v-container>
     </v-main>
@@ -31,7 +34,8 @@ import NavigationDrawer from '@/components/layout/NavigationDrawer.vue'
 import LocalBar from '@/components/layout/LocalBar.vue'
 import LocalDrawer from '@/components/layout/LocalDrawer.vue'
 // import AppFooter from '@/components/layout/AppFooter.vue'
-import DigCanvas from '@/components/JointJs/charts/MakeSourdoughLoaf.vue'
+//import DigCanvas from '@/components/JointJs/charts/MakeSourdoughLoaf.vue'
+import DigCanvas from '@/components/JointJs/charts/MakeSourDoughLoaf/MakeSourDoughLoaf.vue'
 import { useEventBusStore } from '@/stores/eventBus'
 
 //const activeTab = ref('overview')
@@ -46,7 +50,8 @@ interface Tab {
 // tabs for local bar
 const tabs: Tab[] = [
   { value: 'overview', label: 'Overview' },
-  { value: 'parts', label: 'Parts' }
+  { value: 'parts', label: 'Parts' },
+  { value: 'builder', label: 'Builder' }
 ]
 
 // Notify the LocalDrawer which view is active when component mounts

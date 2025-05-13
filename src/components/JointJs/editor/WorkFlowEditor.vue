@@ -1,5 +1,6 @@
 <template>
   <div class="chart-wrapper" ref="chartWrapper">
+    <div class="stencil-container" ref="stencilRef"></div>
     <div ref="paperContainer" class="paper-container"></div>
   </div>
 </template>
@@ -16,11 +17,13 @@ import * as joint from '@joint/core'
 import { CreateLayout, CleanGraph } from '@/components/JointJs/composables/LayoutFactory'
 // move this function out from single chart specific function
 import { createConnectionIndicator } from '@/components/JointJs/composables/ConnectionStatus'
-import { localCleanup } from './MakeSourDoughLoad_Sub'
+import { localCleanup } from '@/components/JointJs/charts/MakeSourDoughLoaf/MakeSourDoughLoad_Sub'
+//import { localCleanup } from './MakeSourDoughLoad_Sub'
 import { logger } from '@/utils/logger'
-import { createShapesInChart } from '@/components/JointJs/charts/MakeSourDoughLoaf/MakeSourDoughLoaf_Shapes'
-import { createLinksInChart } from '@/components/JointJs/charts/MakeSourDoughLoaf/MakeSourDoughLoaf_Links'
+//import { createShapesInChart } from '@/components/JointJs/charts/MakeSourDoughLoaf/MakeSourDoughLoaf_Shapes'
+//import { createLinksInChart } from '@/components/JointJs/charts/MakeSourDoughLoaf/MakeSourDoughLoaf_Links'
 import { CONNECTION_STATES } from '@/components/JointJs/composables/colorCodes'
+import { createStencil } from '@/components/JointJs/composables/StencilFactory'
 
 // Define types for the component
 interface ChartInstance {
@@ -37,6 +40,8 @@ interface ChartInstance {
 // Create refs for the containers
 const chartWrapper = ref<HTMLElement | null>(null)
 const paperContainer = ref<HTMLElement | null>(null)
+const stencilRef = ref<HTMLDivElement | null>(null)
+
 let paper: joint.dia.Paper | null = null
 let graph: joint.dia.Graph | null = null
 // Define connectionIndicator variable
@@ -101,11 +106,17 @@ const initializeChart = async (): Promise<void> => {
       })
     }
 
+    // Inside initializeChart(), after setting up `paper` and `graph`:
+    if (stencilRef.value && paper && graph) {
+      createStencil(stencilRef.value)
+    }
+
     // Create shapes and links from configuration
     //const { shapes } = createShapesInChart(graph)
-    void createShapesInChart(graph)
+    //void createShapesInChart(graph)
+
     //const { likes } = createLinksInChart(graph)
-    void createLinksInChart(graph)
+    //void createLinksInChart(graph)
 
     // Initialize NATS subscriber with error handling
     try {
@@ -266,6 +277,14 @@ defineExpose(exposedApi)
   width: 100%;
   height: 100%;
   min-height: 400px;
+}
+.stencil-container {
+  float: left;
+  width: 240px;
+  height: 100%;
+  overflow-y: auto;
+  border-right: 1px solid #f80404;
+  background-color: #0ef41a;
 }
 
 .paper-container {

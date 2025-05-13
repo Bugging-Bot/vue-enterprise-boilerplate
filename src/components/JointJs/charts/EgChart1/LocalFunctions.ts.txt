@@ -125,6 +125,7 @@ export function getSensorColor(sensorType: string, value: number | string): stri
  * Function to get connection status
  */
 // Add these to the existing exports
+
 export const CONNECTION_STATES = {
   CONNECTED: 'connected',
   DISCONNECTED: 'disconnected',
@@ -153,6 +154,7 @@ let currentConnectionStatus = CONNECTION_STATES.DISCONNECTED
  * Update the connection status
  * @param status New connection status
  */
+
 export function updateConnectionStatus(status: string): void {
   if (currentConnectionStatus !== status) {
     currentConnectionStatus = status
@@ -160,10 +162,12 @@ export function updateConnectionStatus(status: string): void {
   }
 }
 
+
 /**
  * Gets the current connection status
  * @returns The current connection status
  */
+
 export function checkNATSConnectionStatus(): string {
   // Check actual connection and update status if needed
   if (isConnected()) {
@@ -182,6 +186,7 @@ export function checkNATSConnectionStatus(): string {
  * @param status Connection status
  * @returns The title for the status
  */
+
 export function checkNATSConnectionStatusTitle(status: string): string {
   return CONNECTION_TITLES[status] || 'NATS Connection Status'
 }
@@ -191,6 +196,7 @@ export function checkNATSConnectionStatusTitle(status: string): string {
  * @param status Connection status
  * @returns The color for the status
  */
+
 export function checkNATSConnectionStatusColor(status: string): string {
   return CONNECTION_COLORS[status] || '#CCCCCC' // Default gray
 }
@@ -200,6 +206,7 @@ export function checkNATSConnectionStatusColor(status: string): string {
  * @param container The container element to append the indicator to
  * @returns Object with methods to update and remove the indicator
  */
+
 export function createConnectionIndicator(container: HTMLElement) {
   // Create the indicator element
   const indicator = document.createElement('div')

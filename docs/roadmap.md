@@ -250,3 +250,17 @@ Citations:
 ---
 
 Answer from Perplexity: https://www.perplexity.ai/search/suggest-me-how-to-create-3d-mo-TC4JqpG9TT68nt5EIfbL0g?utm_source=copy_output
+
+# Agents / ai
+
+## NLP
+
+1. https://spacy.io/ light weight NLP, this can be integrated into grool / rule engine.
+2. https://www.nltk.org/
+   | **Option** | **Complexity** | **Resource Efficiency** | **Customization** | **Ease of Implementation** | **Best Use Case** |
+   | ----------------------- | -------------- | ----------------------- | ----------------- | -------------------------- | --------------------------------------------------------- |
+   | **spaCy** | Moderate | High | Very High | Moderate | Fast, customizable rule parsing for defined patterns. |
+   | **DistilBERT/TinyBERT** | High | Moderate | High | High | Complex rule patterns, high accuracy, moderate resources. |
+   | **Rasa NLU** | High | Moderate | Very High | High | Conversational rule parsing and intent extraction. |
+   | **TextBlob** | Low | Very High | Low | Very Easy | Simple rule parsing, quick prototyping. |
+   | **Regex + Rule-based** | Low | Very High | Very Low | Very Easy | Simple, predictable rule formats. |
