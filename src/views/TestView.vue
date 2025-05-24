@@ -13,8 +13,11 @@
 //import Layout from '@/components/layout/LayoutView.vue'
 //import DigCanvas from '@/components/JointJs/charts/blankChart.vue'
 //import DigCanvas from '@/components/JointJs/charts/EgChart1/EgChart1.vue'
-import DigCanvas from '@/components/JointJs/editor/WorkFlowEditor.vue'
+//import DigCanvas from '@/components/JointJs/editor/WorkFlowEditor.vue'
 //import DigCanvas from '@/components/JointJs/charts/TestChart/testChart.vue'
+//import DigCanvas from '@/components/JointJs/charts/WorkflowCanvas.vue'
+//import DigCanvas from '@/components/n8n/n8nView.vue'
+import DigCanvas from '@/components/vueflow/DragandDrop.vue'
 
 import { ref } from 'vue'
 // Define a chartConfig object
