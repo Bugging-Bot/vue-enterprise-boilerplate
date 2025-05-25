@@ -1,4 +1,7 @@
-<!-- Shape Information Drawer Component Displays selected shape properties in a collapsible side drawer -->
+<!--
+  Shape Information Drawer Component
+  Displays selected shape properties in a collapsible side drawer
+-->
 <template>
   <v-navigation-drawer
     v-model="localDrawer"
@@ -8,27 +11,6 @@
   >
     <v-list-item title="local navigation bar"></v-list-item>
     <v-divider></v-divider>
-    <!-- Workflow Name Input Section (only for builder tab) -->
-    <div v-if="currentConfig?.showWorkflowNameInput" class="pa-4">
-      <v-text-field
-        v-model="workflowName"
-        label="Name"
-        placeholder="Enter workflow name"
-        variant="outlined"
-        density="compact"
-        prepend-inner-icon="mdi-file-document-edit"
-        @input="handleWorkflowNameChange"
-      ></v-text-field>
-    </div>
-
-    <!-- Divider and Label for workflow nodes -->
-    <div v-if="currentConfig?.showWorkflowNameInput">
-      <v-divider></v-divider>
-      <v-list-subheader class="text-subtitle-2 font-weight-medium">
-        Workflow Nodes
-      </v-list-subheader>
-    </div>
-
     <v-list v-if="currentConfig">
       <v-list-item
         v-for="(item, index) in currentConfig.items"
@@ -46,7 +28,7 @@
     <v-list v-else>
       <v-list-item title="Select a tab to view options"></v-list-item>
     </v-list>
-    <!-- Seperate list -->
+    <!-- seperate list -->
     <v-divider></v-divider>
 
     <!-- Description for draggable items when in builder tab -->
@@ -80,8 +62,6 @@ const localDrawerVisible = ref(true)
 const activeView = ref(getViewNameFromRoute(route.name as string))
 // Track the active tab, this is currently set to 'overview'
 const activeTab = ref('overview')
-// Workflow name state
-const workflowName = ref('')
 
 // Function to extract view name from route
 function getViewNameFromRoute(routeName: string): string {
@@ -141,16 +121,6 @@ const handleDragEnd = () => {
   onDragEnd()
 }
 
-// Handle workflow name change
-const handleWorkflowNameChange = () => {
-  // Emit workflow name change event
-  eventBus.emit('workflow-name-changed', {
-    name: workflowName.value,
-    view: activeView.value,
-    tab: activeTab.value
-  })
-}
-
 // Define handleItemAction function
 const handleItemAction = (action: string, item?: { draggable?: boolean }) => {
   console.log('Action triggered:', action)
@@ -163,8 +133,7 @@ const handleItemAction = (action: string, item?: { draggable?: boolean }) => {
     action,
     view: activeView.value,
     tab: activeTab.value,
-    item: item,
-    workflowName: workflowName.value
+    item: item
   })
 }
 // Define handleToggleLocalDrawer function
@@ -183,11 +152,6 @@ const handleToggleLocalDrawer = (data: { message?: string }) => {
 const handleTabChange = (tabValue: string) => {
   console.log('LocalDrawer received tab change:', tabValue)
   activeTab.value = tabValue
-
-  // Reset workflow name when switching tabs
-  if (tabValue === 'builder') {
-    workflowName.value = ''
-  }
 }
 
 // Define handleViewChange function
@@ -196,8 +160,6 @@ const handleViewChange = (viewName: string) => {
   activeView.value = viewName
   // Reset to default tab when view changes
   activeTab.value = 'overview'
-  // Reset workflow name when view changes
-  workflowName.value = '' // this might need to be changed as user might come back to the same view
 }
 
 // Subscribe to the 'toggle-local-drawer-pub-sub' event when the component mounts
@@ -232,6 +194,14 @@ onUnmounted(() => {
 })
 </script>
 
+<!-- <style scoped>
+.color-preview {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+</style> -->
 <style scoped>
 .draggable-item {
   cursor: grab;
@@ -277,17 +247,5 @@ onUnmounted(() => {
 /* Visual feedback during drag */
 .draggable-item.dragging {
   opacity: 0.5;
-}
-
-/* Workflow name input styling */
-.v-text-field {
-  margin-bottom: 8px;
-}
-
-/* Subheader styling */
-.v-list-subheader {
-  color: rgba(var(--v-theme-on-surface), 0.7);
-  padding: 8px 16px;
-  background-color: rgba(var(--v-theme-surface-variant), 0.3);
 }
 </style>

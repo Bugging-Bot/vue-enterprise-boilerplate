@@ -91,7 +91,7 @@ export default function useDragAndDrop() {
 
     const newNode: Node = {
       id: nodeId,
-      type: draggedType.value!, // We know draggedType has a value here due to the drag over event
+      type: draggedType.value ?? 'default', // Provide a default value instead of using non-null assertion
       position,
       data: { label: nodeId }
     }
@@ -114,7 +114,6 @@ export default function useDragAndDrop() {
 
     addNodes(newNode)
   }
-
   return {
     draggedType,
     isDragOver,

@@ -13,6 +13,7 @@ interface DrawerItem {
 interface DrawerConfig {
   title: string
   items: DrawerItem[]
+  showWorkflowNameInput?: boolean // New property to show workflow name input
 }
 
 interface ViewConfig {
@@ -49,23 +50,24 @@ export const LocalDrawerConfigs: {
     // 25-05-2025: merging flow builder with local drawer
     builder: {
       title: 'Workflow Nodes',
+      showWorkflowNameInput: true,
       items: [
         {
-          title: 'Input Node',
+          title: 'Input',
           icon: 'mdi-import',
           action: 'drag-node',
           draggable: true,
           nodeType: 'input'
         },
         {
-          title: 'Default Node',
+          title: 'Process',
           icon: 'mdi-circle-outline',
           action: 'drag-node',
           draggable: true,
           nodeType: 'default'
         },
         {
-          title: 'Output Node',
+          title: 'Output',
           icon: 'mdi-export',
           action: 'drag-node',
           draggable: true,
