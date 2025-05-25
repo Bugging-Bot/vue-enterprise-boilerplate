@@ -12,7 +12,7 @@ import {
   defineExpose
   // Removed unused import: computed
 } from 'vue'
-import * as joint from '@joint/core'
+import type * as joint from '@joint/core'
 import { CreateLayout, CleanGraph } from '@/components/JointJs/composables/LayoutFactory'
 // move this function out from single chart specific function
 import { createConnectionIndicator } from '@/components/JointJs/composables/ConnectionStatus'
@@ -20,8 +20,7 @@ import { localCleanup } from './MakeSourDoughLoad_Sub'
 import { logger } from '@/utils/logger'
 import { createShapesInChart } from '@/components/JointJs/charts/MakeSourDoughLoaf/MakeSourDoughLoaf_Shapes'
 import { createLinksInChart } from '@/components/JointJs/charts/MakeSourDoughLoaf/MakeSourDoughLoaf_Links'
-import { CONNECTION_STATES } from '@/components/JointJs/composables/colorCodes'
-
+import type { CONNECTION_STATES } from '@/components/JointJs/composables/colorCodes'
 // Define types for the component
 interface ChartInstance {
   paper: joint.dia.Paper | null
@@ -121,8 +120,8 @@ const initializeChart = async (): Promise<void> => {
     logger.error('Error initializing chart', { error })
     throw new Error('Failed to initialize chart')
   }
-}
 
+}
 /**
  * Cleans up resources when the component is unmounted
  */
