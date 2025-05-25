@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import useDragAndDrop from '@/components/vueflow/useDragAndDrop.ts'
-
+import useDragAndDrop from './useDragAndDrop'
 const { onDragStart } = useDragAndDrop()
 </script>
 

@@ -3,25 +3,28 @@
     <AppBar @toggle-drawer="isDrawerOpen = !isDrawerOpen" />
     <NavigationDrawer v-model="isDrawerOpen" />
     <v-main>
-      <v-container fluid>
-        <LocalDrawer />
-        <LocalBar :tabs="tabs" @tab-changed="handleTabChanged">
-          <!-- This is first part-->
-          <template #overview>
-            <DigCanvas />
-          </template>
-          <!-- This is second part-->
-          <template #parts>
-            <v-card-title>Parts Section</v-card-title>
-            <v-card-text>
-              <v-data-table :headers="headers" :items="items"></v-data-table>
-            </v-card-text>
-          </template>
-          <template #builder>
-            <v-card-title>This is for building workflows</v-card-title>
-          </template>
-        </LocalBar>
-      </v-container>
+      <!-- <v-container fluid> -->
+      <LocalDrawer />
+      <LocalBar :tabs="tabs" @tab-changed="handleTabChanged">
+        <!-- This is first part-->
+        <template #overview>
+          <DigCanvas />
+        </template>
+        <!-- This is second part-->
+        <template #parts>
+          <v-card-title>Parts Section</v-card-title>
+          <v-card-text>
+            <v-data-table :headers="headers" :items="items"></v-data-table>
+          </v-card-text>
+        </template>
+        <template #builder>
+          <!-- <v-card-title>This is for building workflows </v-card-title> -->
+          <div class="process-builder-fullwidth">
+            <ProcessBuilder />
+          </div>
+        </template>
+      </LocalBar>
+      <!-- </v-container> -->
     </v-main>
     <!-- <AppFooter /> -->
   </div>
@@ -36,6 +39,7 @@ import LocalDrawer from '@/components/layout/LocalDrawer.vue'
 // import AppFooter from '@/components/layout/AppFooter.vue'
 //import DigCanvas from '@/components/JointJs/charts/MakeSourdoughLoaf.vue'
 import DigCanvas from '@/components/JointJs/charts/MakeSourDoughLoaf/MakeSourDoughLoaf.vue'
+import ProcessBuilder from '@/components/vueflow/DragandDrop.vue'
 import { useEventBusStore } from '@/stores/eventBus'
 
 //const activeTab = ref('overview')
@@ -84,10 +88,10 @@ const items = ref([
 
 // Define the slots type
 defineSlots<{
-  overview: () => any
-  parts: () => any
-  process: () => any
-  adminstration: () => any
+  overview: () => void
+  parts: () => void
+  process: () => void
+  administration: () => void
 }>()
 </script>
 
@@ -96,3 +100,15 @@ defineSlots<{
   padding: 1rem;
 }
 </style> -->
+
+<style scoped>
+.process-builder-fullwidth {
+  position: fixed; /*fixed*/
+  top: 120px; /* Adjust based on your AppBar + LocalBar tab height */
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 999;
+  background: white;
+}
+</style>

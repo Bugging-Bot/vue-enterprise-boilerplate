@@ -17,7 +17,11 @@
         :key="index"
         :title="item.title"
         :prepend-icon="item.icon"
+        :draggable="item.draggable || false"
+        :class="getDraggableClass(item)"
         @click="handleItemAction(item.action)"
+        @dragstart="handleDragStart($event, item)"
+        @dragend="handleDragEnd"
       ></v-list-item>
     </v-list>
 
@@ -26,6 +30,13 @@
     </v-list>
     <!-- seperate list -->
     <v-divider></v-divider>
+
+    <!-- Description for draggable items when in builder tab -->
+    <div v-if="showDragDescription" class="pa-4">
+      <v-alert type="info" variant="tonal" class="text-caption">
+        You can drag workflow nodes to the canvas to build your workflow.
+      </v-alert>
+    </div>
   </v-navigation-drawer>
 </template>
 
@@ -34,6 +45,10 @@ import { ref, onMounted, onUnmounted, computed } from 'vue'
 import { useEventBusStore } from '@/stores/eventBus'
 import { LocalDrawerConfigs } from './LocalDrawerConfigs'
 import { useRoute } from 'vue-router'
+import useDragAndDrop from '@/components/vueflow/useDragAndDrop'
+
+// Import drag and drop functionality
+const { onDragStart, onDragEnd } = useDragAndDrop()
 
 // defining localDrawer as a ref/reactive variable
 const localDrawer = ref(false)
@@ -41,7 +56,8 @@ const localDrawer = ref(false)
 const eventBus = useEventBusStore()
 // Get current route to determine active view
 const route = useRoute()
-// local/initial state for local drawer visibility is set to hidden const localDrawerVisible = ref(true)
+// local/initial state for local drawer visibility is set to hidden
+const localDrawerVisible = ref(true)
 // Track the active view
 const activeView = ref(getViewNameFromRoute(route.name as string))
 // Track the active tab, this is currently set to 'overview'
@@ -77,21 +93,53 @@ const currentConfig = computed(() => {
   return viewConfig[activeTab.value] || null
 })
 
+// Check if we should show drag description
+const showDragDescription = computed(() => {
+  return (
+    activeView.value === 'ProcessBuilderView' &&
+    activeTab.value === 'builder' &&
+    currentConfig.value?.items.some((item) => item.draggable)
+  )
+})
+
+// Get CSS class for draggable items
+const getDraggableClass = (item: { draggable?: boolean; nodeType?: string }) => {
+  if (item.draggable) {
+    return `vue-flow__node-${item.nodeType || 'default'} draggable-item`
+  }
+  return ''
+}
+
+// Handle drag start for draggable items
+const handleDragStart = (event: DragEvent, item: { draggable?: boolean; nodeType?: string }) => {
+  if (item.draggable && item.nodeType) {
+    onDragStart(event, item.nodeType)
+  }
+}
+// Handle drag end
+const handleDragEnd = () => {
+  onDragEnd()
+}
+
 // Define handleItemAction function
-const handleItemAction = (action: string) => {
+const handleItemAction = (action: string, item?: { draggable?: boolean }) => {
   console.log('Action triggered:', action)
+  // Don't trigger click action for draggable items during drag
+  if (item?.draggable && action === 'drag-node') {
+    return
+  }
   // Emit an event with the action to be handled by the appropriate component
   eventBus.emit('drawer-action', {
     action,
     view: activeView.value,
-    tab: activeTab.value
+    tab: activeTab.value,
+    item: item
   })
 }
-
 // Define handleToggleLocalDrawer function
-const handleToggleLocalDrawer = (data: any) => {
+const handleToggleLocalDrawer = (data: { message?: string }) => {
   console.log('Received event:', data)
-  if (data && data.message) {
+  if (data?.message) {
     localDrawer.value = !localDrawer.value
     // Emit event to change icon in AppBar
     eventBus.emit(
@@ -100,7 +148,6 @@ const handleToggleLocalDrawer = (data: any) => {
     )
   }
 }
-
 // Define handleTabChange function BEFORE it's used in onMounted
 const handleTabChange = (tabValue: string) => {
   console.log('LocalDrawer received tab change:', tabValue)
@@ -155,3 +202,50 @@ onUnmounted(() => {
   border: 1px solid #ddd;
 }
 </style> -->
+<style scoped>
+.draggable-item {
+  cursor: grab;
+  user-select: none;
+}
+
+.draggable-item:active {
+  cursor: grabbing;
+}
+
+/* Vue Flow node styles */
+.vue-flow__node-input {
+  background: #e3f2fd;
+  border: 2px solid #2196f3;
+  border-radius: 4px;
+  padding: 8px;
+  margin: 2px 0;
+}
+
+.vue-flow__node-default {
+  background: #f5f5f5;
+  border: 2px solid #9e9e9e;
+  border-radius: 4px;
+  padding: 8px;
+  margin: 2px 0;
+}
+
+.vue-flow__node-output {
+  background: #e8f5e8;
+  border: 2px solid #4caf50;
+  border-radius: 4px;
+  padding: 8px;
+  margin: 2px 0;
+}
+
+/* Hover effects for draggable items */
+.draggable-item:hover {
+  opacity: 0.8;
+  transform: translateY(-1px);
+  transition: all 0.2s ease;
+}
+
+/* Visual feedback during drag */
+.draggable-item.dragging {
+  opacity: 0.5;
+}
+</style>

@@ -1,11 +1,11 @@
 <script setup>
 import { ref } from 'vue'
 import { VueFlow, useVueFlow } from '@vue-flow/core'
-import DropzoneBackground from '@/components/vueflow/DropzoneBackground.vue'
-import Sidebar from '@/components/vueflow/EditorSidebar.vue'
-import useDragAndDrop from '@/components/vueflow/useDnD.ts'
-import '@/components/vueflow/editor-sidebar.css'
-import Icon from '@/components/vueflow/EditorViewIcons.vue'
+import DropzoneBackground from './DropzoneBackground.vue'
+// import Sidebar from './EditorSidebar.vue'
+import useDragAndDrop from './useDND.ts'
+import './editor-sidebar.css'
+import Icon from './EditorViewIcons.vue'
 
 const { onConnect, addEdges } = useVueFlow()
 
@@ -47,6 +47,18 @@ onConnect(addEdges)
         </Controls>
       </DropzoneBackground>
     </VueFlow>
-    <Sidebar />
+    <!-- <Sidebar /> -->
   </div>
 </template>
+
+<style scoped>
+.dnd-flow {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  background: white;
+}
+</style>

@@ -86,13 +86,13 @@ body,
 }
 
 .dropzone-background .overlay {
-  position: absolute;
+  position: relative; /*absolute*/
   top: 0;
   left: 0;
   height: 100%;
   width: 100%;
   display: flex;
-  align-items: center;
+  align-items: top; /*center*/
   justify-content: center;
   z-index: 1;
   pointer-events: none;
@@ -100,7 +100,7 @@ body,
 
 /* Controls Styling */
 .dnd-flow .vue-flow__controls {
-  position: absolute; /* Ensures controls are positioned correctly : absolute*/
+  position: relative; /* Ensures controls are positioned correctly : absolute*/
   top: 20px; /* Adjust as needed */
   left: 20px; /* Adjust as needed */
   z-index: 1000; /* Make sure controls stay above other elements */

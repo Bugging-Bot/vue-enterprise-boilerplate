@@ -5,6 +5,9 @@ interface DrawerItem {
   title: string
   icon: string
   action: string
+  // 25-05-2025: merging flow builder with local drawer
+  draggable?: boolean // New property for drag-and-drop items
+  nodeType?: string // New property for Vue Flow node types
 }
 
 interface DrawerConfig {
@@ -43,10 +46,31 @@ export const LocalDrawerConfigs: {
     },
     // added this for the builder right navigation bar
     // this is the place where options need to be added
+    // 25-05-2025: merging flow builder with local drawer
     builder: {
-      title: 'Builder Options',
+      title: 'Workflow Nodes',
       items: [
-        { title: 'View workflow', icon: 'mdi-eye', action: 'view-diagram' },
+        {
+          title: 'Input Node',
+          icon: 'mdi-import',
+          action: 'drag-node',
+          draggable: true,
+          nodeType: 'input'
+        },
+        {
+          title: 'Default Node',
+          icon: 'mdi-circle-outline',
+          action: 'drag-node',
+          draggable: true,
+          nodeType: 'default'
+        },
+        {
+          title: 'Output Node',
+          icon: 'mdi-export',
+          action: 'drag-node',
+          draggable: true,
+          nodeType: 'output'
+        },
         { title: 'Save workflow', icon: 'mdi-content-save', action: 'save-diagram' },
         { title: 'Export workflow', icon: 'mdi-file-export', action: 'export-worflow' }
       ]
