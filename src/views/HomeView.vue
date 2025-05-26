@@ -103,9 +103,9 @@ const items = ref([
 
 // Define the slots type
 defineSlots<{
-  overview: () => any
-  parts: () => any
-  process: () => any
-  adminstration: () => any
+  overview: () => void //any
+  parts: () => void //any
+  process: () => void //any
+  adminstration: () => void //any
 }>()
 </script>

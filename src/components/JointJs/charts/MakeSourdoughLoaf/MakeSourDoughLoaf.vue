@@ -120,7 +120,6 @@ const initializeChart = async (): Promise<void> => {
     logger.error('Error initializing chart', { error })
     throw new Error('Failed to initialize chart')
   }
-
 }
 /**
  * Cleans up resources when the component is unmounted

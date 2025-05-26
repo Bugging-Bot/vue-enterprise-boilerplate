@@ -61,7 +61,7 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, computed } from 'vue'
 import { useEventBusStore } from '@/stores/eventBus'
-import { LocalDrawerConfigs } from './LocalDrawerConfigs'
+import { LocalDrawerConfig } from '@/components/layout/LocalDrawer/configs'
 import { useRoute } from 'vue-router'
 import useDragAndDrop from '@/components/vueflow/useDragAndDrop'
 
@@ -101,7 +101,7 @@ function getViewNameFromRoute(routeName: string): string {
 
 // Get the current configuration based on active view and tab
 const currentConfig = computed(() => {
-  const viewConfig = LocalDrawerConfigs[activeView.value]
+  const viewConfig = LocalDrawerConfig[activeView.value]
   if (!viewConfig) return null
 
   // For views with a single 'default' configuration
@@ -118,7 +118,7 @@ const showDragDescription = computed(() => {
   return (
     activeView.value === 'ProcessBuilderView' &&
     activeTab.value === 'builder' &&
-    currentConfig.value?.items.some((item) => item.draggable)
+    currentConfig.value?.items.some((item: { draggable?: boolean }) => item.draggable)
   )
 })
 
