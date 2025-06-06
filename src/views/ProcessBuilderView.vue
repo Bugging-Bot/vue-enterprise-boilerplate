@@ -95,12 +95,6 @@ defineSlots<{
 }>()
 </script>
 
-<!-- <style scoped>
-.pa-4 {
-  padding: 1rem;
-}
-</style> -->
-
 <style scoped>
 .process-builder-fullwidth {
   position: fixed; /*fixed*/

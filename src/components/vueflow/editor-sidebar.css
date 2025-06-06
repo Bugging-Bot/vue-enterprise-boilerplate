@@ -26,7 +26,7 @@ body,
 }
 
 .dnd-flow {
-  flex-direction: column;
+  flex-direction: column; /* column layout */
   display: flex;
   height: 100%;
   position: relative; /* Make sure positioning works for children like Controls */
@@ -100,7 +100,7 @@ body,
 
 /* Controls Styling */
 .dnd-flow .vue-flow__controls {
-  position: relative; /* Ensures controls are positioned correctly : absolute*/
+  position: absolute; /* Ensures controls are positioned correctly : absolute*/
   top: 20px; /* Adjust as needed */
   left: 20px; /* Adjust as needed */
   z-index: 1000; /* Make sure controls stay above other elements */
@@ -108,5 +108,16 @@ body,
 
 /* If you need to adjust button layout within Controls */
 .dnd-flow .vue-flow__controls .vue-flow__control-button {
+  /* You can add specific styling for individual buttons here if needed */
+  /* For example, if you want them to have a specific size or border */
   margin-bottom: 10px; /* Add spacing between buttons */
+}
+
+.vue-flow__node.selected {
+  outline: 2px solid #1976d2;
+}
+
+.vue-flow__edge.selected {
+  stroke: #1976d2 !important;
+  stroke-width: 3px !important;
 }
