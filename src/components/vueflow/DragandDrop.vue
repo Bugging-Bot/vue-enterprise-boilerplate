@@ -20,12 +20,19 @@ import Sidebar from './EditorSidebar.vue'
 import useDragAndDrop from '@/components/vueflow/useDND'
 import { useSelection } from '@/components/vueflow/useSelection'
 import { useControls } from '@/components/vueflow/useControls'
-import { keyboardListener } from './useKeyboard'
+import { useKeyboard } from './useKeyboard'
 import { usePropertyDialog } from './usePropertyDialog'
 import { CustomNode, CustomEdge } from './types'
 import './editor-sidebar.css'
 import Icon from './EditorViewIcons.vue'
 
+const { deleteSelected, canDelete } = useKeyboard()
+const {
+  isDialogOpen,
+  openPropertyDialog,
+  closeDialog
+  // ...
+} = usePropertyDialog()
 // VueFlow API: connecting edges
 const { onConnect, addEdges } = useVueFlow()
 
@@ -39,10 +46,10 @@ const { selectedNodes, selectedEdges, onNodeSelect, onEdgeSelect } = useSelectio
 const { resetTransform, updatePos, dark, toggleDarkMode, logToObject } = useControls()
 
 // Keyboard shortcut handlers
-const { deleteSelected, canDelete } = keyboardListener()
+//const { deleteSelected, canDelete } = keyboardListener()
 
 // Dialog management for node/edge/background properties
-const { openPropertyDialog } = usePropertyDialog()
+//const { openPropertyDialog } = usePropertyDialog()
 
 // Reactive node and edge lists
 const nodes = ref<CustomNode[]>([])
@@ -108,15 +115,14 @@ onConnect(addEdges)
           </ControlButton>
 
           <!-- Optional: Delete selected elements via button -->
-          <!--
+
           <ControlButton
             title="Delete Selected (Del/Backspace)"
-            @click="handleManualDelete"
+            @click="deleteSelected"
             :disabled="!canDelete()"
           >
             <Icon name="delete" />
           </ControlButton>
-          -->
         </Controls>
       </DropzoneBackground>
     </VueFlow>

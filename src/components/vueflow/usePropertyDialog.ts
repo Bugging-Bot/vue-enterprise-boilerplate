@@ -8,9 +8,10 @@
   The dialog's state includes properties such as whether the dialog is open, its title, the current item being edited, and more.
 */
 
-import { ref, computed } from 'vue' // Import Vue's ref and computed for reactive state management
+import { ref, computed, watch } from 'vue' // Import Vue's ref and computed for reactive state management
 import type { ComputedRef } from 'vue' // Import Vue's computed type for type checking
 import type { CustomNode, CustomEdge, PropertyDialogState } from './types' // Import types for custom node, edge, and dialog state
+import { setKeyboardScope } from '@/utils/keyboardManager'
 
 // Initialize the state object that manages the dialog's state, such as whether it is open and what item is being edited.
 const state = ref<PropertyDialogState>({
@@ -63,6 +64,8 @@ export function usePropertyDialog(): {
       state.value.type = 'background'
       state.value.localItem = null
     }
+    // Switch keyboard scope to dialog mode
+    setKeyboardScope('dialog')
   }
 
   /**
@@ -70,6 +73,8 @@ export function usePropertyDialog(): {
    */
   const closeDialog = () => {
     state.value.isOpen = false
+    // Restore global keyboard shortcut scope
+    setKeyboardScope('global')
   }
 
   /**
@@ -88,6 +93,16 @@ export function usePropertyDialog(): {
   const dialogTitle = computed(() => state.value.title) // The title of the dialog
   const dialogType = computed(() => state.value.type) // The type of the item being edited (node, edge, or background)
   const currentItem = computed(() => state.value.localItem) // The current item (node/edge) being edited
+
+  /**
+   * Automatically update keyboard scope when dialog opens/closes
+   */
+  watch(
+    () => state.value.isOpen,
+    (isOpen) => {
+      setKeyboardScope(isOpen ? 'dialog' : 'global')
+    }
+  )
 
   // Return all the methods and computed properties
   return {
