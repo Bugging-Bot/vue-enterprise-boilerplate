@@ -1,3 +1,4 @@
+<!-- file: src\components\BaseButton.vue -->
 <template>
   <button :class="$style.button">
     <slot>Submit</slot>

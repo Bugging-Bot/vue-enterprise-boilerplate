@@ -1,72 +1,86 @@
 /*
-This code handel all the keyboard events for chart like
-1: Deleting selected nodes and edges in the VueFlow component.
+  File: useKeyboard.ts
+
+  About:
+  This code provides a composable that listens for keyboard events (Delete and Backspace) and handles the deletion of selected nodes and edges in a VueFlow graph.
+  The functionality is implemented using the `@vue-flow/core` library to manipulate the nodes and edges in the flow builder environment.
 */
-import { onMounted, onUnmounted } from 'vue'
-import { useVueFlow } from '@vue-flow/core'
-import type { Node, Edge } from '@vue-flow/core'
+
+import { onMounted, onUnmounted } from 'vue' // Import lifecycle hooks from Vue
+import { useVueFlow } from '@vue-flow/core' // Import VueFlow core functions
+import type { Node, Edge } from '@vue-flow/core' // Import types for Node and Edge
 
 /**
- * Composable for handling keyboard deletion of selected VueFlow nodes and edges
- * Listens for Delete and Backspace key presses to remove selected elements
+ * Composable for handling keyboard deletion of selected VueFlow nodes and edges.
+ * This composable listens for Delete and Backspace key presses to remove selected nodes and edges in VueFlow.
+ *
+ * @returns An object with methods for handling keydown events, deleting selected elements, and checking if deletion is possible.
  */
 export function keyboardListener() {
+  // Extract necessary functions from VueFlow to manage nodes and edges
   const { removeNodes, removeEdges, getSelectedNodes, getSelectedEdges } = useVueFlow()
 
   /**
-   * Handles keyboard events for deleting selected nodes and edges
-   * @param event - KeyboardEvent from keydown listener
+   * Handles keyboard events (Delete and Backspace keys) for deleting selected nodes and edges.
+   * When the Delete or Backspace key is pressed, it deletes any selected nodes or edges.
+   *
+   * @param {KeyboardEvent} event - The keyboard event triggered by a key press.
    */
   const handleKeyDown = (event: KeyboardEvent) => {
     // Check if Delete or Backspace key is pressed
     if (event.key === 'Delete' || event.key === 'Backspace') {
-      // Prevent default browser behavior (like going back in history for Backspace)
+      // Prevent default behavior (e.g., prevent back navigation on Backspace)
       event.preventDefault()
 
-      // Get currently selected nodes and edges
+      // Get the currently selected nodes and edges
       const selectedNodes = getSelectedNodes.value
       const selectedEdges = getSelectedEdges.value
 
-      // Delete selected nodes if any
+      // If there are selected nodes, delete them
       if (selectedNodes.length > 0) {
-        const nodeIds = selectedNodes.map((node: Node) => node.id)
-        removeNodes(nodeIds)
-        console.log(`Deleted ${nodeIds.length} node(s):`, nodeIds)
+        const nodeIds = selectedNodes.map((node: Node) => node.id) // Map node objects to their ids
+        removeNodes(nodeIds) // Remove nodes by id
+        console.log(`Deleted ${nodeIds.length} node(s):`, nodeIds) // Log deleted nodes
       }
 
-      // Delete selected edges if any
+      // If there are selected edges, delete them
       if (selectedEdges.length > 0) {
-        const edgeIds = selectedEdges.map((edge: Edge) => edge.id)
-        removeEdges(edgeIds)
-        console.log(`Deleted ${edgeIds.length} edge(s):`, edgeIds)
+        const edgeIds = selectedEdges.map((edge: Edge) => edge.id) // Map edge objects to their ids
+        removeEdges(edgeIds) // Remove edges by id
+        console.log(`Deleted ${edgeIds.length} edge(s):`, edgeIds) // Log deleted edges
       }
 
-      // Log if nothing was selected
+      // Log a message if no nodes or edges were selected
       if (selectedNodes.length === 0 && selectedEdges.length === 0) {
-        console.log('No nodes or edges selected for deletion')
+        console.log('No nodes or edges selected for deletion') // Log if nothing is selected
       }
     }
   }
 
   /**
-   * Adds keyboard event listener when component is mounted
+   * Adds a keydown event listener when the component is mounted.
+   * The listener will trigger the `handleKeyDown` function when a key is pressed.
    */
   onMounted(() => {
     document.addEventListener('keydown', handleKeyDown)
   })
 
   /**
-   * Removes keyboard event listener when component is unmounted
+   * Removes the keydown event listener when the component is unmounted.
+   * This helps clean up the event listener to avoid memory leaks.
    */
   onUnmounted(() => {
     document.removeEventListener('keydown', handleKeyDown)
   })
 
   /**
-   * Manual deletion function that can be called programmatically
-   * @returns Object with methods to delete selected elements
+   * Manually delete selected nodes and edges.
+   * This function can be called programmatically to delete selected items.
+   *
+   * @returns An object containing the count of deleted nodes and edges.
    */
   const deleteSelected = () => {
+    // Get the currently selected nodes and edges
     const selectedNodes = getSelectedNodes.value
     const selectedEdges = getSelectedEdges.value
 
@@ -75,34 +89,40 @@ export function keyboardListener() {
       edges: 0
     }
 
+    // Delete selected nodes if any
     if (selectedNodes.length > 0) {
-      const nodeIds = selectedNodes.map((node: Node) => node.id)
-      removeNodes(nodeIds)
-      deletedItems.nodes = nodeIds.length
+      const nodeIds = selectedNodes.map((node: Node) => node.id) // Extract node ids
+      removeNodes(nodeIds) // Remove nodes by id
+      deletedItems.nodes = nodeIds.length // Update the count of deleted nodes
     }
 
+    // Delete selected edges if any
     if (selectedEdges.length > 0) {
-      const edgeIds = selectedEdges.map((edge: Edge) => edge.id)
-      removeEdges(edgeIds)
-      deletedItems.edges = edgeIds.length
+      const edgeIds = selectedEdges.map((edge: Edge) => edge.id) // Extract edge ids
+      removeEdges(edgeIds) // Remove edges by id
+      deletedItems.edges = edgeIds.length // Update the count of deleted edges
     }
 
-    return deletedItems
+    return deletedItems // Return an object with the count of deleted nodes and edges
   }
 
   /**
-   * Check if there are any selected elements that can be deleted
-   * @returns boolean indicating if deletion is possible
+   * Checks if there are any selected nodes or edges that can be deleted.
+   * This method is useful for determining if the deletion actions can be triggered.
+   *
+   * @returns {boolean} - True if there are selected nodes or edges, otherwise false.
    */
   const canDelete = () => {
+    // Check if there are any selected nodes or edges
     const selectedNodes = getSelectedNodes.value
     const selectedEdges = getSelectedEdges.value
     return selectedNodes.length > 0 || selectedEdges.length > 0
   }
 
+  // Return the functions that allow deletion and check for deletable elements
   return {
-    deleteSelected,
-    canDelete,
-    handleKeyDown
+    deleteSelected, // Function to delete selected nodes and edges
+    canDelete, // Function to check if deletion is possible
+    handleKeyDown // Function to handle keydown events for deletion
   }
 }
