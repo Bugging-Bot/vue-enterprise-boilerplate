@@ -25,6 +25,8 @@ import { usePropertyDialog } from './usePropertyDialog'
 import { CustomNode, CustomEdge } from './types'
 import './editor-sidebar.css'
 import Icon from './EditorViewIcons.vue'
+// for adding custom node and custom edges
+//import { createCustomNode, createCustomEdge } from './nodeFactory'
 
 const { deleteSelected, canDelete } = useKeyboard()
 const {

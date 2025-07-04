@@ -9,7 +9,7 @@
 
 import { useVueFlow, type Node, type XYPosition } from '@vue-flow/core' // Import Vue Flow hooks and types for managing the flow editor.
 import { ref, watch, type Ref } from 'vue' // Import Vue’s `ref` for creating reactive state and `watch` for side-effects.
-
+import { createCustomNode } from './nodeFactory' // for adding custom nodes and edges
 let id = 0
 
 /**
@@ -118,13 +118,28 @@ export default function useDragAndDrop() {
 
     const nodeId = getId() // Generate a unique node ID for the new node.
 
+    // Hardcoded SVG path for testing
+    const testSvgPath =
+      'M 4 8 L 10 1 L 13 0 L 12 3 L 5 9 C 6 10 6 11 7 10 C 7 11 8 12 7 12 A 1.42 1.42 0 0 1 6 13 A 5 5 0 0 0 4 10 Q 3.5 9.9 3.5 10.5 T 2 11.8 T 1.2 11 T 2.5 9.5 T 3 9 A 5 5 90 0 0 0 7 A 1.42 1.42 0 0 1 1 6 C 1 5 2 6 3 6 C 2 7 3 7 4 8 M 10 1 L 10 3 L 12 3 L 10.2 2.8 L 10 1'
+
     // Create the new node with the dragged type and the dropped position.
-    const newNode: Node = {
-      id: nodeId,
-      type: draggedType.value ?? 'default', // Use the dragged type or default to 'default' if no type is set.
-      position,
-      data: { label: nodeId } // Set the node label as its ID for simplicity.
-    }
+    // const newNode: Node = {
+    //   id: nodeId,
+    //   type: draggedType.value ?? 'default', // Use the dragged type or default to 'default' if no type is set.
+    //   position,
+    //   data: { label: nodeId } // Set the node label as its ID for simplicity.
+    // }
+
+    // replace this with custom node creation logic
+    // Use the factory instead of manual node creation
+    const newNode = createCustomNode(
+      draggedType.value ?? 'default', // node type
+      position, // position
+      {
+        label: `${draggedType.value ?? 'default'}_${getId()}`,
+        svgPath: testSvgPath // hardcoded SVG path for testing
+      } // custom data with unique label
+    )
 
     /**
      * Align the node's position after it has been added to the flow,

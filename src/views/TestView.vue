@@ -1,5 +1,7 @@
 <template>
-  <DigCanvas :chartConfig="chartConfig" />
+  <DigCanvas
+    :data="{ title: 'Example Chart', description: 'This is an example chart', localItem: null }"
+  />
 </template>
 
 <script setup lang="ts">
@@ -17,7 +19,8 @@
 //import DigCanvas from '@/components/JointJs/charts/TestChart/testChart.vue'
 //import DigCanvas from '@/components/JointJs/charts/WorkflowCanvas.vue'
 //import DigCanvas from '@/components/n8n/n8nView.vue'
-import DigCanvas from '@/components/vueflow/DragandDrop.vue'
+//import DigCanvas from '@/components/vueflow/DragandDrop.vue'
+import DigCanvas from '@/components/vueflow/CustomSvgNode.vue'
 
 import { ref } from 'vue'
 // Define a chartConfig object
