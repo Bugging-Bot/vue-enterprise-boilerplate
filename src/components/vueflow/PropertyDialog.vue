@@ -7,6 +7,8 @@
   The dialog is persistent and can be opened and closed based on user interaction.
 
   It dynamically renders different settings components based on the item type (node, edge, or background).
+  --- 07-07-2025 ---
+  adding the logic for custom svg node
 -->
 
 <template>
@@ -67,6 +69,8 @@
 import { ref, computed } from 'vue'
 import { usePropertyDialog } from './usePropertyDialog'
 import NodeSettings from './NodeSettings.vue'
+// Adding this to import svg node settings
+import SvgNodeSettings from './SvgNodeSettings.vue'
 import EdgeSettings from './EdgeSettings.vue'
 import BackgroundSettings from './BackgroundSettings.vue'
 import LogicTab from './LogicTab.vue'
@@ -78,6 +82,11 @@ const { isDialogOpen, dialogTitle, dialogType, currentItem, closeDialog, updateI
 
 // Active tab within the dialog (default is 'settings')
 const activeTab = ref('settings')
+
+// Check if current item is a CustomSvgNode
+const isCustomSvgNode = computed(() => {
+  return currentItem.value?.type === 'customSvgNode'
+})
 
 // Computed property to dynamically select the appropriate settings component based on the dialog type
 const settingsComponent = computed(() => {
@@ -93,6 +102,19 @@ const settingsComponent = computed(() => {
   }
 })
 
+// Handle SVG node updates
+const handleSvgUpdate = (data: any) => {
+  if (currentItem.value) {
+    // Update the current item with new SVG data
+    currentItem.value.data = {
+      ...currentItem.value.data,
+      ...data
+    }
+    // If you have updateItem function from usePropertyDialog, use it
+    //updateItem?.(currentItem.value.id, { data: currentItem.value.data })
+    updateItem?.(currentItem.value)
+  }
+}
 // Optional: Save changes function (currently commented out)
 // const saveChanges = () => {
 //   // Save logic here

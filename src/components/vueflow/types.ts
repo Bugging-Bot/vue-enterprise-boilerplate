@@ -14,6 +14,9 @@ export interface CustomNodeData {
   label?: string // Optional label for the node
   code?: string // Optional code snippet associated with the node
   svgPath?: string // Optional SVG path string for custom node visuals
+  svgWidth?: number // SVG width
+  svgHeight?: number // SVG height
+  viewBox?: string // SVG viewBox attribute
   settings?: Record<string, any> // Custom settings in key-value pairs
   output?: any // Output data from the node
   logicType?: 'python' | 'golang' | 'javascript' | 'temporal' // Type of logic the node uses
@@ -56,3 +59,16 @@ export interface PropertyDialogState {
   localItem: CustomNode | CustomEdge | null // The actual node or edge being edited
   output: any // Output data associated with the item
 }
+
+// Additional type for SVG node settings (more specific than generic settings)
+export interface SvgNodeSettings {
+  color?: string
+  strokeColor?: string
+  strokeWidth?: number
+  [key: string]: any // Allow additional settings
+}
+
+// Defining json data type
+export type JSONValue = string | number | boolean | null | JSONObject | JSONArray
+export type JSONObject = { [key: string]: JSONValue }
+export type JSONArray = JSONValue[]

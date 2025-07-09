@@ -10,6 +10,7 @@
 import { useVueFlow, type Node, type XYPosition } from '@vue-flow/core' // Import Vue Flow hooks and types for managing the flow editor.
 import { ref, watch, type Ref } from 'vue' // Import Vue’s `ref` for creating reactive state and `watch` for side-effects.
 import { createCustomNode } from './nodeFactory' // for adding custom nodes and edges
+import { Console } from 'console'
 let id = 0
 
 /**
@@ -133,13 +134,14 @@ export default function useDragAndDrop() {
     // replace this with custom node creation logic
     // Use the factory instead of manual node creation
     const newNode = createCustomNode(
-      draggedType.value ?? 'default', // node type
+      draggedType.value ?? 'customSvgNode', // node type, 07-07-2025: changing from default to customSvgNode
       position, // position
       {
-        label: `${draggedType.value ?? 'default'}_${getId()}`,
+        label: `${draggedType.value ?? 'customSvgNode'}_${getId()}`, // node type, 07-07-2025: changing from default to customSvgNode
         svgPath: testSvgPath // hardcoded SVG path for testing
       } // custom data with unique label
     )
+    console.log('created node', newNode)
 
     /**
      * Align the node's position after it has been added to the flow,
