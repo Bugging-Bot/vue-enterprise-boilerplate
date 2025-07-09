@@ -11,7 +11,7 @@ import '@mdi/font/css/materialdesignicons.css'
 
 import App from '@/App.vue'
 import router from '@/router/index'
-import { authConfig } from './auth/auth.config'
+import { authConfig } from './components/auth/auth.config'
 import VueKonva from 'vue-konva'
 // Import your global CSS file here
 import '@/assets/styles/main.scss' // Make sure the path is correct
