@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useHead } from '@unhead/vue'
 useHead({
   title: 'Home - Vue Enterprise Boilerplate',
   meta: [

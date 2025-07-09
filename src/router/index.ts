@@ -1,12 +1,13 @@
 import { createRouter, createWebHistory } from 'vue-router'
+
 import { authGuard } from './guards'
-import MessageView from '@/pages/MessageView.vue'
-import ConfigurationView from '@/pages/ConfigurationView.vue'
+import MessageView from '@/pages/Messages.vue'
+import ConfigurationView from '@/pages/GlobalConfiguration.vue'
 import DashboardView from '@/pages/DashboardView.vue'
-import SimulationView from '@/pages/SimulationView.vue'
-import UpdateView from '@/pages/UpdateView.vue'
-import ProcessBuilderView from '@/pages/ProcessBuilderView.vue'
-import TestView from '@/pages/TestView.vue'
+import SimulationView from '@/pages/Simulations.vue'
+import UpdateView from '@/pages/UpdateEvents.vue'
+import ProcessBuilderView from '@/pages/ProcessBuilder.vue'
+import TestView from '@/pages/TestPage.vue'
 
 const routes = [
   {
@@ -15,11 +16,11 @@ const routes = [
   },
   {
     path: '/login',
-    component: () => import('@/pages/LoginView.vue')
+    component: () => import('@/pages/LoginPage.vue')
   },
   {
     path: '/home',
-    component: () => import('@/pages/HomeView.vue'),
+    component: () => import('@/pages/Home.vue'),
     //meta: { requiresAuth: true },
     meta: { requiresAuth: false },
     beforeEnter: authGuard
