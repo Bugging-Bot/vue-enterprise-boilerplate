@@ -10,11 +10,12 @@ import ProcessBuilderView from '@/pages/ProcessBuilder.vue'
 import TestView from '@/pages/TestPage.vue'
 
 const routes = [
-  {
-    path: '/',
-    redirect: '/login'
-  },
   // commenting since using keycloak login
+  // {
+  //   path: '/',
+  //   redirect: '/login'
+  // },
+
   // {
   //   path: '/login',
   //   component: () => import('@/pages/LoginPage.vue')
@@ -23,44 +24,44 @@ const routes = [
     path: '/home',
     component: () => import('@/pages/Home.vue'),
     //meta: { requiresAuth: true },
-    meta: { requiresAuth: false },
-    beforeEnter: authGuard
+    meta: { requiresAuth: true } // changing it to true, making login mandatory
+    //beforeEnter: authGuard // commenting, making login mandatory
   },
   {
     path: '/messages',
     // name: 'Messages',
     component: MessageView,
-    meta: { requiresAuth: false }
+    meta: { requiresAuth: true }
   },
   {
     path: '/configuration',
     // name: 'ConfigurationView',
     component: ConfigurationView,
-    meta: { requiresAuth: false }
+    meta: { requiresAuth: true }
   },
   {
     path: '/dashboard',
     // name: 'ConfigurationView',
     component: DashboardView,
-    meta: { requiresAuth: false }
+    meta: { requiresAuth: true }
   },
   {
     path: '/simulation',
     // name: 'ConfigurationView',
     component: SimulationView,
-    meta: { requiresAuth: false }
+    meta: { requiresAuth: true }
   },
   {
     path: '/update',
     // name: 'ConfigurationView',
     component: UpdateView,
-    meta: { requiresAuth: false }
+    meta: { requiresAuth: true }
   },
   {
     path: '/processes',
     // name: 'ConfigurationView',
     component: ProcessBuilderView,
-    meta: { requiresAuth: false }
+    meta: { requiresAuth: true }
   },
   {
     path: '/test',
