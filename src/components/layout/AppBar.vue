@@ -71,8 +71,12 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import { useAuth0 } from '@auth0/auth0-vue'
+import { ref, computed } from 'vue'
+//import { useAuth0 } from '@auth0/auth0-vue'
+// 🔑 NEW: Import Keycloak dependencies
+import { useKeycloak } from '@josempgon/vue-keycloak'
+import type { KeycloakInstance } from 'keycloak-js'
+
 import { useRouter } from 'vue-router'
 import { useEventBusStore } from '@/stores/eventBus'
 
@@ -81,7 +85,14 @@ import { useEventBusStore } from '@/stores/eventBus'
 const eventBus = useEventBusStore()
 // Composables
 const router = useRouter()
-const { logout: auth0Logout } = useAuth0()
+//const { logout: auth0Logout } = useAuth0()
+// 🔑 NEW: Setup Keycloak
+const { keycloak } = useKeycloak()
+// Unwrap the Keycloak instance from the Ref (resolves the TypeScript error)
+const keycloakInstance = computed(() => keycloak.value as KeycloakInstance).value
+
+// Optional: Use this to toggle a "Login" / "Logout" button in your template if you add one
+const isAuthenticated = computed(() => keycloakInstance.authenticated)
 
 /********Local Bar setup ********/
 // State for local bar visibility
@@ -155,7 +166,12 @@ const handleMenuAction = (action: string) => {
       router.push('/profile')
       break
     case 'logout':
-      auth0Logout({ logoutParams: { returnTo: window.location.origin } })
+      //auth0Logout({ logoutParams: { returnTo: window.location.origin } })
+      // 🔑 NEW: Use keycloakInstance.logout() instead of auth0Logout()
+      keycloakInstance.logout({
+        // Keycloak uses 'redirectUri' for post-logout redirect
+        redirectUri: window.location.origin
+      })
       break
   }
 }
