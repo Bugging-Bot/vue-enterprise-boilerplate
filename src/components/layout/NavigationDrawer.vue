@@ -22,6 +22,13 @@
       ></v-list-item>
       <v-list-item link to="/update" title="Updates" prepend-icon="mdi-update"></v-list-item>
       <v-list-item link to="/messages" title="Messages" prepend-icon="mdi-message"></v-list-item>
+      <!-- Added for Builder progress view -->
+      <v-list-item
+        link
+        to="/progress"
+        title="Progress"
+        prepend-icon="mdi-progress-check"
+      ></v-list-item>
       <v-list-item link to="/test" title="Test" prepend-icon="mdi-test-tube"></v-list-item>
       <!-- <v-list-item-title>Messages</v-list-item-title> -->
     </v-list>

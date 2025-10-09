@@ -8,6 +8,7 @@ import SimulationView from '@/pages/Simulations.vue'
 import UpdateView from '@/pages/UpdateEvents.vue'
 import ProcessBuilderView from '@/pages/ProcessBuilder.vue'
 import TestView from '@/pages/TestPage.vue'
+import ProgressView from '@/pages/ConstructionProgress.vue'
 
 const routes = [
   // commenting since using keycloak login
@@ -61,6 +62,12 @@ const routes = [
     path: '/processes',
     // name: 'ConfigurationView',
     component: ProcessBuilderView,
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/progress',
+    // name: 'ConfigurationView',
+    component: ProgressView,
     meta: { requiresAuth: true }
   },
   {
