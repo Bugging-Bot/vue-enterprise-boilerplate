@@ -123,7 +123,9 @@ export default defineComponent({
           const light = new BABYLON.HemisphericLight('light', new BABYLON.Vector3(0, 1, 0), scene)
           light.intensity = 0.8
 
-          BABYLON.SceneLoader.ImportMesh('', '/assets/', 'skateboard.glb', scene, (newMeshes) => {
+          //skateboard.glb and city_pack.glb
+
+          BABYLON.SceneLoader.ImportMesh('', '/assets/', 'house_2.glb', scene, (newMeshes) => {
             model = newMeshes[0] as BABYLON.Mesh
             model.scaling = new BABYLON.Vector3(0.75, 0.75, 0.75)
             model.position = new BABYLON.Vector3(0, 1, 0)

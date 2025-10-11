@@ -53,7 +53,8 @@ const afterImagePath = ref('../../public/assets/construction/builder_1/project_1
 /* Container styling */
 .comparison-container {
   overflow: hidden;
-  max-width: 100%;
+  max-width: 421px; /*100%;*/
+  margin: 0 auto; /* Center the container */
 }
 
 /* Customizing the labels to match your original design */
@@ -84,6 +85,6 @@ const afterImagePath = ref('../../public/assets/construction/builder_1/project_1
 
 /* Set fixed height for the component */
 .styled-slider {
-  height: 300px;
+  /* height: 60px; */
 }
 </style>

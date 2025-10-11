@@ -11,8 +11,8 @@ const keycloakConfig: Keycloak.KeycloakConfig = {
   // Note: 'http://127.0.0.1:53551' looks like a temporary Vite/Dev server address.
   // Ensure this is your actual Keycloak server URL/port.
   url: `${keycloakServerBaseUrl}`, // Use your confirmed server address + /auth
-  realm: 'GherKaPata',
-  clientId: 'VueApp'
+  realm: 'identity',
+  clientId: 'construction'
 }
 
 const keycloakInitOptions = {
